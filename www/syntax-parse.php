@@ -1,8 +1,8 @@
 <?php
 	/*
-		parsira dati string - izvorni kod, formira sintaksno\
+		parsira dati string - izvorni kod, formira sintaksno
 		drvo programa i vraca ga
-	*/
+	*/	
 	
 	class Program {
 		public $statement_list;
@@ -228,7 +228,7 @@
 		
 		static function parse($a, $n) {
 			$variable = $a->get($n);
-			if (preg_match('/^[a-z]$/', $variable)) {
+			if (preg_match('/^[a-z]$/', $variable) === 1) {
 				return new Variable($variable, $n + 1);
 			}
 			return NULL;
@@ -290,7 +290,7 @@
 		
 		static function parse($a, $n) {
 			$literal = $a->get($n);
-			if (preg_match("/^[0-9]+$/", $literal)) {
+			if (preg_match("/^[0-9]+$/", $literal) === 1) {
 				return new Literal((int)$literal, $n + 1);
 			}
 			return NULL;			
