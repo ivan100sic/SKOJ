@@ -18,7 +18,7 @@
 		
 		static function to_token_seq($s) {
 			
-			$k = 27;
+			$k = 28;
 			
 			$tokens_raw = [
 				/* Operatori od dva znaka, daje im se visi prioritet */
@@ -34,7 +34,7 @@
 				
 				/* Ostali jezicki tokeni */
 				
-				"@", "=", ";",
+				"@", "=", ";", ".",
 				"[", "]", "{", "}"
 			];
 			
@@ -47,7 +47,7 @@
 				"plus", "minus", "times", "divide", "mod",
 				"greater", "less", "logical_and", "logical_or",
 				
-				"cookie", "assignment", "semicolon",
+				"cookie", "assignment", "semicolon", "dot",
 				"left_bracket", "right_bracket", "left_brace", "right_brace"
 			];
 			
@@ -58,26 +58,28 @@
 			$a = new TokenSequence();
 			
 			while ($i < $n) {
-				if (is_digit($s[$i])) {
+				if (Tokenizer::is_digit($s[$i])) {
 					/* scan an integer literal */
 					$start_idx = $i;
-					while (is_digit($s[$i])) {
+					while (Tokenizer::is_digit($s[$i])) {
 						$i++;
 					}
 					$num = substr($s, $start_idx, $i - $start_idx);
 					$a->append($num);
-				} else if (is_variable($s[$i])) {
+				} else if (Tokenizer::is_variable($s[$i])) {
 					/* variable */
 					$a->append($s[$i]);	
+					$i++;
 				} else {
 					/* operator or special char */
 					$skip = true;
 					for ($j = 0; $j < $k; $j++) {
 						$needle = $tokens_raw[$j];
 						$candidate = substr($s, $i, strlen($needle));
+						$name = $tokens_names[$j];
 						
 						if ($needle === $candidate) {
-							$a->append($needle);
+							$a->append($name);
 							$i += strlen($needle);
 							$skip = false;
 							break;

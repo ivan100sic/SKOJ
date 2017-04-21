@@ -209,11 +209,15 @@
 			if ($variable === NULL) {
 				return NULL;
 			}
-			$rval = Rval::parse($a, $variable->end);
-			if ($rval === NULL) {
+			if ($a->get($variable->end) === "dot") {
+				$rval = Rval::parse($a, $variable->end + 1);
+				if ($rval === NULL) {
+					return NULL;
+				}
+				return new Lval($variable, $rval, $rval->end);
+			} else {
 				return new Lval($variable, NULL, $variable->end);
 			}
-			return new Lval($variable, $rval, $rval->end);
 		}		
 	}
 	
@@ -320,7 +324,7 @@
 		
 		static function parse($a, $n) {
 			$operator = $a->get($n);
-			if (!is_operator($operator)) {
+			if (!UnaryExpression::is_unary_operator($operator)) {
 				return NULL;
 			}
 			
@@ -358,7 +362,7 @@
 				case "greater":
 				case "less":
 				case "not_equal":
-				case "greator_or_equal":
+				case "greater_or_equal":
 				case "less_or_equal":
 				
 				case "logical_and":
@@ -377,10 +381,10 @@
 		
 		static function parse($a, $n) {
 			$operator = $a->get($n);
-			if (!is_binary_operator($operator)) {
+			if (!BinaryExpression::is_binary_operator($operator)) {
 				return NULL;
 			}
-			
+
 			$rval_left = Rval::parse($a, $n + 1);
 			if ($rval_left === NULL) {
 				return NULL;

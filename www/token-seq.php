@@ -14,7 +14,7 @@
 		}
 
 		function append($token) {
-			$token_seq[] = $token;
+			$this->token_seq[] = $token;
 			$this->size++;
 		}
 		
@@ -22,7 +22,7 @@
 			if ($n < 0 || $n >= $this->size) {
 				return "invalid";
 			}
-			return $token_seq[$n];
+			return $this->token_seq[$n];
 		}		
 	}
 ?>
