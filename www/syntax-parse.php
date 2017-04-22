@@ -243,6 +243,7 @@
 			} else {
 				$index = $this->lval->rval->run($env); // evaluiramo indeks
 				$env->dink(); // jos jedna instrukcija za indeksirani pristup
+				$ppp = $this->lval->variable->run($env);
 				$env->set_var_value($this->lval->variable->run($env), $index, $result);
 			}
 		}
@@ -300,7 +301,7 @@
 			if ($this->rval === NULL) {
 				return $env->get_var_value_root($this->variable->run($env));
 			}
-			$index = $rval->run($env);
+			$index = $this->rval->run($env);
 			$env->dink(); // citanje indeksirane vrednosti iz memorije
 			return $env->get_var_value($this->variable->run($env), $index);
 		}

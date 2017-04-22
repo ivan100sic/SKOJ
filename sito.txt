@@ -1,0 +1,20 @@
+OVAJ PROGRAM PUNI NIZ A PROSTIM BROJEVIMA
+KOJI SU MANJI ILI JEDNAKI DESET HILJADA
+
+h = 10000;
+i = 2;
+k = 0;
+<ih [
+	!b.i {
+		a.k = i
+		k = +k1
+		j = *ii
+		<= j n [
+			b.j = 1
+			j = +ji
+		]
+	}
+]
+
+K SADRZI BROJ PROSTIH BROJEVA DOK A SADRZI TE PROSTE
+BROJEVE, INDEKSIRANE OD 0

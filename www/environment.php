@@ -20,14 +20,14 @@
 		
 		// TODO ovo ZAISTA mora da se istestira dobro sa velikim indeksima
 		function get($idx) {
-			if (!isset($map[$idx])) {
-				$map[$idx] = 0;
+			if (!isset($this->map[$idx])) {
+				$this->map[$idx] = 0;
 			}
-			return $map[$idx];
+			return $this->map[$idx];
 		}
 		
 		function set($idx, $val) {
-			$map[$idx] = $val;	
+			$this->map[$idx] = $val;	
 		}
 	}
 

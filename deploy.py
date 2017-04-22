@@ -1,6 +1,6 @@
 import os
 
-wamp_path = 'P:\\Program Files\\wamp\\www\\'
+wamp_path = 'P:\\wamp64\\www\\'
 project_name = "skoj\\"
 options = "/Q /Y";
 
