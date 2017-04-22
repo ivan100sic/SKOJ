@@ -20,6 +20,18 @@
 			}
 			return new Program($statement_list, $statement_list->end);
 		}
+		
+		function run($env) {
+			try {
+				// Sigurno nije null
+				$this->statement_list->run($env);
+			} catch (Exception $e) {
+				if ($e->getMessage() == "TLE") {
+					// TLE hendler
+				}
+				// ostali hendleri
+			}
+		}
 	}
 	
 	class StatementList {
@@ -40,6 +52,15 @@
 			} else {
 				$statement_list = StatementList::parse($a, $statement->end);
 				return new StatementList($statement, $statement_list, $statement_list->end);
+			}
+		}
+		
+		function run($env) {
+			if ($this->statement !== NULL) {
+				$this->statement->run($env);
+			}
+			if ($this->statement_list !== NULL) {
+				$this->statement_list->run($env);
 			}
 		}
 	}
@@ -85,6 +106,21 @@
 
 			return NULL;
 		}
+		
+		function run($env) {
+			if ($this->if_statement !== NULL) {
+				$this->if_statement->run($env);
+			}
+			if ($this->while_statement !== NULL) {
+				$this->while_statement->run($env);
+			}
+			if ($this->assignment_statement !== NULL) {
+				$this->assignment_statement->run($env);
+			}
+			if ($this->cookie_statement !== NULL) {
+				$this->cookie_statement->run($env);
+			}
+		}
 	}
 	
 	class IfStatement {
@@ -114,6 +150,14 @@
 				return NULL;
 			}
 			return new IfStatement($rval, $statement_list, $statement_list->end + 1);
+		}
+		
+		function run($env) {
+			$condition = $this->rval->run($env);
+			$env->dink(); // odnosi se na branch instrukciju
+			if ($condition !== 0) {
+				$this->statement_list->run($env);
+			}
 		}
 	}
 	
@@ -145,6 +189,19 @@
 			}
 			return new WhileStatement($rval, $statement_list, $statement_list->end + 1);
 		}
+		
+		function run($env) {
+			while (true) {
+				$condition = $this->rval->run($env);
+				$env->dink(); // odnosi se na branch instrkciju
+				if ($condition !== 0) {
+					$this->statement_list->run($env);
+					// bezuslovni skok, ne racuna se kao instrukcija
+				} else {
+					break;
+				}
+			}
+		}
 	}
 	
 	class AssignmentStatement {
@@ -175,6 +232,20 @@
 			}
 			return new AssignmentStatement($lval, $rval, $rval->end + 1);
 		}
+		
+		function run($env) {
+			// evaluiramo desnu stranu
+			$result = $this->rval->run($env);
+			$env->dink(); // instrukcija kopije vrednosti
+			
+			if ($this->lval->rval === NULL) {
+				$env->set_var_value_root($this->lval->variable->run($env), $result);
+			} else {
+				$index = $this->lval->rval->run($env); // evaluiramo indeks
+				$env->dink(); // jos jedna instrukcija za indeksirani pristup
+				$env->set_var_value($this->lval->variable->run($env), $index, $result);
+			}
+		}
 	}
 	
 	class CookieStatement {
@@ -190,6 +261,11 @@
 				return NULL;
 			}
 			return new CookieStatement($n + 1);
+		}
+		
+		function run($env) {
+			$env->dink(); // specijalna instrukcija
+			$env->success();
 		}
 	}
 	
@@ -218,7 +294,16 @@
 			} else {
 				return new Lval($variable, NULL, $variable->end);
 			}
-		}		
+		}
+		
+		function run($env) {
+			if ($this->rval === NULL) {
+				return $env->get_var_value_root($this->variable->run($env));
+			}
+			$index = $rval->run($env);
+			$env->dink(); // citanje indeksirane vrednosti iz memorije
+			return $env->get_var_value($this->variable->run($env), $index);
+		}
 	}
 	
 	class Variable {
@@ -236,6 +321,11 @@
 				return new Variable($variable, $n + 1);
 			}
 			return NULL;
+		}
+		
+		function run($env) {
+			$env->dink();
+			return $this->variable;
 		}
 	}
 	
@@ -280,11 +370,26 @@
 			}
 			
 			return NULL;
-		}		
+		}
+		
+		function run($env) {
+			if ($this->lval !== NULL) {
+				return $this->lval->run($env);
+			}
+			if ($this->literal !== NULL) {
+				return $this->literal->run($env);
+			}
+			if ($this->unary_expression !== NULL) {
+				return $this->unary_expression->run($env);
+			}
+			if ($this->binary_expression !== NULL) {
+				return $this->binary_expression->run($env);
+			}
+		}
 	}
 	
 	class Literal {
-		public $literal;
+		public $literal; // integer
 		public $end;
 		
 		function __construct($literal, $end) {
@@ -298,6 +403,11 @@
 				return new Literal((int)$literal, $n + 1);
 			}
 			return NULL;			
+		}
+		
+		function run($env) {
+			$env->dink();
+			return $this->literal;
 		}
 	}
 	
@@ -334,6 +444,23 @@
 			}
 			
 			return new UnaryExpression($operator, $rval, $rval->end);			
+		}
+		
+		function run($env) {
+			$result = $this->rval->run($env);
+			$env->dink(); // za primenu unarne operacije
+			switch ($this->operator) {
+				case "unary_minus":
+					return -$result;
+				case "not":
+					if ($result === 0) {
+						return 1;
+					} else {
+						return 0;
+					}
+				case "complement":
+					return ~$result;				
+			}
 		}
 	}
 	
@@ -396,6 +523,86 @@
 			}
 			
 			return new BinaryExpression($operator, $rval_left, $rval_right, $rval_right->end);
+		}
+		
+		function run($env) {
+			$a = $this->rval_left->run($env);
+			$b = $this->rval_right->run($env);
+			$env->dink(); // za primenu binarne operacije
+			
+			switch ($this->operator) {
+				case "plus":
+					return (int)($a + $b);
+				case "minus":
+					return (int)($a - $b);
+				case "times":
+					return (int)($a * $b);
+				case "divide":
+					return (int)(($a - $a % $b) / $b);
+				case "mod":
+					return (int)($a % $b);
+					
+				case "equal":
+					if ($a === $b) {
+						return 1;
+					} else {
+						return 0;
+					}
+				case "greater":
+					if ($a > $b) {
+						return 1;
+					} else {
+						return 0;
+					}
+				case "less":
+					if ($a < $b) {
+						return 1;
+					} else {
+						return 0;
+					}
+				case "greater_or_equal":
+					if ($a >= $b) {
+						return 1;
+					} else {
+						return 0;
+					}
+				case "less_or_equal":
+					if ($a <= $b) {
+						return 1;
+					} else {
+						return 0;
+					}
+				case "not_equal":
+					if ($a !== $b) {
+						return 1;
+					} else {
+						return 0;
+					}
+					
+				case "logical_and":
+					if ($a !== 0 && $b !== 0) {
+						return 1;
+					} else {
+						return 0;
+					}
+				case "logical_or":
+					if ($a !== 0 || $b !== 0) {
+						return 1;
+					} else {
+						return 0;
+					}
+				case "bitwise_and":
+					return (int)($a & $b);
+				case "bitwise_or":
+					return (int)($a | $b);
+				case "bitwise_xor":
+					return (int)($a ^ $b);
+				
+				case "shift_left":
+					return (int)($a << $b);
+				case "shift_right":
+					return (int)($a >> $b);
+			}
 		}
 	}
 	

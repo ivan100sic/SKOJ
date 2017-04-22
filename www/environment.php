@@ -39,38 +39,43 @@
 		
 		private $map;
 		private $instr_count;
+		private $max_instr_count;
 		
 		function __construct($max_instr_count) {
 			$this->map = array();
-			$this->nstr_count = 0;
+			$this->instr_count = 0;
 			$this->max_instr_count = $max_instr_count;
 			for ($i = 1; $i <= 26; $i++) {
-				$s = chr($i);
-				$map[$s] = new SKOJObject();
+				$s = chr($i + 96);
+				$this->map[$s] = new SKOJObject();
 			}
 		}
 		
 		function get_var_value_root($var) {
-			return $map[$var]->get_root();
+			return $this->map[$var]->get_root();
 		}
 		
 		function set_var_value_root($var, $val) {
-			$map[$var]->set_root($val);
+			$this->map[$var]->set_root($val);
 		}
 		
 		function get_var_value($var, $idx) {
-			return $map[$var]->get($idx);
+			return $this->map[$var]->get($idx);
 		}
 		
 		function set_var_value($var, $idx, $val) {
-			$map[$var]->set($idx, $val);
+			$this->map[$var]->set($idx, $val);
 		}
 
 		function dink() {
-			$instr_count++;
-			if ($instr_count == $max_instr_count) {
+			$this->instr_count++;
+			if ($this->instr_count == $this->max_instr_count) {
 				throw new Exception("TLE");
 			}
+		}
+		
+		function success() {
+			// Poziva se iz testa kada se program uspesno zavrsi
 		}
 		
 	}
