@@ -26,7 +26,7 @@
 	// $s = "a=0; b=1; i=1; n=24; <in[ b=+ab; a=-ba; i=+i1; ] r=b;";
 	// $s = "a = + a 1;";
 	
-	
+	/*
 	$s =
 		"OVAJ PROGRAM PUNI NIZ A PROSTIM BROJEVIMA
 		KOJI SU MANJI OD HILJADU
@@ -49,6 +49,37 @@
 
 		K SADRZI BROJ PROSTIH BROJEVA DOK A SADRZI TE PROSTE
 		BROJEVE INDEKSIRANE OD NULA";
+	*/
+	
+	$s = "
+		a.0 = 0;
+		a.1 = 1;
+		i = 2;
+		n = 40;
+		! > i n [
+			a.i = + (a.-i1) (a.-i2);
+			i = +i1;
+		]
+		i = `1;
+		> i `n [
+			a.i = - (a.+i2) (a.+i1);
+			i = -i1;
+		]
+	";
+	
+	$test_primer = "
+		n = 3;
+		a.0 = 1;
+		a.1 = 16;
+		a.2 = 22;
+		
+	";
+	
+	$verify = "
+		== b 39 {
+			@
+		}
+	";
 	
 	
 	// $s = "a.4 = 5;";
