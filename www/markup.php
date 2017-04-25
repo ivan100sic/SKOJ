@@ -104,6 +104,17 @@
 							}
 							break;
 							
+						case "E":
+							$html .= "<div class='statement_example'>"; // or whatever we come up with
+							$markup_stack[$ms_size++] = "E";
+							break;
+						case "e":
+							$html .= "</div>";
+							if ($markup_stack[--$ms_size] !== 'e') {
+								return NULL;
+							}
+							break;
+							
 						default:
 							return NULL;
 					}
@@ -124,21 +135,7 @@
 		private $escaped_html;
 		
 		function __construct($raw) {
-			
-			$html = "";
-			
-			$n = strlen($raw);
-			while ($i < $n) {
-				
-				if ($raw[$i] == '\\') {
-						
-					
-					
-					
-				}
-			}
-			
-			$this->escaped_html = new EscapedText($html);
+			$this->escaped_html = Markup::convert_to_html($raw);
 		}
 		
 		function render() {
