@@ -1,5 +1,7 @@
 <?php
 
+	require_once('sql.php');
+
 	class User {
 		
 		private $id;
@@ -24,7 +26,7 @@
 			
 			// If this is 0, something is wrong
 			// If this is neither 0 nor 1, something is TERRIBLY wrong
-			if (len($db) !== 1) return NULL;
+			if (count($db) !== 1) return NULL;
 			
 			
 			return new User($db[0]);
@@ -37,7 +39,13 @@
 		}
 	}
 	
-	(new User(1))->render_link();
+	$user = User::construct_safe(1);
+	
+	if ($user !== NULL) {
+		$user->render_link();
+	} else {
+		echo "NULL";
+	}
 	
 ?>
 	

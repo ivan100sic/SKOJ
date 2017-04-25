@@ -17,7 +17,7 @@
 				$types = '';
 				for ($i = 0; $i < count($params); $i++) {
 					$types .= 's';
-					$params[i] = (string)$params[i];
+					$params[$i] = (string)$params[$i];
 				}
 				// sve je string
 				$st->bind_param($types, ...$params);
@@ -42,11 +42,11 @@
 		}
 		
 		static function get($query, $params) {
-			return do_it($query, $params, true);
+			return SQL::do_it($query, $params, true);
 		}
 		
 		static function run($query, $params) {
-			return do_it($query, $params, false);
+			return SQL::do_it($query, $params, false);
 		}
 	}
 	
