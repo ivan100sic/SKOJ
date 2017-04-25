@@ -17,6 +17,9 @@
 *.RTF	 diff=astextplain
 
 # Za lepe tabove
-
+[*]
+charset = utf-8
 indent_style = tab
 indent_size = 4
+trim_trailing_whitespace = true
+
