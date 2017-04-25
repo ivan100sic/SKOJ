@@ -32,7 +32,11 @@
 				$result = $st->get_result();
 				$st->close();
 				$conn->close();
-				return $result->fetch_assoc();
+				$all_results = [];
+				while ($row = $result->fetch_assoc()) {
+					$all_results[] = $row;
+				}
+				return $all_results;
 			}
 			throw new Exception("SQL");	
 		}
