@@ -20,7 +20,9 @@
 					$params[$i] = (string)$params[$i];
 				}
 				// sve je string
-				$st->bind_param($types, ...$params);
+				if (count($params) > 0) {
+					$st->bind_param($types, ...$params);
+				}
 				if (!$is_select) {
 					$retval = $st->execute();
 					$st->close();

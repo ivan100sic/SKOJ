@@ -9,6 +9,7 @@
 	require_once('environment.php');
 	require_once('dom.php');
 	require_once('markup.php');
+	require_once('task.php');
 	
 	function test_execute() {
 
@@ -135,6 +136,9 @@
 			смешта га у <п>променљиву \Br\b.
 		\\p
 		
+		\\P
+			Ogranicenja: \\I0 ≤ n ≤ 46\\i.
+		
 		\\U
 			Promenljiva \Bn\b sadrzi redni broj \\Ifibonacijevog\\i broja
 			koji treba izracunati.
@@ -148,5 +152,11 @@
 		(new Text(Markup::convert_to_html($s)))->render();
 	}
 	
-	test_markup();
+	function test_task() {
+		$task = Task::construct_safe(1);
+		var_dump($task);
+		$task->render_statement();
+	}
+	
+	test_task();
 ?>
