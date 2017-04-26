@@ -2,7 +2,10 @@
 
 	require_once('syntax-parse.php');
 	require_once('tokenizer.php');
-
+	//require_once('submission.php');
+	require_once('sql.php');
+	//require_once('test_run.php');
+	
 	class Grader {
 		
 		static function grade_one($source_tree, $input, $output, $instruction_limit) {

@@ -110,9 +110,24 @@
 							break;
 						case "e":
 							$html .= "</div>";
-							if ($markup_stack[--$ms_size] !== 'e') {
+							if ($markup_stack[--$ms_size] !== 'E') {
 								return NULL;
 							}
+							break;
+							
+						case "M":
+							$html .= "<span class='monospace'>"; // or whatever we come up with
+							$markup_stack[$ms_size++] = "M";
+							break;
+						case "m":
+							$html .= "</span>";
+							if ($markup_stack[--$ms_size] !== 'M') {
+								return NULL;
+							}
+							break;
+							
+						case 'N':
+							$html .= "<br/>";
 							break;
 							
 						default:

@@ -13,6 +13,7 @@
 		SQL::run("delete from submissions;", []);
 		SQL::run("delete from tasks;", []);
 		SQL::run("delete from users;", []);
+		SQL::run("delete from test_runs;", []);
 		
 		$e = SQL::run("insert into users(id, username, password, email, created_on, status) values
 			(1, 'ivan100sic', 'password', 'ivan100sic@gmail.com', now(), 1),
@@ -22,22 +23,27 @@
 		
 		$task_statement = "
 		\\P
-			Написати програм који израчунава n-ти \\IФибоначијев\\i број и
-			смешта га у <п>променљиву \Br\b.
+			Написати програм који израчунава \\In\\i-ти \\IФибоначијев\\i број и
+			смешта га у променљиву \Ir\i.
 		\\p
 		
 		\\P
-			Ogranicenja: \\I0 ≤ n ≤ 46\\i.
+			Ограничења: \\I0 ≤ n ≤ 46\\i.
 		\\p
 		
 		\\U
-			Promenljiva \Bn\b sadrzi redni broj \\Ifibonacijevog\\i broja
-			koji treba izracunati.
+			Променљива \In\i садржи редни број \\IФибоначијевог\\i броја
+			који треба израчунати.
 		\\u
 		
 		\\R
-			U promenljivu \Br\b upisati \\If\\Dn\\d\\i, rezultat.
+			У променљиву \Br\b уписати \\If\\Dn\\d\\i, резултат.
 		\\r
+		
+		\\E
+			Пример:\\N
+			за \\M\\In\\i=7, \\Ir\\i=13\\m. 
+		\\e
 		";
 		
 		SQL::run("insert into tasks(id, name, statement, author, created_on, status) values
@@ -46,8 +52,8 @@
 		/* Two testcases for this task */
 		$in1 = "n=4;";
 		$in2 = "n=46;";
-		$out1 = "r==3{@}";
-		$out2 = "r==1836311903{@}";
+		$out1 = "== 3 r {@}";
+		$out2 = "== 1836311903 r {@}";
 		SQL::run("insert into testcases(id, name, task_id, source_input, source_output, instruction_limit) values
 			(1, 'mali', 1, ?, ?, 8000),
 			(2, 'veliki', 1, ?, ?, 8000)", [$in1, $out1, $in2, $out2]);
@@ -60,7 +66,9 @@
 		<in [
 		  b = +ab;
 		  a = -ba;
+		  i = +i1;
 		]
+		1 []
 		r = b;";
 		
 		SQL::run("insert into submissions(id, user_id, source, created_on, status) values
