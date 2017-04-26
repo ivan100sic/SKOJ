@@ -71,6 +71,7 @@
 		r = b;";
 		
 		$source2 = "
+			@ RACUNA SE KAO INSTRUKCIJA ALI JE GUBLJENJE VREMENA
 			r = 3;
 		";
 		
