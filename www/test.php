@@ -10,6 +10,7 @@
 	require_once('dom.php');
 	require_once('markup.php');
 	require_once('task.php');
+	require_once('submission.php');
 	
 	function test_execute() {
 
@@ -158,5 +159,10 @@
 		$task->render_statement();
 	}
 	
-	test_task();
+	function test_grade() {
+		$submission = Submission::construct_safe(1);
+		$submission->grade();		
+	}
+	
+	test_grade();
 ?>

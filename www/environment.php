@@ -40,11 +40,13 @@
 		private $map;
 		private $instr_count;
 		private $max_instr_count;
+		private $success;
 		
 		function __construct($max_instr_count) {
 			$this->map = array();
 			$this->instr_count = 0;
 			$this->max_instr_count = $max_instr_count;
+			$this->success = false;
 			for ($i = 1; $i <= 26; $i++) {
 				$s = chr($i + 96);
 				$this->map[$s] = new SKOJObject();
@@ -69,13 +71,30 @@
 
 		function dink() {
 			$this->instr_count++;
-			if ($this->instr_count == $this->max_instr_count) {
+			if ($this->instr_count >= $this->max_instr_count) {
 				throw new Exception("TLE");
 			}
 		}
 		
 		function success() {
 			// Poziva se iz testa kada se program uspesno zavrsi
+			$this->success = true;
+		}
+		
+		function is_successful() {
+			return $this->success;
+		}
+		
+		function get_instruction_count() {
+			return $this->instr_count;
+		}
+		
+		function set_instruction_count($val) {
+			$this->instr_count = $val;
+		}
+		
+		function set_instruction_limit($val) {
+			$this->max_instr_count = $val;
 		}
 		
 	}

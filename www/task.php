@@ -24,7 +24,7 @@
 			
 			$db = SQL::get("select * from tasks where id = ?", [$id]);
 			
-			if (count($db) == 0) return NULL;
+			if (count($db) !== 1) return NULL;
 			return new Task($db[0]);
 		}
 		

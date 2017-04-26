@@ -27,9 +27,11 @@
 				$this->statement_list->run($env);
 			} catch (Exception $e) {
 				if ($e->getMessage() == "TLE") {
-					// TLE hendler
+					// pass
+					throw $e;
 				}
 				// ostali hendleri
+				throw $e;
 			}
 		}
 	}
