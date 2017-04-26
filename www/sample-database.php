@@ -60,7 +60,7 @@
 		
 		/* A submission by Ivan */
 		
-		$source = "a = 0;
+		$source1 = "a = 0;
 		b = 1;
 		i = 1;
 		<in [
@@ -68,12 +68,24 @@
 		  a = -ba;
 		  i = +i1;
 		]
-		1 []
 		r = b;";
 		
-		SQL::run("insert into submissions(id, user_id, source, created_on, status) values
-			(1, 1, ?, now(), -1)", [$source]);
-	
+		$source2 = "
+			r = 3;
+		";
+		
+		$source3 = "1 []";
+		
+		$source4 = "r = / 1 0;";
+		
+		$source5 = "r = 55 FALI TACKA ZAREZ";
+		
+		SQL::run("insert into submissions(id, user_id, task_id, source, created_on, status) values
+			(1, 1, 1, ?, now(), -1),
+			(2, 2, 1, ?, now(), -1),
+			(3, 2, 1, ?, now(), -1),
+			(4, 2, 1, ?, now(), -1),
+			(5, 2, 1, ?, now(), -1)", [$source1, $source2, $source3, $source4, $source5]);
 	}
 	
 	version_1();

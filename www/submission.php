@@ -11,6 +11,7 @@
 	
 		private $id;
 		private $user_id;
+		private $task_id;
 		private $source;
 		private $created_on;
 		private $status;
@@ -25,6 +26,7 @@
 		function __construct($row) {
 			$this->id = $row["id"];
 			$this->user_id = $row["user_id"];
+			$this->task_id = $row["task_id"];
 			$this->source = $row["source"];
 			$this->created_on = $row["created_on"];
 			$this->status = $row["status"];
@@ -37,7 +39,7 @@
 		}
 		
 		private function grade_impl() {
-			$db = SQL::get("select * from testcases where task_id = ? order by id asc", [$this->id]);			
+			$db = SQL::get("select * from testcases where task_id = ? order by id asc", [$this->task_id]);			
 			$obj = array();
 			foreach ($db as $row) {
 				// safe
@@ -48,7 +50,7 @@
 			$source_tree = Program::compile($source_tokens);
 			
 			// compilation error
-			if ($source_tree->end === NULL) {
+			if ($source_tree === NULL) {
 				return ["status" => "CE"];
 			}
 			
@@ -85,20 +87,22 @@
 			
 			$test_runs = [];
 			
+			var_dump($grade_result);
+			
 			foreach($grade_result["run"] as $tc_result) {
 				$run_instructions = 0;
-				if ($tc_result["run"]["status"] == "AC") {
+				if ($tc_result["run"]["status"] === "AC") {
 					$run_instructions = $tc_result["run"]["instructions"];
 					$total_time += $run_instructions;
 				} else {
 					$ok = false;
 				}
-				
-				var_dump($tc_result);
-				
+
 				$test_runs[] = TestRun::create($this->id, $tc_result["id"],
 					$tc_result["run"]["status"], $run_instructions);
 			}
+			
+			var_dump($test_runs);
 			
 			if ($ok) {
 				$this->status = $total_time;

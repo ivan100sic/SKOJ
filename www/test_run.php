@@ -11,7 +11,7 @@
 			0+ : Accepted (instructions)
 			-1 : TLE
 			-2 : WA
-			-3 : RTE (should never happen)
+			-3 : RTE (only division by zero, it seems)
 			Anything else?
 		*/
 		

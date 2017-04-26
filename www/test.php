@@ -160,8 +160,10 @@
 	}
 	
 	function test_grade() {
-		$submission = Submission::construct_safe(1);
-		$submission->grade();		
+		for ($i = 1; $i <= 5; $i++) {
+			$submission = Submission::construct_safe($i);
+			$submission->grade();
+		}
 	}
 	
 	test_grade();

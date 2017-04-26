@@ -32,7 +32,7 @@
 			try {
 				// Sigurno nije null
 				$this->statement_list->run($env);
-			} catch (Exception $e) {
+			} catch (Throwable $e) {
 				if ($e->getMessage() == "TLE") {
 					// pass
 					throw $e;

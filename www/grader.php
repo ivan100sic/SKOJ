@@ -49,7 +49,7 @@
 				
 				return $result;
 				
-			} catch (Exception $e) {
+			} catch (Throwable $e) {
 				if ($e->getMessage() === "TLE") {
 					return ["status" => "TLE"];
 				} else {
