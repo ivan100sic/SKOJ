@@ -91,7 +91,7 @@
 		// $s = "a.4 = 5;";
 		
 		$token_sequence = Tokenizer::to_token_seq($s);	
-		$syntax_tree = Program::parse($token_sequence, 0);	
+		$syntax_tree = Program::compile($token_sequence);	
 		$env = new Environment(100000);
 		$syntax_tree->run($env);
 		
@@ -124,7 +124,7 @@
 		
 		var_dump($token_sequence);
 		
-		$syntax_tree = Program::parse($token_sequence, 0);
+		$syntax_tree = Program::compile($token_sequence);
 		
 		var_dump($syntax_tree);
 	}

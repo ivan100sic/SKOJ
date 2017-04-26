@@ -12,8 +12,8 @@
 			$input_tokens = Tokenizer::to_token_seq($input);
 			$output_tokens = Tokenizer::to_token_seq($output);
 			
-			$input_tree = Program::parse($input_tokens, 0);
-			$output_tree = Program::parse($output_tokens, 0);
+			$input_tree = Program::compile($input_tokens);
+			$output_tree = Program::compile($output_tokens);
 			
 			$renv = new Environment(16000);
 			
@@ -28,6 +28,7 @@
 				
 				$renv->set_instruction_count(0);
 				$renv->set_instruction_limit(16000);
+				$renv->reset_success();
 				$output_tree->run($renv);
 				$output_instructions = $renv->get_instruction_count();
 				
@@ -59,7 +60,7 @@
 		
 		static function sandbox($source) {
 			$source_tokens = Tokenizer::to_token_seq($source);
-			$source_tree = Program::parse($source_tokens, 0);
+			$source_tree = Program::compile($source_tokens);
 			if ($source_tree === NULL) {
 				return ["status" => "CE"];
 			}

@@ -81,6 +81,10 @@
 			$this->success = true;
 		}
 		
+		function reset_success() {
+			$this->success = false;
+		}
+		
 		function is_successful() {
 			return $this->success;
 		}

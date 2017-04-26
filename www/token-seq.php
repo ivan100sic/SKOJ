@@ -23,6 +23,10 @@
 				return "invalid";
 			}
 			return $this->token_seq[$n];
-		}		
+		}
+		
+		function size() {
+			return $this->size;
+		}
 	}
 ?>

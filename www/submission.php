@@ -45,10 +45,10 @@
 			}
 			
 			$source_tokens = Tokenizer::to_token_seq($this->source);
-			$source_tree = Program::parse($source_tokens, 0);
+			$source_tree = Program::compile($source_tokens);
 			
-			// empty programs are not allowed anyway
-			if ($source_tree->end == 0) {
+			// compilation error
+			if ($source_tree->end === NULL) {
 				return ["status" => "CE"];
 			}
 			

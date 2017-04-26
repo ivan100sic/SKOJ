@@ -21,6 +21,13 @@
 			return new Program($statement_list, $statement_list->end);
 		}
 		
+		static function compile($a) {
+			$program = Program::parse($a, 0);
+			if ($program === NULL) return NULL;
+			if ($program->end !== $a->size()) return NULL;
+			return $program;
+		}
+		
 		function run($env) {
 			try {
 				// Sigurno nije null
