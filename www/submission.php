@@ -87,8 +87,6 @@
 			
 			$test_runs = [];
 			
-			var_dump($grade_result);
-			
 			foreach($grade_result["run"] as $tc_result) {
 				$run_instructions = 0;
 				if ($tc_result["run"]["status"] === "AC") {
@@ -101,8 +99,6 @@
 				$test_runs[] = TestRun::create($this->id, $tc_result["id"],
 					$tc_result["run"]["status"], $run_instructions);
 			}
-			
-			var_dump($test_runs);
 			
 			if ($ok) {
 				$this->status = $total_time;
