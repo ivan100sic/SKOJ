@@ -1,6 +1,9 @@
 import os
 
-wamp_path = 'P:\\wamp64\\www\\'
+if os.path.exists("P:\\"):
+	wamp_path = 'P:\\wamp64\\www\\'
+else:
+	wamp_path = 'D:\\wamp64\\www\\'
 project_name = "skoj\\"
 options = "/Q /Y";
 
