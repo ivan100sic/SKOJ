@@ -1,5 +1,5 @@
 <?php
-include 'dom.php';
+require_once 'dom.php';
 class Welcome extends Page{
 	function __construct(){
 		/*$this->head_items =[
