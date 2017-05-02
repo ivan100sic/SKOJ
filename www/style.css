@@ -1,0 +1,16 @@
+div {
+	width: 50%;
+	border: 2px BlanchedAlmond;
+	padding: 5px;
+	margin: 25%;
+	background-color: #ffe0af;
+}
+
+#toolbar{
+	width:17%;
+	border: 2px brown;
+	padding: 2px;
+	margin: 13%;
+	background-color: BlanchedAlmond;
+	
+}
