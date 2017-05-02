@@ -11,6 +11,7 @@
 	require_once('markup.php');
 	require_once('task.php');
 	require_once('submission.php');
+	require_once('user.php');
 	
 	function test_execute() {
 
@@ -160,10 +161,30 @@
 	}
 	
 	function test_grade() {
+		
+		$ivan = User::construct_safe(1);
+		$dzale = User::construct_safe(2);
+		
+		
+		
 		for ($i = 1; $i <= 5; $i++) {
 			$submission = Submission::construct_safe($i);
 			$submission->grade();
 		}
+		$ivan_solved = $ivan->get_solved_tasks();
+		echo "Ivan solved " . count($ivan_solved);
+		foreach ($ivan_solved as $task) {
+			$task->render_statement();
+		}
+		
+		$dzale_attempted = $dzale->get_attempted_tasks();
+		echo "Aleksandar attempted " . count($dzale_attempted);
+		foreach ($dzale_attempted as $task) {
+			$task->render_statement();
+		}
+		
+		$ivan_attempted = $ivan->get_attempted_tasks();
+		echo "Ivan attempted " . count($ivan_attempted);
 	}
 	
 	test_grade();

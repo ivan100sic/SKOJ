@@ -11,6 +11,10 @@
 		private $created_on;
 		private $status;
 		
+		// additional fields
+		private $solved_tasks;
+		private $attempted_tasks;
+		
 		function __construct($row) {
 			$this->id = $row["id"];
 			$this->username = $row["username"];
@@ -18,6 +22,9 @@
 			$this->email = $row["email"];
 			$this->created_on = $row["created_on"];
 			$this->status = $row["status"];
+
+			$this->solved_tasks = NULL;
+			$this->attempted_tasks = NULL;
 		}
 		
 		static function construct_safe($id) {
@@ -36,6 +43,47 @@
 			$user_id = $this->id;
 			$user_username = $this->username;
 			echo "<a href='profile.php?id=$user_id'>$user_username</a>";
+		}
+		
+		function get_solved_tasks() {
+			if ($this->solved_tasks !== NULL) {
+				return $this->solved_tasks;
+			}
+			$a = [];
+			$db = SQL::get("select * from tasks t1 where
+				(select count(*) from submissions where
+					user_id = ? and
+					task_id = t1.id and
+					status >= 0
+				) > 0", [$this->id]);
+				
+			foreach ($db as $row) {
+				$a[] = new Task($row);
+			}
+			return $this->solved_tasks = $a;
+		}
+		
+		function get_attempted_tasks() {
+			if ($this->attempted_tasks !== NULL) {
+				return $this->attempted_tasks;
+			}
+			$a = [];
+			/* Without successful submissions but with some attempts */
+			$db = SQL::get("select * from tasks t1 where
+				(select count(*) from submissions where
+					user_id = ? and
+					task_id = t1.id and
+					status >= 0
+				) = 0 and
+				(select count(*) from submissions where
+					user_id = ? and
+					task_id = t1.id
+				) > 0", [$this->id, $this->id]);
+				
+			foreach ($db as $row) {
+				$a[] = new Task($row);
+			}
+			return $this->attempted_tasks = $a;
 		}
 	}
 	
