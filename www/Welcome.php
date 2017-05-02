@@ -1,6 +1,6 @@
 <?php
 require_once 'dom.php';
-class Welcome extends Page{
+class welcome extends Page{
 	function __construct(){
 		/*$this->head_items =[
 			"charset" => new Text("<meta charset='UTF-8'/>"),
@@ -14,6 +14,6 @@ class Welcome extends Page{
 		$this->head_items['title']= new Text("<title> Welcome</title>");
 	}
 }
-$page = new Welcome();
+$page = new welcome();
 $page->render();
 ?>
