@@ -1,16 +1,31 @@
 div {
 	width: 50%;
-	border: 2px BlanchedAlmond;
+	border: 2px black;
 	padding: 5px;
 	margin: 25%;
-	background-color: #ffe0af;
+	background-color: #fc7612;
 }
 
-#toolbar{
+.toolbar{
 	width:17%;
-	border: 2px brown;
-	padding: 2px;
+	border-style: solid;
+	border-width: 3px;
+	padding: 10px;
 	margin: 13%;
-	background-color: BlanchedAlmond;
+	background-color: #fdd284;
+	position: fixed;
+	top: 25%;
 	
+}
+.login{
+	line-height: 22px;
+	width: 17%;
+	height: 19%;
+	border-style: ridge;
+	border-width: 3px;
+	padding: 10px;
+	margin: 13%;
+	background-color: #00ff00;
+	position: fixed;
+	top: 1%;
 }
