@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 	class Text {
 		private $data;
 		
@@ -74,16 +74,27 @@
 	//Login form
 	//Think about implementing tables as class to help sorting and ordering html elements
 	class Login extends Div{
-		function __construct(){
-			$this->class="login";
-			$this->elements=[
-					'title'=>new Text("<strong>Login:</strong><br>"),
-					'name'=>new Text("Username "),
-					'inputname'=>new Text("<input type='text' name='username'><br>"),
-					'pass'=>new Text("Password "),
-					'inputpass'=>new Text("<input type='password' name='password'><br>"),
-					'submit'=> new Text("<input type='submit'><br>")
-			];
+		function __construct($status){
+			if($status==0){
+				$this->class="login";
+				$this->elements=[
+						'title'=>new Text("<strong>Login:</strong><br>"),
+						'name'=>new Text("Username "),
+						'inputname'=>new Text("<input type='text' name='username'><br>"),
+						'pass'=>new Text("Password "),
+						'inputpass'=>new Text("<input type='password' name='password'><br>"),
+						'submit'=> new Text("<input type='submit'><br>")
+				];
+			}
+			else if($status==1){
+				$this->class="salute";
+				$this->elements=[
+						'gr'=>new Text("Hello there, "),
+						'name'=>new Text($_SESSION['username']),
+						'eet'=>new Text(", nice to see you again!<br>"),
+						'logout'=>new Text("<input type='button'>")
+				];
+			}
 		}
 		function render(){
 			echo "<form action='action.php' method='post'>",PHP_EOL;
@@ -118,6 +129,15 @@
 		}
 		
 		function render() {
+			//for testing, to be removed
+			if(!isset($_SESSION['status'])){
+				$_SESSION['status']=0;
+			}
+			/*
+			foreach($_SESSION as $key=>$value){
+				echo $value;
+			}
+			 */
 			echo "<!DOCTYPE HTML><html><head>";
 			foreach ($this->head_items as $key => $value) {
 				$value->render();
