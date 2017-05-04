@@ -1,0 +1,43 @@
+div {
+	width: 50%;
+	border: 2px black;
+	padding: 5px;
+	margin: 25%;
+	background-color: #fc7612;
+}
+
+.toolbar{
+	width:17%;
+	border-style: solid;
+	border-width: 3px;
+	padding: 10px;
+	margin: 13%;
+	background-color: #fdd284;
+	position: fixed;
+	top: 25%;
+	
+}
+.login{
+	line-height: 22px;
+	width: 17%;
+	height: 19%;
+	border-style: ridge;
+	border-width: 3px;
+	padding: 10px;
+	margin: 13%;
+	background-color: #80ffff;
+	position: fixed;
+	top: 1%;
+}
+.salute{
+	line-height: 22px;
+	width: 17%;
+	height: 19%;
+	border-style: ridge;
+	border-width: 3px;
+	padding: 10px;
+	margin: 13%;
+	background-color: #00ff00;
+	position: fixed;
+	top: 1%;
+}

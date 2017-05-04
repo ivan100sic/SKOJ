@@ -50,3 +50,4 @@
 			return new TestRun($db[0]);
 		}
 	}
+	?>
