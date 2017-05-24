@@ -1,73 +1,63 @@
 <?php
 
-	class Text {
-		private $data;
-		
-		function __construct($data) {
-			$this->data = $data;
-		}
-		
-		function render() {
-			echo $this->data;
-		}
+require_once 'renderer.php';
 
-		/* Getters, setters... */
+class Text {
+	private $data;
+	
+	function __construct($data) {
+		$this->data = $data;
 	}
 	
-	class EscapedText {
-		
-		private $data;
-		
-		function __construct($data) {
-			$this->data = $data;
-		}
-		
-		static function convert($data) {
-			return htmlspecialchars($data, ENT_QUOTES | ENT_HTML5);
-		}
-		
-		function render() {
-			echo EscapedText::convert($this->data);
-		}
-
-		/* Getters, setters... */
+	function render($r) {
+		$r->print($this->data);
 	}
 
-	class Page {
-		protected $head_items;
-		protected $body_items;
-		protected $toolbar;
-		
-		function __construct() {
-			$this->head_items = [
-				"charset" => new Text("<meta charset='UTF-8'/>"),
-				"title" => new Text("<title>SKOJ</title>")
-			];
-			$this->body_items = [
-				new Text("Hello world!")
-			];
-			$this->toolbar=[
-					'go_index' => new Text("<a href='index2.php'>Index2</a><br/>"),
-					'go_user' => new Text("<a href='user.php'>User</a><br/>")
-					//add more
-			];
-		}
-		
-		function render() {
-			echo "<!DOCTYPE HTML><html><head>";
-			foreach ($this->head_items as $key => $value) {
-				$value->render();
-			}
-			echo "</head><body>";
-			echo "<div style='color:#f44242; border-style:dotted;' align='left'>";
-			foreach ($this->toolbar as $key =>$value){
-				$value->render();
-			}
-			echo"</div>";
-			foreach ($this->body_items as $key => $value) {
-				$value->render();
-			}
-			echo "</body></html>";
-		}	
+	/* Getters, setters... */
+}
+
+class EscapedText {
+	
+	private $data;
+	
+	function __construct($data) {
+		$this->data = $data;
 	}
+	
+	static function convert($data) {
+		return htmlspecialchars($data, ENT_QUOTES | ENT_HTML5);
+	}
+	
+	function render($r) {
+		$r->print(EscapedText::convert($this->data));
+	}
+
+	/* Getters, setters... */
+}
+
+class Page {
+	protected $head_items;
+	protected $body_items;
+	
+	function __construct() {
+		$this->head_items = [
+			"charset" => new Text("<meta charset='UTF-8'/>"),
+			"title" => new Text("<title>SKOJ</title>")
+		];
+		$this->body_items = [];
+	}
+	
+	function render($r) {
+		$r->print("<!DOCTYPE HTML><html><head>");
+		foreach ($this->head_items as $key => $value) {
+			$value->render($r);
+		}
+		$r->print("</head><body>");
+		foreach ($this->body_items as $key => $value) {
+			$value->render($r);
+		}
+		$r->print("</body></html>");
+	}	
+}
+
 ?>
