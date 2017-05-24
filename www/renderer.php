@@ -4,6 +4,7 @@ class Renderer {
 
 	protected $text;
 	protected $params;
+	public $temp;
 
 	function __construct($params) {
 		$this->text = [];

@@ -60,4 +60,19 @@ class Page {
 	}	
 }
 
+class Adapter {
+	protected $obj;
+	protected $method;
+
+	function __construct($obj, $method) {
+		$this->obj = $obj;
+		$this->method = $method;
+	}
+
+	function render($r) {
+		$method = $this->method;
+		$this->obj->$method($r);
+	}
+}
+
 ?>

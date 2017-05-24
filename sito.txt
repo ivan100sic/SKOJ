@@ -1,22 +1,15 @@
-OVAJ PROGRAM PUNI NIZ A PROSTIM BROJEVIMA
-KOJI SU MANJI ILI JEDNAKI DESET HILJADA
-
-h = 10000;
+h = 50;
 i = 2;
 k = 0;
 <ih [
 	!b.i {
-		a.k = i
-		k = +k1
-		j = *ii
+		a.k = i;
+		k = +k1;
+		j = *ii;
 		<= j n [
-			b.j = 1
-			j = +ji
+			b.j = 1;
+			j = +ji;
 		]
 	}
+	i = +i1;
 ]
-
-K SADRZI BROJ PROSTIH BROJEVA DOK A SADRZI TE PROSTE
-BROJEVE, INDEKSIRANE OD 0
-
-proba kancer

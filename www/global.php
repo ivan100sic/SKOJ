@@ -38,6 +38,7 @@ function __files__($id) {
 // to index.php. Perhaps I should show some error page?
 function recover($params) {
 	header('Location: index.php');
+	exit();
 }
 
 ?>

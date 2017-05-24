@@ -36,7 +36,7 @@ class SubmitBox {
 		$r->print(
 		"<div>
 			<p>Submit a solution:</p>
-			<form action='submit.php' method='POST'>
+			<form action='submit.php' method='POST' enctype='multipart/form-data'>
 				<input type='hidden' name='task_id' value='$id'/>
 				<input type='file' name='file'/>
 				<input type='submit'/>
