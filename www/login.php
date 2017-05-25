@@ -14,4 +14,6 @@ if ($user === NULL) {
 	set_session_id($user->get_id());
 }
 
+header('Location: index.php');
+
 ?>

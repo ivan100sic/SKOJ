@@ -22,9 +22,9 @@ function version_1() {
 	$h1 = skoj_hash($u1, 'password');
 	$h2 = skoj_hash($u2, 'sifra');
 	
-	$e = SQL::run("insert into users(id, username, password, email, created_on, status) values
-		(1, ?, ?, 'ivan100sic@gmail.com', now(), 1),
-		(2, ?, ?, 'aleksandar1177@gmail.com', now(), 1);", [$u1, $h1, $u2, $h2]);
+	$e = SQL::run("insert into users(id, username, password, email, created_on) values
+		(1, ?, ?, 'ivan100sic@gmail.com', now()),
+		(2, ?, ?, 'aleksandar1177@gmail.com', now());", [$u1, $h1, $u2, $h2]);
 	
 	/* The one and only task */
 	
