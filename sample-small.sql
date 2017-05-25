@@ -9,7 +9,8 @@ delete from users_permissions;
 -- 'sifra'
 insert into users(id, username, password, email, created_on) values
 	(1, 'ivan100sic', 'abc60fb12cd58e0421069461161e421e81176d82', 'ivan100sic@gmail.com', now()),
-	(2, 'dzale', 'fed6f87f04ee830cbc19687369defa9bbdd41a32', 'aleksandar1177@gmail.com', now())
+	(2, 'dzale', 'fed6f87f04ee830cbc19687369defa9bbdd41a32', 'aleksandar1177@gmail.com', now()),
+	(3, 'troll', '080882ec7ab0f02142898c670fae5ce51d26abd2', 'troll@troll.com', now())
 ;
 
 insert into tasks(id, name, statement, author, created_on, status) values

@@ -10,7 +10,10 @@ class User {
 	private $password;
 	private $email;
 	private $created_on;
-	private $status;
+
+	// Permissions are integrated into the User class
+	// Array of permission names, as strings
+	private $permissions;
 	
 	// additional fields
 	private $solved_tasks;
@@ -20,28 +23,41 @@ class User {
 		return $this->id;
 	}
 	
-	function __construct($row) {
+	function __construct($row, $perms) {
 		$this->id = $row["id"];
 		$this->username = $row["username"];
 		$this->password = $row["password"];
 		$this->email = $row["email"];
 		$this->created_on = $row["created_on"];
-		$this->status = $row["status"];
+		$this->permissions = $perms;
 
 		$this->solved_tasks = NULL;
 		$this->attempted_tasks = NULL;
+	}
+
+	function has_permission($perm) {
+		foreach ($this->permissions as $p) {
+			if ($p === $perm) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	static function construct_safe($id) {
 		
 		$db = SQL::get("select * from users where id = ?", [$id]);
-		
-		// If this is 0, something is wrong
-		// If this is neither 0 nor 1, something is TERRIBLY wrong
 		if (count($db) !== 1) return NULL;
-		
-		
-		return new User($db[0]);
+
+		$row = $db[0];
+		$db = SQL::get("select * from users_permissions inner join permissions
+			on users_permissions.permission_id = permissions.id where user_id = ?",
+			[$row['id']]);
+		$perms = [];
+		foreach ($db as $pr) {
+			$perms[] = $pr['name'];
+		}		
+		return new User($row, $perms);
 	}
 	
 	function render_link($r) {
@@ -98,7 +114,7 @@ class User {
 		if (count($db) !== 1) {
 			return NULL;
 		}
-		return new User($db[0]);
+		return User::construct_safe($db[0]['id']);
 	}
 }
 

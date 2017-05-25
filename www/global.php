@@ -2,6 +2,8 @@
 
 session_start();
 
+require_once 'user.php';
+
 function __get__($id) {
 	if (isset($_GET[$id])) {
 		return $_GET[$id];
@@ -18,7 +20,14 @@ function __post__($id) {
 
 function get_session_id() {
 	if (isset($_SESSION['id'])) {
-		return $_SESSION['id'];
+		$id = $_SESSION['id'];
+		$user = User::construct_safe($id);
+		if ($user !== NULL && $user->has_permission("LOGIN")) {
+			return $id;
+		} else {
+			unset($_SESSION['id']);
+			return 0;
+		}
 	}
 	return 0;
 }

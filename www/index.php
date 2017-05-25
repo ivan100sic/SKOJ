@@ -17,6 +17,7 @@ class IndexPage extends Page {
 			$this->body_items[] = new Text("<p>Welcome, ");
 			$this->body_items[] = new Adapter($user, "render_link");
 			$this->body_items[] = new Text("</p>");
+			$this->body_items[] = new Text("<a href='logout.php'>Log out</a>");
 		}
 	}
 }
