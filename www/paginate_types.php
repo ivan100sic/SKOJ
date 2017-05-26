@@ -1,12 +1,32 @@
 <?php
 
-/*
-	
-*/
-
 class PaginateTypes {
 
 	static function get($type) {
+
+		// Put the controller wherever you want within the HTML wrapper
+		// but you have to put it somewhere!
+
+		$paginate_limit_controller = "
+			<select id='${type}_limit' oninput='${type}_offset_reset()'>
+				<option value='10'>10</option>
+				<option value='20'>20</option>
+				<option value='50'>50</option>
+				<option value='100'>100</option>
+			</select>
+		";
+
+		// The same goes for the result box
+
+		$paginate_result_box = "<div id='${type}_result_box'></div>";
+
+		// And previous/next controller
+
+		$paginate_bidi_controller = "
+			<button onclick='${type}_offset_previous()'>Previous</button>
+			<button onclick='${type}_offset_next()'>Next</button>
+		";
+
 		switch ($type) {
 			case 'user_simple':
 				return [
@@ -18,12 +38,9 @@ class PaginateTypes {
 					"method_name" => "render_row_simple",
 					"html" => "
 						<div>
-							Users per page: <br/>
-							<input type='text' id='user_simple_limit' name='limit'/> <br/>
-							Offset: <br/>
-							<input type='text' id='user_simple_offset' name='offset'/> <br/>
-							<div id='user_simple_result_box'></div>
-							<button onclick='user_simple_post()'>Submit</button>
+							$paginate_limit_controller
+							$paginate_bidi_controller
+							$paginate_result_box
 						</div>
 					"
 				];

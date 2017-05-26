@@ -20,6 +20,8 @@ class PaginateFrontend {
 			$js_post_list .= ", $arg: \$('#${name}_${arg}').val()";
 		}
 		$js = "
+			<input type='hidden' id='${name}_offset' value='0'/>
+
 			<script>
 				function ${name}_callback(data, status) {
 					if (status == 'success') {
@@ -33,6 +35,28 @@ class PaginateFrontend {
 						${name}_callback
 					);
 				}
+				function ${name}_offset_previous() {
+					var limit = \$('#${name}_limit').val();
+					var offset = \$('#${name}_offset').val();
+					offset -= limit;
+					if (offset < 0) {
+						offset = 0;
+					}
+					\$('#${name}_offset').val(offset);
+					${name}_post();
+				}
+				function ${name}_offset_next() {
+					var limit = \$('#${name}_limit').val();
+					var offset = \$('#${name}_offset').val();
+					offset += limit;
+					\$('#${name}_offset').val(offset);
+					${name}_post();
+				}
+				function ${name}_offset_reset() {
+					\$('#${name}_offset').val(0);
+					${name}_post();
+				}
+				${name}_post();
 			</script>";
 		$r->print($html);
 		$r->print($js);
