@@ -44,6 +44,20 @@
 			$user_username = $this->username;
 			echo "<a href='profile.php?id=$user_id'>$user_username</a>";
 		}
+		static function check($name,$pass){
+			$cn=SQL::get("SELECT id FROM users WHERE username = ?", [$name]);
+			$cp=SQL::get("SELECT id FROM users WHERE password = ?", [$pass]);
+			if($cn==null){
+				return -2;
+			}
+			if($cp==null){
+				return -1;
+			}
+			if($cp==$cn){
+			return $cp;
+			}
+			return 0;
+		}
 		
 		function get_solved_tasks() {
 			if ($this->solved_tasks !== NULL) {

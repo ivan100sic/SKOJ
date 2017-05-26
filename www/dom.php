@@ -73,7 +73,7 @@ session_start();
 	
 	//Login form
 	//Think about implementing tables as class to help sorting and ordering html elements
-	class Login extends Div{
+	class LoginBox extends Div{
 		function __construct($status){
 			if($status==0){
 				$this->class="login";
@@ -112,7 +112,8 @@ session_start();
 			$this->head_items = [
 				"charset" => new Text("<meta charset='UTF-8'/>"),
 				"title" => new Text("<title>SKOJ</title>"),
-				"style" => new Text(" <link rel='stylesheet' href='style.css'>")
+				"style" => new Text(" <link rel='stylesheet' href='style.css'>"),
+				"jquery" => new Text("<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>")
 			];
 			$this->body_items = [
 				//new Text("Hello world!")
@@ -128,6 +129,18 @@ session_start();
 			$this->toolbar->add("logout", new Text("<a href='logout.php'>Log Out</a>"));
 		}
 		
+		function add_script($script){
+			$this->head_items['script']=$script;
+		}
+		function head_add($key,$value){
+			$this->head_items[$key]=$value;
+		}
+		function body_add($key,$value){
+			$this->body_items[$key]=$value;
+		}
+		function sub_render($key){
+			$this->body_items[$key]->render;
+		}
 		function render() {
 			//for testing, to be removed
 			if(!isset($_SESSION['status'])){
