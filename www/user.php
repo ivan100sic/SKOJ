@@ -23,14 +23,24 @@ class User {
 		return $this->id;
 	}
 	
-	function __construct($row, $perms) {
+	function __construct($row) {
 		$this->id = $row["id"];
 		$this->username = $row["username"];
 		$this->password = $row["password"];
 		$this->email = $row["email"];
 		$this->created_on = $row["created_on"];
-		$this->permissions = $perms;
+		
+		// Permissions
+		$db = SQL::get("select * from users_permissions inner join permissions
+			on users_permissions.permission_id = permissions.id where user_id = ?",
+			[$row['id']]);
 
+		$this->permissions = [];
+		foreach ($db as $pr) {
+			$this->permissions[] = $pr['name'];
+		}
+
+		// Temporaries
 		$this->solved_tasks = NULL;
 		$this->attempted_tasks = NULL;
 	}
@@ -115,6 +125,10 @@ class User {
 			return NULL;
 		}
 		return User::construct_safe($db[0]['id']);
+	}
+
+	function render_row_simple($r) {
+		$r->print("<tr><td>$this->username</td></tr>");
 	}
 }
 

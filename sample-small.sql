@@ -7,6 +7,7 @@ delete from users_permissions;
 -- see skoj_hash in hash.php
 -- 'password'
 -- 'sifra'
+-- 'troll', this account has no privileges
 insert into users(id, username, password, email, created_on) values
 	(1, 'ivan100sic', 'abc60fb12cd58e0421069461161e421e81176d82', 'ivan100sic@gmail.com', now()),
 	(2, 'dzale', 'fed6f87f04ee830cbc19687369defa9bbdd41a32', 'aleksandar1177@gmail.com', now()),
@@ -39,6 +40,7 @@ insert into tasks(id, name, statement, author, created_on, status) values
 			за \\M\\In\\i=7, \\Ir\\i=13\\m. 
 		\\e
 		', 1, now(), 1),
+
 	(2, 'swap',
 		'
 		\\P

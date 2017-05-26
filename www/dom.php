@@ -42,7 +42,9 @@ class Page {
 	function __construct() {
 		$this->head_items = [
 			"charset" => new Text("<meta charset='UTF-8'/>"),
-			"title" => new Text("<title>SKOJ</title>")
+			"title" => new Text("<title>SKOJ</title>"),
+			"jquery" => new Text("<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/
+				jquery.min.js'></script>")
 		];
 		$this->body_items = [];
 	}
