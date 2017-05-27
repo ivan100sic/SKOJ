@@ -42,15 +42,13 @@ if ($password1 != $password2) {
 }
 
 // Create an account
-$hash = skoj_hash($password1);
+$hash = skoj_hash($username, $password1);
 
 $db = SQL::run("insert into users(username, password, email, created_on)
-	values (?, ?, ?, now())", [$username, $password, $email]);
+	values (?, ?, ?, now())", [$username, $hash, $email]);
 
-if (!$db) {
-	echo "Database error";
-} else {
-	echo "You have successfully registered! You may now log in!";
-}
+$id = SQL::get("select last_insert_id() as id", [])[0]['id'];
+
+echo "You have successfully registered! You may now log in!";
 
 ?>
