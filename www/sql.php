@@ -12,6 +12,7 @@ class SQL {
 				throw new Exception("SQL");
 			}
 		}
+		SQL::$conn_var->set_charset("utf8");
 		return SQL::$conn_var;
 	}
 	

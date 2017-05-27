@@ -1,5 +1,5 @@
 drop database skoj;
-create database skoj default character set utf8;
+create database skoj default character set utf8 collate utf8_general_ci;
 use skoj;
 
 create table users (

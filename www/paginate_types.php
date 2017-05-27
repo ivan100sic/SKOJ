@@ -44,6 +44,22 @@ class PaginateTypes {
 						</div>
 					"
 				];
+			case 'task_simple':
+				return [
+					"name" => "task_simple",
+					"query" => "select * from tasks order by id asc",
+					"args" => ["limit", "offset"],
+					"header" => "<tr><td>Task name:</td></tr>",
+					"class_name" => "Task",
+					"method_name" => "render_row_simple",
+					"html" => "
+						<div>
+							$paginate_limit_controller
+							$paginate_bidi_controller
+							$paginate_result_box
+						</div>
+					"
+				];
 			default:
 				return NULL;
 		}

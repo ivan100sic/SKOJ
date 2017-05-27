@@ -132,6 +132,15 @@ class Submission {
 		$this->save_to_db();			
 	}
 
+	static function status_to_str($status) {
+		switch ($status) {
+			case self::STATUS_NOT_GRADED: return "Not graded";
+			case self::STATUS_CE: return "Compilation error";
+			case self::STATUS_REJECTED: return "Rejected";
+			default: return "Accepted ($status)";
+		}
+	}
+
 	function render_detailed($r) {
 		$r->print("<div>");
 		if ($this->get_status() == self::STATUS_NOT_GRADED) {

@@ -32,6 +32,51 @@ class Task {
 	function render_statement($r) {
 		$r->print(Markup::convert_to_html($this->statement));
 	}
+
+	function render_row_simple($r) {
+		$r->print("
+			<tr><td>
+				<a href='showtask.php?task_id=$this->id'>$this->name</a>
+			</td></tr>");
+	}
+
+	function render_best_solutions($r) {
+		// Worst query I've written in a while
+		$db = SQL::get("
+			select t5.id sid, t6.id uid, t6.username, t5.status from
+			(
+			select t4.id, t4.user_id, t4.status from (
+					select min(t2.id) i, t2.user_id
+					from
+						(select user_id u, min(status) m
+							from submissions
+							where task_id = ?
+							and status >= 0
+							group by user_id
+							order by m asc
+						) t1 inner join
+							submissions t2
+						on m = status and u = user_id
+					group by
+						t2.user_id
+				) t3 inner join submissions t4 on t3.i = t4.id
+			) t5
+			inner join users t6 on t5.user_id = t6.id
+			limit 10
+			", [$this->id]);
+
+		// var_dump($db);
+		$r->print("<div><p>Best solutions</p><table>");
+		foreach ($db as $row) {
+			$r->print("<tr>
+				<td>${row['sid']}</td>
+				<td>${row['uid']}</td>
+				<td>${row['username']}</td>
+				<td>${row['status']}</td>
+			</tr>");
+		}
+		$r->print("</table></div>");
+	}
 }
 	
 ?>
