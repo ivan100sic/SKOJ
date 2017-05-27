@@ -5,7 +5,8 @@ class LoginBox {
 	function __construct() {}
 
 	function render($r) {
-		$r->print("<div>
+		$r->print("
+		<div>
 			<p>Login:</p>
 			<form action='login.php' method='POST'>
 				Username:<br/>
@@ -14,7 +15,8 @@ class LoginBox {
 				<input type='password' name='password'/> <br/>
 				<input type='submit' value='Log in'/>
 			</form>
-		</div>");
+		</div>
+		");
 	}
 }
 
