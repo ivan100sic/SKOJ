@@ -77,6 +77,8 @@ $db = SQL::run("update testcases set
 	[$name, $source_input, $source_output, $instruction_limit, $id]
 );
 
+$testcase->invalidate();
+
 if (!$db) {
 	echo "Database error!";
 } else {

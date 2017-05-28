@@ -22,6 +22,8 @@ if (!Task::authorize_edit($task, get_session_id())) {
 	bad_post();
 }
 
+$testcase->invalidate();
+
 // Perhaps we just want to delete this test case?
 $db = SQL::run("delete from testcases where id = ?",	[$id]);
 if ($db) {

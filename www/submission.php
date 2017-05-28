@@ -57,15 +57,24 @@ class Submission {
 			return NULL;
 		}
 		$id = SQL::last_insert_id();
-		return $id;
+		return Submission::construct_safe($id);
 	}
 	
 	private function grade_impl() {
-		$db = SQL::get("select * from testcases where task_id = ? order by id asc", [$this->task_id]);			
-		$obj = array();
+		/*
+			This is how you get only stale testcases
+			"select * from testcases where
+			task_id = ? and id not in (
+				select testcase_id id from test_runs where
+				submission_id = ?
+			) order by id asc"
+		*/
+		$db = SQL::get("select * from testcases where
+			task_id = ? order by id asc", [$this->task_id]);		
+		$testcases = array();
 		foreach ($db as $row) {
 			// safe
-			$obj[] = new Testcase($row);
+			$testcases[] = new Testcase($row);
 		}
 		
 		$source_tokens = Tokenizer::to_token_seq($this->source);
@@ -78,7 +87,7 @@ class Submission {
 		
 		$result = [];
 		
-		foreach ($obj as $testcase) {
+		foreach ($testcases as $testcase) {
 			$result[] = [
 				"id"  => $testcase->get_id(),
 				"run" => Grader::grade_one($source_tree, $testcase->get_source_input(),

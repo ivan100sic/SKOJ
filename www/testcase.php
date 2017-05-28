@@ -55,8 +55,16 @@ class Testcase {
 		<tr id='testcase_edit_row_$this->id'>
 			<td>$this->name</td>
 			<td><a href='edit-test-case.php?id=$this->id' target='_blank'>Edit</a></td>
-			<td><a onclick='delete_test_case($this->id)'>Delete</a></td>
+			<td><a href='javascript:void(0)' onclick='delete_test_case($this->id)'>Delete</a></td>
 		</tr>");
+	}
+
+	// Remove all test runs for this test case from the database.
+	// In addition to this, we need to invalidate statuses for all submissions
+	// for problems which contain this testcase
+	function invalidate() {
+		$db = SQL::run("delete from test_runs where testcase_id = ?", [$this->id]);
+		$db = SQL::run("update submissions set status = -1 where task_id = ?", [$this->task_id]);
 	}
 }
 

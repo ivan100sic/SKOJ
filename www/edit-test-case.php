@@ -106,6 +106,9 @@ class EditTestcasePage extends Page {
 
 $testcase_id = __get__('id');
 $testcase = Testcase::construct_safe($testcase_id);
+if ($testcase === NULL) {
+	recover(0);
+}
 $task = $testcase->get_task_id();
 
 if (!Task::authorize_edit($task, get_session_id())) {
