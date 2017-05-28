@@ -21,8 +21,13 @@ Documentation for the markup language used for displaying task statements
 Documentation for adding testcases
 Documentation for the whole site (.pdf)
 
+--- Minor problems ---
+
+Tabs in <textarea>
+
 --- Optional ---
 
 Improve compiler/interpreter performance
 Add more data to sample-small.sql
 Sandbox
+

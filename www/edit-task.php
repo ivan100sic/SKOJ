@@ -43,34 +43,51 @@ class EditTaskForm {
 				<p>Problem title:</p>
 				<input type='text' id='task_name'/>
 				<p>Problem statement:</p>
-				<textarea id='task_statement' rows='30' cols='90'></textarea>
+				<textarea id='task_statement' rows='30' cols='90'></textarea><br/>
+				<button onclick='task_save()'>Save changes</button>
+				<p id='task_result_box'></p>
 				<p>Test cases:</p>
 			");
 
 		(new TestCaseEditor($this->task_id))->render($r);
-		$r->print("</div>
-		<script>
-			\$.post('get_task_attrs.php',
-				{
-					type: 'name',
-					id: '$this->task_id'				
-				},
-				function (data, status) {
-					if (status == 'success') {
-						\$('#task_name').val(data);
-					}
-				});
-			\$.post('get_task_attrs.php',
-				{
-					type: 'statement',
-					id: '$this->task_id'
-				},
-				function (data, status) {
-					if (status == 'success') {
-						\$('#task_statement').val(data);
-					}
-				});
-		</script>
+		$r->print("
+			</div>
+			<script>
+				\$.post('get_task_attrs.php',
+					{
+						type: 'name',
+						id: '$this->task_id'				
+					},
+					function (data, status) {
+						if (status == 'success') {
+							\$('#task_name').val(data);
+						}
+					});
+				\$.post('get_task_attrs.php',
+					{
+						type: 'statement',
+						id: '$this->task_id'
+					},
+					function (data, status) {
+						if (status == 'success') {
+							\$('#task_statement').val(data);
+						}
+					});
+
+				function task_save() {
+					var name = \$('#task_name').val();
+					var statement = \$('#task_statement').val();
+					\$.post('save-task.php', {
+						'id': $this->task_id,
+						'name' : name,
+						'statement': statement
+					}, function(data, status) {
+						if (status == 'success') {
+							\$('#task_result_box').html(data);
+						}
+					});
+				}
+			</script>
 		");
 	}
 }

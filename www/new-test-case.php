@@ -11,7 +11,7 @@ if (Task::authorize_edit($task_id, $user_id)) {
 	$db = SQL::run("insert into testcases(name, task_id, source_input, source_output, instruction_limit) values ('', ?, '', '@', 1000)", [$task_id]);
 
 	$testcase_id = SQL::last_insert_id();
-	header("Location: edit-test-case.php?testcase_id=$id");
+	header("Location: edit-test-case.php?testcase_id=$task_id");
 } else {
 	recover(0);
 }
