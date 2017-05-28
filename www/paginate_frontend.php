@@ -36,8 +36,8 @@ class PaginateFrontend {
 					);
 				}
 				function ${name}_offset_previous() {
-					var limit = \$('#${name}_limit').val();
-					var offset = \$('#${name}_offset').val();
+					var limit = parseInt(\$('#${name}_limit').val());
+					var offset = parseInt(\$('#${name}_offset').val());
 					offset -= limit;
 					if (offset < 0) {
 						offset = 0;
@@ -46,8 +46,8 @@ class PaginateFrontend {
 					${name}_post();
 				}
 				function ${name}_offset_next() {
-					var limit = \$('#${name}_limit').val();
-					var offset = \$('#${name}_offset').val();
+					var limit = parseInt(\$('#${name}_limit').val());
+					var offset = parseInt(\$('#${name}_offset').val());
 					offset += limit;
 					\$('#${name}_offset').val(offset);
 					${name}_post();
@@ -56,6 +56,8 @@ class PaginateFrontend {
 					\$('#${name}_offset').val(0);
 					${name}_post();
 				}
+
+				${name}_offset_reset();
 				${name}_post();
 			</script>";
 		$r->print($html);
