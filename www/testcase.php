@@ -52,10 +52,10 @@ class Testcase {
 
 	function render_edit_row($r) {
 		$r->print("
-		<tr>
+		<tr id='testcase_edit_row_$this->id'>
 			<td>$this->name</td>
 			<td><a href='edit-test-case.php?id=$this->id' target='_blank'>Edit</a></td>
-			<td><a onclick='delete_testcase($this->id)'>Delete</a></td>
+			<td><a onclick='delete_test_case($this->id)'>Delete</a></td>
 		</tr>");
 	}
 }

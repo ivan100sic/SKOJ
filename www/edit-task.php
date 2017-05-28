@@ -87,6 +87,17 @@ class EditTaskForm {
 						}
 					});
 				}
+
+				function delete_test_case(id) {
+					\$.post('delete-test-case.php', {
+						'id': id					
+					},
+					function(data, status) {
+						if (status == 'success' && data == 'ok') {
+							\$('#testcase_edit_row_'+id).remove();
+						}
+					});
+				}
 			</script>
 		");
 	}
