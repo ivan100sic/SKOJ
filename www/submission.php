@@ -56,9 +56,8 @@ class Submission {
 		if (!$db) {
 			return NULL;
 		}
-		$id = SQL::get('select last_insert_id() as id', []);
-		if (count($id) !== 1) return NULL;
-		return Submission::construct_safe($id[0]['id']);
+		$id = SQL::last_insert_id();
+		return $id;
 	}
 	
 	private function grade_impl() {

@@ -54,6 +54,10 @@ class SQL {
 	static function run($query, $params) {
 		return SQL::do_it($query, $params, false);
 	}
+
+	static function last_insert_id() {
+		return SQL::get("select last_insert_id() as id", [])[0]['id'];
+	}
 }
 	
 ?>

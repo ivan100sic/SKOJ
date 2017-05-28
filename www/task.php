@@ -2,6 +2,7 @@
 
 require_once 'sql.php';
 require_once 'markup.php';
+require_once 'user.php';
 
 class Task {
 	
@@ -28,6 +29,18 @@ class Task {
 		if (count($db) !== 1) return NULL;
 		return new Task($db[0]);
 	}
+
+	function get_author() {
+		return $this->author;
+	}
+
+	function get_name() {
+		return $this->name;
+	}
+
+	function get_statement() {
+		return $this->statement;
+	}
 	
 	function render_statement($r) {
 		$r->print(Markup::convert_to_html($this->statement));
@@ -36,7 +49,7 @@ class Task {
 	function render_row_simple($r) {
 		$r->print("
 			<tr><td>
-				<a href='showtask.php?task_id=$this->id'>$this->name</a>
+				<a href='show-task.php?task_id=$this->id'>$this->name</a>
 			</td></tr>");
 	}
 
@@ -76,6 +89,21 @@ class Task {
 			</tr>");
 		}
 		$r->print("</table></div>");
+	}
+
+	static function authorize_edit($task_id, $user_id) {
+		$task = Task::construct_safe($task_id);
+		$user = User::construct_safe($user_id);
+
+		if ($task === NULL) return 0;
+		if ($user === NULL) return 0;
+
+		if ($task->get_author() == $user_id) {
+			return $user->has_permission("EDIT_OWN_TASKS")
+				|| $user->has_permission("EDIT_ALL_TASKS");
+		} else {
+			return $user->has_permission("EDIT_ALL_TASKS");
+		}
 	}
 }
 	

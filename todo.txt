@@ -1,0 +1,28 @@
+--- Highest Priority ---
+
+Create/modify tasks page
+Top users page
+Profiles page
+Sidebar/navbar
+Change password page
+
+--- High priority
+
+Implement permissions for all pages
+Admin Panel
+	SQL/XML dump
+Action Logging
+
+--- Lower priority, must be done before release ---
+
+Implement a visual theme
+Documentation for the programming language
+Documentation for the markup language used for displaying task statements
+Documentation for adding testcases
+Documentation for the whole site (.pdf)
+
+--- Optional ---
+
+Improve compiler/interpreter performance
+Add more data to sample-small.sql
+Sandbox

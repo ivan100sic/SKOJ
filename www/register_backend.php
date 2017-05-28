@@ -47,7 +47,7 @@ $hash = skoj_hash($username, $password1);
 $db = SQL::run("insert into users(username, password, email, created_on)
 	values (?, ?, ?, now())", [$username, $hash, $email]);
 
-$id = SQL::get("select last_insert_id() as id", [])[0]['id'];
+$id = SQL::last_insert_id();
 
 echo "You have successfully registered! You may now log in!";
 
