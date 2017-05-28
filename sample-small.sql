@@ -1011,7 +1011,7 @@ insert into users(id, username, password, email, created_on) values
 	(999,'user999', '7c161701bba6af51fbf2061094d693988fed01c2', 'user999@gmail.com', now()),
 	(1000,'user1000', 'ed2c2e3845de9efd898dd619a39f5b5cfb6f7213', 'user1000@gmail.com', now()),
 	(1001,'user1001', 'cdd7ececa8c9e638dbe751dce012f904f0283ef7', 'user1001@gmail.com', now()),
-	(1002,'user1002', 'f4477162232f566069fdb2b1456d546429ee1ac5', 'user1002@gmail.com', now()),
+	(1002,'user1002', 'f4477162232f566069fdb2b1456d546429ee1ac5', 'user1002@gmail.com', now())
 ;
 
 insert into tasks(id, name, statement, author, created_on, status) values
