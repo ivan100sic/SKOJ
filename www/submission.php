@@ -149,6 +149,14 @@ class Submission {
 		}
 	}
 
+	function render_row_simple($r) {
+		$pretty_status = Submission::status_to_str($this->status);
+		$r->print("<tr>
+			<td><a href='show-submission.php?id=$this->id'>$this->created_on</a></td>
+			<td>$pretty_status</td>
+		</tr>");
+	}
+
 	function render_detailed($r) {
 		$r->print("<div>");
 		if ($this->get_status() == self::STATUS_NOT_GRADED) {

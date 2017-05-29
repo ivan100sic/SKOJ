@@ -18,6 +18,7 @@ class User {
 	// additional fields
 	private $solved_tasks;
 	private $attempted_tasks;
+	private $authored_tasks;
 
 	function get_id() {
 		return $this->id;
@@ -43,6 +44,7 @@ class User {
 		// Temporaries
 		$this->solved_tasks = NULL;
 		$this->attempted_tasks = NULL;
+		$this->authored_tasks = NULL;
 	}
 
 	function has_permission($perm) {
@@ -71,9 +73,9 @@ class User {
 	}
 	
 	function render_link($r) {
-		$user_id = $this->id;
-		$user_username = $this->username;
-		$r->print("<a href='profile.php?id=$user_id'>$user_username</a>");
+		$r->print("<a href='profile.php?id=$this->id'>");
+		(new EscapedText($this->username))->render($r);
+		$r->print("</a>");
 	}
 	
 	function get_solved_tasks() {
@@ -115,6 +117,18 @@ class User {
 			$a[] = new Task($row);
 		}
 		return $this->attempted_tasks = $a;
+	}
+
+	function get_authored_tasks() {
+		if ($this->authored_tasks !== NULL) {
+			return $this->authored_tasks;
+		}
+		$a = [];
+		$db = SQL::get("select * from tasks where author = ?", [$this->id]);
+		foreach ($db as $row) {
+			$a[] = new Task($row);
+		}
+		return $this->authored_tasks = $a;
 	}
 
 	static function authenticate($username, $password) {

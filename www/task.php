@@ -41,16 +41,25 @@ class Task {
 	function get_statement() {
 		return $this->statement;
 	}
+
+	function get_id() {
+		return $this->id;
+	}
 	
 	function render_statement($r) {
 		$r->print(Markup::convert_to_html($this->statement));
 	}
 
+	function render_link($r) {
+		$r->print("<a href='show-task.php?task_id=$this->id'>");
+		(new EscapedText($this->name))->render($r);
+		$r->print("</a>");
+	}
+
 	function render_row_simple($r) {
-		$r->print("
-			<tr><td>
-				<a href='show-task.php?task_id=$this->id'>$this->name</a>
-			</td></tr>");
+		$r->print("<tr><td>");
+		$this->render_link($r);
+		$r->print("</td></tr>");
 	}
 
 	function render_best_solutions($r) {
@@ -81,12 +90,14 @@ class Task {
 		// var_dump($db);
 		$r->print("<div><p>Best solutions</p><table>");
 		foreach ($db as $row) {
-			$r->print("<tr>
-				<td>${row['sid']}</td>
-				<td>${row['uid']}</td>
-				<td>${row['username']}</td>
-				<td>${row['status']}</td>
-			</tr>");
+			$sid = $row['sid'];
+			$uid = $row['uid'];
+			$status = $row['status'];
+
+			$r->print("<tr><td>");
+			User::construct_safe($uid)->render_link($r);
+			$r->print("</td><td><a href='show-submission.php?id=$sid'>
+				$status</a></td></tr>");
 		}
 		$r->print("</table></div>");
 	}

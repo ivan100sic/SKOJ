@@ -49,6 +49,10 @@ $db = SQL::run("insert into users(username, password, email, created_on)
 
 $id = SQL::last_insert_id();
 
+// Add some permissions
+$db = SQL::run("insert into users_permissions(user_id, permission_id) values
+	(?, 1), (?, 2), (?, 3)", [$id, $id, $id]);
+
 echo "You have successfully registered! You may now log in!";
 
 ?>

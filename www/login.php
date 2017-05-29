@@ -8,12 +8,15 @@ $password = __post__('password');
 
 $user = User::authenticate($username, $password);
 
-if ($user === NULL) {
-	// Login failed
-} else {
-	set_session_id($user->get_id());
+if ($user === NULL || $password === NULL) {
+	recover(0);
 }
 
-header('Location: index.php');
+if ($user === NULL) {
+	echo "Authentication failed!";
+} else {
+	echo "OK";
+	set_session_id($user->get_id());
+}
 
 ?>

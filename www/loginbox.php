@@ -6,15 +6,31 @@ class LoginBox {
 
 	function render($r) {
 		$r->print("
+		<script>
+			function login() {
+				\$.post('login.php', {
+					'username': \$('#username').val(),
+					'password': \$('#password').val()
+				}, function (data, status) {
+					if (status == 'success') {
+						\$('#login_result_box').html(data);
+					}
+					if (data == 'OK') {
+						window.location = 'index.php';
+					}
+				});
+			}
+		</script>
 		<div>
 			<p>Login:</p>
-			<form action='login.php' method='POST'>
-				Username:<br/>
-				<input type='text' name='username'/> <br/>
-				Password:<br/>
-				<input type='password' name='password'/> <br/>
-				<input type='submit' value='Log in'/>
-			</form>
+			<div>
+				<p>Username:</p>
+				<input type='text' id='username'/>
+				<p>Password:</p>
+				<input type='password' id='password'/>
+				<p><button onclick='login()'>Log in</button></p>
+				<p id='login_result_box'></p>
+			</div>
 		</div>
 		");
 	}

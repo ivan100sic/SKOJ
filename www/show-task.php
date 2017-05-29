@@ -60,19 +60,14 @@ class RecentSubmissionsBox {
 		if ($this->user_id == 0) return;
 
 		$db = SQL::get("
-			select id, created_on, status
+			select *
 			from submissions where user_id = ? and task_id = ?
-			limit 10
+			order by id desc limit 10
 		", [$this->user_id, $this->task_id]);
 
 		$r->print("<div><p>Your recent submissions:</p><table>");
 		foreach ($db as $row) {
-			$pretty_status = Submission::status_to_str($row['status']);
-			$r->print("<tr>
-				<td>${row['id']}</td>
-				<td>${row['created_on']}</td>
-				<td>$pretty_status</td>
-			</tr>");
+			(new Submission($row))->render_row_simple($r);
 		}
 		$r->print("</table></div>");
 	}

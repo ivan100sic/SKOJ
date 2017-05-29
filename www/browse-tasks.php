@@ -1,7 +1,7 @@
 <?php
 
 require_once 'dom.php';
-require_once 'task.php';
+require_once 'global.php';
 require_once 'paginate.php';
 
 class BrowseTasksPage extends Page {

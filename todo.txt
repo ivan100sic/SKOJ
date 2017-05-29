@@ -1,12 +1,14 @@
 --- Highest Priority ---
 
-[DONE] Create/modify tasks page
+[DONE] Modify tasks page
 [DONE] Logic for modifying test cases
-[....] Top users page
-Profiles page
+[DONE] Top users page
+[DONE] Profiles page
+[DONE] Rework login
+[DONE] Submissions link to submission page
+Create task page (backend action at least)
 Sidebar/navbar
 Change password page
-Submissions link to submission page
 
 --- High priority
 
@@ -26,6 +28,7 @@ Documentation for the whole site (.pdf)
 --- Minor problems ---
 
 Tabs in <textarea>
+Login/register forms, enter = submit
 
 --- Optional ---
 
@@ -33,3 +36,9 @@ Improve compiler/interpreter performance
 Add more data to sample-small.sql
 Sandbox
 
+--- Unescaped text issues ---
+
+[DONE] hall-of-fame.php
+[DONE] index.php
+[DONE] edit-task.php testcase name, problem name
+[DONE] browse-tasks.php problem name

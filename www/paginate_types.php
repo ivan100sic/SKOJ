@@ -60,6 +60,23 @@ class PaginateTypes {
 						</div>
 					"
 				];
+			case 'user_task_subs':
+				return [
+					"name" => "user_task_subs",
+					"query" => "select * from submissions where
+						user_id = ? and task_id = ? order by id asc",
+					"args" => ["user_id", "task_id", "limit", "offset"],
+					"header" => "",
+					"class_name" => "Submission",
+					"method_name" => "render_row_simple",
+					"html" => "
+						<div>
+							$paginate_limit_controller
+							$paginate_bidi_controller
+							$paginate_result_box
+						</div>
+					"
+				];
 			default:
 				return NULL;
 		}

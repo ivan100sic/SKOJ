@@ -53,7 +53,9 @@ class Testcase {
 	function render_edit_row($r) {
 		$r->print("
 		<tr id='testcase_edit_row_$this->id'>
-			<td>$this->name</td>
+			<td>");
+		(new EscapedText($this->name))->render($r);
+		$r->print("</td>
 			<td><a href='edit-test-case.php?id=$this->id' target='_blank'>Edit</a></td>
 			<td><a href='javascript:void(0)' onclick='delete_test_case($this->id)'>Delete</a></td>
 		</tr>");
