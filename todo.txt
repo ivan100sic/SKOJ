@@ -6,7 +6,7 @@
 [DONE] Profiles page
 [DONE] Rework login
 [DONE] Submissions link to submission page
-Create task page (backend action at least)
+[....] Create task page (backend action at least)
 Sidebar/navbar
 Change password page
 

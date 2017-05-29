@@ -116,6 +116,12 @@ class Task {
 			return $user->has_permission("EDIT_ALL_TASKS");
 		}
 	}
+
+	static function create_new($author) {
+		$db = SQL::run("insert into tasks(name, statement, author, created_on, status)
+			values (concat('Task ', now()), '', ?, now(), 1)", [$author]);
+		return SQL::last_insert_id();
+	}
 }
 	
 ?>
