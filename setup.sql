@@ -130,6 +130,31 @@ create table users_permissions (
 		on update cascade
 ) engine = InnoDB;
 
+-- Very useful views
+
+create view solved as
+	select users.id user_id, tasks.id task_id from users, tasks
+	where
+		(select count(*) from submissions where
+			user_id = users.id and
+			task_id = tasks.id and
+			status >= 0
+		) > 0;
+
+create view attempted as
+	select users.id user_id, tasks.id task_id from users, tasks
+	where
+		(select count(*) from submissions where
+				user_id = users.id and
+				task_id = tasks.id and
+				status >= 0
+		) = 0
+		and
+		(select count(*) from submissions where
+			user_id = users.id and
+			task_id = tasks.id
+		) > 0;
+
 -- The predefined set of permissions and properties
 
 insert into permissions(id, name) values

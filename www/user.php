@@ -83,12 +83,8 @@ class User {
 			return $this->solved_tasks;
 		}
 		$a = [];
-		$db = SQL::get("select * from tasks t1 where
-			(select count(*) from submissions where
-				user_id = ? and
-				task_id = t1.id and
-				status >= 0
-			) > 0", [$this->id]);
+		$db = SQL::get("select * from solved inner join tasks
+			on task_id = tasks.id where user_id = ?", [$this->id]);
 			
 		foreach ($db as $row) {
 			$a[] = new Task($row);
@@ -102,16 +98,8 @@ class User {
 		}
 		$a = [];
 		/* Without successful submissions but with some attempts */
-		$db = SQL::get("select * from tasks t1 where
-			(select count(*) from submissions where
-				user_id = ? and
-				task_id = t1.id and
-				status >= 0
-			) = 0 and
-			(select count(*) from submissions where
-				user_id = ? and
-				task_id = t1.id
-			) > 0", [$this->id, $this->id]);
+		$db = SQL::get("select * from attempted inner join tasks
+			on task_id = tasks.id where user_id = ?", [$this->id]);
 			
 		foreach ($db as $row) {
 			$a[] = new Task($row);
