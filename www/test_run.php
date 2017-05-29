@@ -65,12 +65,7 @@ class TestRun {
 	}
 
 	function render_table_row($r) {
-		if (!isset($r->temp)) {
-			$r->temp = [];
-		}
-		if (!isset($r->temp['rsto'])) {
-			$r->temp['rsto'] = 0;
-		};
+		$r->temp['rsto'] = 0;
 
 		$r->temp['rsto'] += 1;
 		$a = $r->temp['rsto'];

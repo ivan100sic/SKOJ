@@ -1,11 +1,12 @@
 --- Highest Priority ---
 
-Create/modify tasks page
-	Logic for modifying test cases
-Top users page
+[DONE] Create/modify tasks page
+[DONE] Logic for modifying test cases
+[....] Top users page
 Profiles page
 Sidebar/navbar
 Change password page
+Submissions link to submission page
 
 --- High priority
 

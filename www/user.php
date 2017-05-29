@@ -130,6 +130,20 @@ class User {
 	function render_row_simple($r) {
 		$r->print("<tr><td>$this->username</td></tr>");
 	}
+
+	function render_row_hall_of_fame($r) {
+		$sp = $r->temp['user_solved_problems'];
+		if ($sp == 1) {
+			$suffix = '';
+		} else {
+			$suffix = 's';
+		}
+		$r->print("<tr><td>");
+		$this->render_link($r);
+		$r->print("</td>
+			<td>$sp problem$suffix solved</td>
+		</tr>");
+	}
 }
 
 

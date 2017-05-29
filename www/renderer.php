@@ -9,6 +9,7 @@ class Renderer {
 	function __construct($params) {
 		$this->text = [];
 		$this->params = $params;
+		$this->temp = [];
 	}
 
 	function print($data) {
