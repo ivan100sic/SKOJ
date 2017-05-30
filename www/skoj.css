@@ -1,3 +1,7 @@
+body {
+	font-family: monospace;
+}
+
 div.skoj_header {
 	position: absolute;
 	left: 0px;
@@ -13,7 +17,7 @@ div.skoj_header {
 div.skoj_sidebar {
 	position: absolute;
 	left: 0px;
-	top: 64px;
+	top: 48px;
 	width: 25%;
 	padding: 8px;
 	text-align: left;
@@ -22,7 +26,30 @@ div.skoj_sidebar {
 div.skoj_content {
 	position: absolute;
 	left: 25%;
-	top: 64px;
+	top: 48px;
 	width: 50%;
 	padding: 8px;
+}
+
+/* unvisited link */
+a:link {
+	color: red;
+	text-decoration: none;
+}
+
+/* visited link */
+a:visited {
+	color: red;
+	text-decoration: none;
+}
+
+/* mouse over link */
+a:hover {
+	color: blue;
+	text-decoration: underline;
+}
+
+/* selected link */
+a:active {
+	color: purple;
 }

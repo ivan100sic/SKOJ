@@ -47,16 +47,18 @@ class Sidebar {
 			<p><a href='new-task.php'>Add a task</a></p>
 			<p><a href=''>Recent submissions (TODO)</a></p>
 			<p><a href=''>Tutorials (TODO)</a></p>
-			<p><a href=''>Change password</a></p>");
+			<p><a href=''>Change password (TODO)</a></p>");
 
 		$user = User::construct_safe(get_session_id());
 
 		if ($user !== NULL && $user->has_permission("ADMIN_PANEL")) {
-			$r->print("<p><a href=''>Admin panel</a></p>");
+			$r->print("<p><a href=''>Admin panel (TODO)</a></p>");
 		}
 
-		$r->print("<p><a href='logout.php'>Log out</a></p>
-			</div>");
+		if ($user !== NULL) {
+			$r->print("<p><a href='logout.php'>Log out</a></p>");
+		}
+		$r->print("</div>");
 	}
 }
 
