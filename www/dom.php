@@ -1,6 +1,8 @@
 <?php
 
+require_once 'global.php';
 require_once 'renderer.php';
+require_once 'user.php';
 
 class Text {
 	private $data;
@@ -35,17 +37,40 @@ class EscapedText {
 	/* Getters, setters... */
 }
 
+class Sidebar {
+	function render($r) {
+		$r->print("<div class='skoj_sidebar'>
+			<p><a href='index.php'>Home</a></p>
+			<p><a href='browse-tasks.php'>Browse tasks</a></p>
+			<p><a href='hall-of-fame.php'>Hall of Fame</a></p>
+			<p><a href=''>My tasks (TODO)</a></p>
+			<p><a href='new-task.php'>Add a task</a></p>
+			<p><a href=''>Recent submissions (TODO)</a></p>
+			<p><a href=''>Tutorials (TODO)</a></p>
+			<p><a href=''>Change password</a></p>");
+
+		$user = User::construct_safe(get_session_id());
+
+		if ($user !== NULL && $user->has_permission("ADMIN_PANEL")) {
+			$r->print("<p><a href=''>Admin panel</a></p>");
+		}
+
+		$r->print("<p><a href='logout.php'>Log out</a></p>
+			</div>");
+	}
+}
+
 class Page {
 	protected $head_items;
 	protected $body_items;
 	
 	function __construct() {
+		$jquery_url = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js";
 		$this->head_items = [
 			"charset" => new Text("<meta charset='UTF-8'/>"),
 			"title" => new Text("<title>SKOJ</title>"),
-			"jquery" => new Text(
-				"<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'>
-				 </script>")
+			"jquery" => new Text("<script src='$jquery_url'></script>"),
+			"css" => new Text("<link rel='stylesheet' type='text/css' href='skoj.css'/>")
 		];
 		$this->body_items = [];
 	}
@@ -56,10 +81,14 @@ class Page {
 			$value->render($r);
 		}
 		$r->print("</head><body>");
+		// Header div
+		$r->print("<div class='skoj_header'>SKOJ</div>");
+		(new Sidebar())->render($r);
+		$r->print("<div class='skoj_content'>");
 		foreach ($this->body_items as $key => $value) {
 			$value->render($r);
 		}
-		$r->print("</body></html>");
+		$r->print("</div></body></html>");
 	}	
 }
 

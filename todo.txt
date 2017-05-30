@@ -6,12 +6,17 @@
 [DONE] Profiles page
 [DONE] Rework login
 [DONE] Submissions link to submission page
-[....] Create task page (backend action at least)
+[DONE] Create task page (backend action at least)
 Sidebar/navbar
+	Home, (browse) tasks, Hall of Fame, My tasks,
+	Add a task, Recent submissions, Tutorials,
+	Change password, (ADMIN PANEL), Log out
 Change password page
 
 --- High priority
 
+[DONE] Check if the problem statement can be parsed before saving
+Display parsed problem statement sandbox
 Implement permissions for all pages
 Admin Panel
 	SQL/XML dump
@@ -19,7 +24,7 @@ Action Logging
 
 --- Lower priority, must be done before release ---
 
-Implement a visual theme
+[D...] Implement a visual theme
 Documentation for the programming language
 Documentation for the markup language used for displaying task statements
 Documentation for adding testcases
@@ -29,6 +34,10 @@ Documentation for the whole site (.pdf)
 
 Tabs in <textarea>
 Login/register forms, enter = submit
+
+--- Optional but cool ---
+
+Add *unsolved only* selector to browse-tasks
 
 --- Optional ---
 

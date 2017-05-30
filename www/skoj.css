@@ -1,0 +1,28 @@
+div.skoj_header {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 48px;
+	font-size: 40px;
+	margin: 0px;
+	padding: 0px;
+	text-align: center;
+}
+
+div.skoj_sidebar {
+	position: absolute;
+	left: 0px;
+	top: 64px;
+	width: 25%;
+	padding: 8px;
+	text-align: left;
+}
+
+div.skoj_content {
+	position: absolute;
+	left: 25%;
+	top: 64px;
+	width: 50%;
+	padding: 8px;
+}

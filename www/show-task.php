@@ -5,6 +5,23 @@ require_once 'global.php';
 require_once 'task.php';
 require_once 'submission.php';
 
+class TaskEditPrompt {
+	protected $task_id;
+	protected $session_id;
+
+	function __construct($task_id, $session_id) {
+		$this->task_id = $task_id;
+		$this->session_id = $session_id;
+	}
+
+	function render($r) {
+		if (Task::authorize_edit($this->task_id, $this->session_id)) {
+			$r->print("<a href='edit-task.php?task_id=$this->task_id'>
+				Edit this task</a>");
+		}
+	}
+}
+
 class TaskTextBox {
 
 	protected $task_id;
@@ -78,9 +95,11 @@ class ShowTaskPage extends Page {
 	function __construct($task_id, $session_id) {
 		parent::__construct();
 		$this->task_id = $task_id;
+		$this->body_items[] = new TaskEditPrompt($task_id, $session_id);
 		$this->body_items[] = new TaskTextBox($task_id);
 		$this->body_items[] = new SubmitBox($task_id, $session_id);
-		$this->body_items[] = new Adapter(Task::construct_safe($task_id), "render_best_solutions");
+		$this->body_items[] =
+			new Adapter(Task::construct_safe($task_id), "render_best_solutions");
 		$this->body_items[] = new RecentSubmissionsBox($session_id, $task_id);
 	}
 }

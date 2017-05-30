@@ -32,6 +32,12 @@ if ($statement === "") {
 	exit();
 }
 
+$markup = Markup::convert_to_html($statement);
+if ($markup === NULL) {
+	echo "Invalid markup!";
+	exit();
+}
+
 $db = SQL::run("update tasks set
 	name = ?,
 	statement = ?
