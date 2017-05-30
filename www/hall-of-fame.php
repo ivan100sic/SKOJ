@@ -16,7 +16,7 @@ class HallOfFameBox {
 						task_id = t2.id and
 						status >= 0
 					) > 0
-			) c1 from users t1 order by c1 desc, id asc");
+			) c1 from users t1 order by c1 desc, id asc", []);
 
 		foreach ($db as $row) {
 			$user = new User($row);

@@ -6,11 +6,12 @@ require_once 'user.php';
 $username = __post__('username');
 $password = __post__('password');
 
-$user = User::authenticate($username, $password);
-
-if ($user === NULL || $password === NULL) {
-	recover(0);
+if ($username === NULL || $password === NULL) {
+	echo "Bad POST request, hacker! Move on!";
+	exit();
 }
+
+$user = User::authenticate($username, $password);
 
 if ($user === NULL) {
 	echo "Authentication failed!";

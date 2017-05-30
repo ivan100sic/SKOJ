@@ -52,7 +52,7 @@ class Sidebar {
 		$user = User::construct_safe(get_session_id());
 
 		if ($user !== NULL && $user->has_permission("ADMIN_PANEL")) {
-			$r->print("<p><a href=''>Admin panel (TODO)</a></p>");
+			$r->print("<p><a href='admin-panel.php'>Admin panel</a></p>");
 		}
 
 		if ($user !== NULL) {

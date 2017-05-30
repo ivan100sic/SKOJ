@@ -12,18 +12,20 @@
 	Issue: Don't display "Add a task" for users which can't do that
 	Move "Add a task" to My tasks
 [DONE] Change password page
+[DONE] Issue: Strange reply when a login attempt fails
 
 --- High priority
 
 [DONE] Check if the problem statement can be parsed before saving
 Display parsed problem statement sandbox
 Implement permissions for all pages
-Admin Panel
-	SQL/XML dump
+[DO..] Admin Panel
+[DONE] SQL/XML dump
 Action Logging
 
 --- Lower priority, must be done before release ---
 
+Issue: "Edit this task" link does not appear on its own line always
 [D...] Implement a visual theme
 Documentation for the programming language
 Documentation for the markup language used for displaying task statements
