@@ -157,6 +157,16 @@ class Submission {
 		</tr>");
 	}
 
+	function render_row_all($r) {
+		$pretty_status = Submission::status_to_str($this->status);
+		$user = User::construct_safe($this->user_id);
+		$r->print("<tr><td>");
+		$user->render_link($r);
+		$r->print("</td>
+			<td><a href='show-submission.php?id=$this->id'>$this->created_on</a></td>");		
+		$r->print("<td>$pretty_status</td></tr>");
+	}
+
 	function render_detailed($r) {
 		$r->print("<div>");
 		if ($this->get_status() == self::STATUS_NOT_GRADED) {

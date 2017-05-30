@@ -45,7 +45,7 @@ class Sidebar {
 			<p><a href='hall-of-fame.php'>Hall of Fame</a></p>
 			<p><a href=''>My tasks (TODO)</a></p>
 			<p><a href='new-task.php'>Add a task</a></p>
-			<p><a href=''>Recent submissions (TODO)</a></p>
+			<p><a href='recent-submissions.php'>Recent submissions</a></p>
 			<p><a href=''>Tutorials (TODO)</a></p>
 			<p><a href='change-password.php'>Change password</a></p>");
 

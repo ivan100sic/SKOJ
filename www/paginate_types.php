@@ -77,6 +77,22 @@ class PaginateTypes {
 						</div>
 					"
 				];
+			case 'all_subs':
+				return [
+					"name" => "all_subs",
+					"query" => "select * from submissions order by id desc",
+					"args" => ["limit", "offset"],
+					"header" => "",
+					"class_name" => "Submission",
+					"method_name" => "render_row_all",
+					"html" => "
+						<div>
+							$paginate_limit_controller
+							$paginate_bidi_controller
+							$paginate_result_box
+						</div>
+					"
+				];
 			default:
 				return NULL;
 		}
