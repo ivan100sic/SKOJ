@@ -10,7 +10,8 @@
 [DON.] Sidebar/navbar
 	Issue: Don't display pages inaccessible to guests
 	Issue: Don't display "Add a task" for users which can't do that
-Change password page
+	Move "Add a task" to My tasks
+[DONE] Change password page
 
 --- High priority
 

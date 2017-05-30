@@ -23,6 +23,10 @@ class User {
 	function get_id() {
 		return $this->id;
 	}
+
+	function get_username() {
+		return $this->username;
+	}
 	
 	function __construct($row) {
 		$this->id = $row["id"];

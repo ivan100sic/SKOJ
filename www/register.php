@@ -2,6 +2,7 @@
 
 require_once 'dom.php';
 require_once 'global.php';
+require_once 'user.php';
 
 class RegisterBox {
 
@@ -64,6 +65,9 @@ class RegisterPage extends Page {
 		$this->body_items[] = new RegisterBox();
 	}
 }
+
+$user = User::construct_safe(get_session_id());
+if ($user !== NULL) recover(0);
 
 $r = new Renderer(0);
 $page = new RegisterPage();

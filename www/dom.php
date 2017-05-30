@@ -47,7 +47,7 @@ class Sidebar {
 			<p><a href='new-task.php'>Add a task</a></p>
 			<p><a href=''>Recent submissions (TODO)</a></p>
 			<p><a href=''>Tutorials (TODO)</a></p>
-			<p><a href=''>Change password (TODO)</a></p>");
+			<p><a href='change-password.php'>Change password</a></p>");
 
 		$user = User::construct_safe(get_session_id());
 
@@ -57,7 +57,10 @@ class Sidebar {
 
 		if ($user !== NULL) {
 			$r->print("<p><a href='logout.php'>Log out</a></p>");
+		} else {
+			$r->print("<p><a href='register.php'>Register</a></p>");
 		}
+
 		$r->print("</div>");
 	}
 }
