@@ -39,17 +39,29 @@ class EscapedText {
 
 class Sidebar {
 	function render($r) {
-		$r->print("<div class='skoj_sidebar'>
-			<p><a href='index.php'>Home</a></p>
+		$user = User::construct_safe(get_session_id());
+
+
+		$r->print("<div class='skoj_sidebar'>");
+		if ($user !== NULL) {
+			$r->print("<p><a href='index.php'>Home</a></p>");
+		}
+		$r->print("
 			<p><a href='browse-tasks.php'>Browse tasks</a></p>
 			<p><a href='hall-of-fame.php'>Hall of Fame</a></p>
-			<p><a href=''>My tasks (TODO)</a></p>
-			<p><a href='new-task.php'>Add a task</a></p>
 			<p><a href='recent-submissions.php'>Recent submissions</a></p>
 			<p><a href=''>Tutorials (TODO)</a></p>
-			<p><a href='change-password.php'>Change password</a></p>");
+		");
 
-		$user = User::construct_safe(get_session_id());
+		
+
+		if ($user !== NULL) {
+			$r->print("
+				<p><a href='my-tasks.php'>My tasks</a></p>			
+				<p><a href='change-password.php'>Change password</a></p>");
+		} else {
+			$r->print("<p><a href='index.php'>Login</a></p>");
+		}
 
 		if ($user !== NULL && $user->has_permission("ADMIN_PANEL")) {
 			$r->print("<p><a href='admin-panel.php'>Admin panel</a></p>");

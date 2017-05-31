@@ -8,9 +8,9 @@
 [DONE] Submissions link to submission page
 [DONE] Create task page (backend action at least)
 [DON.] Sidebar/navbar
-	Issue: Don't display pages inaccessible to guests
-	Issue: Don't display "Add a task" for users which can't do that
-	Move "Add a task" to My tasks
+[DON.] Issue: Don't display pages inaccessible to guests
+[....] Issue: Don't display "Add a task" for users which can't do that
+[DONE] Move "Add a task" to My tasks
 [DONE] Change password page
 [DONE] Issue: Strange reply when a login attempt fails
 

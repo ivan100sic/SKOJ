@@ -93,6 +93,22 @@ class PaginateTypes {
 						</div>
 					"
 				];
+			case 'user_tasks':
+				return [
+					"name" => "user_tasks",
+					"query" => "select * from tasks where author = ? order by id asc",
+					"args" => ["author", "limit", "offset"],
+					"header" => "<tr><td>Task name:</td></tr>",
+					"class_name" => "Task",
+					"method_name" => "render_row_simple",
+					"html" => "
+						<div>
+							$paginate_limit_controller
+							$paginate_bidi_controller
+							$paginate_result_box
+						</div>
+					"
+				];
 			default:
 				return NULL;
 		}
