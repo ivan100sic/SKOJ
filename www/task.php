@@ -12,6 +12,9 @@ class Task {
 	private $author;	
 	private $created_on;	
 	private $status;
+
+	private $solved_count;
+	private $att_sol_count;
 	
 	function __construct($row) {
 		$this->id = $row["id"];
@@ -20,6 +23,18 @@ class Task {
 		$this->author = $row["author"];
 		$this->created_on = $row["created_on"];
 		$this->status = $row["status"];
+
+		if (isset($row['s'])) {
+			$this->solved_count = (int)$row['s'];
+		} else {
+			$this->solved_count = NULL;
+		}
+
+		if (isset($row['ac'])) {
+			$this->att_sol_count = (int)$row['ac'];
+		} else {
+			$this->att_sol_count = NULL;
+		}
 	}
 	
 	static function construct_safe($id) {
@@ -59,6 +74,14 @@ class Task {
 	function render_row_simple($r) {
 		$r->print("<tr><td>");
 		$this->render_link($r);
+		$r->print("</td><td>");
+	}
+
+	function render_row_detailed($r) {
+		$r->print("<tr><td>");
+		$this->render_link($r);
+		$r->print("</td><td>");
+		$r->print("$this->solved_count/$this->att_sol_count");
 		$r->print("</td></tr>");
 	}
 
@@ -84,6 +107,7 @@ class Task {
 				) t3 inner join submissions t4 on t3.i = t4.id
 			) t5
 			inner join users t6 on t5.user_id = t6.id
+			order by status asc
 			limit 10
 			", [$this->id]);
 

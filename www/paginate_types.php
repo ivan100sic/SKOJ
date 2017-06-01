@@ -33,7 +33,7 @@ class PaginateTypes {
 					"name" => "user_simple",
 					"query" => "select * from users order by id asc",
 					"args" => ["limit", "offset"],
-					"header" => "",
+					"header" => "<tr><th>User</th></tr>",
 					"class_name" => "User",
 					"method_name" => "render_row_simple",
 					"html" => "
@@ -44,14 +44,28 @@ class PaginateTypes {
 						</div>
 					"
 				];
-			case 'task_simple':
+			case 'task_detailed':
 				return [
-					"name" => "task_simple",
-					"query" => "select * from tasks order by id asc",
+					"name" => "task_detailed",
+					"query" => 
+"select id, name, statement, author, created_on, status,
+ s, ac from tasks t9 inner join (
+ select t3.task_id, s, ac from (
+  select task_id, count(user_id) ac from (
+   (select * from solved) union (select * from attempted)
+  ) t1 group by task_id
+ ) t3
+ inner join
+ (
+  select task_id, count(user_id) s from solved group by task_id
+ ) t4
+ on t3.task_id = t4.task_id
+) t7 on t9.id = t7.task_id
+order by t7.task_id",
 					"args" => ["limit", "offset"],
-					"header" => "<tr><td>Task name:</td></tr>",
+					"header" => "<tr><th>Task name</th><th>Success rate</th></tr>",
 					"class_name" => "Task",
-					"method_name" => "render_row_simple",
+					"method_name" => "render_row_detailed",
 					"html" => "
 						<div>
 							$paginate_limit_controller
@@ -66,7 +80,7 @@ class PaginateTypes {
 					"query" => "select * from submissions where
 						user_id = ? and task_id = ? order by id asc",
 					"args" => ["user_id", "task_id", "limit", "offset"],
-					"header" => "",
+					"header" => "<tr><th>Submission time</th><th>Status</th></tr>",
 					"class_name" => "Submission",
 					"method_name" => "render_row_simple",
 					"html" => "
@@ -82,7 +96,8 @@ class PaginateTypes {
 					"name" => "all_subs",
 					"query" => "select * from submissions order by id desc",
 					"args" => ["limit", "offset"],
-					"header" => "",
+					"header" => "<tr><th>User</th><th>Task</th><th>Submission time</th>
+						<th>Status</th></tr>",
 					"class_name" => "Submission",
 					"method_name" => "render_row_all",
 					"html" => "
@@ -98,7 +113,7 @@ class PaginateTypes {
 					"name" => "user_tasks",
 					"query" => "select * from tasks where author = ? order by id asc",
 					"args" => ["author", "limit", "offset"],
-					"header" => "<tr><td>Task name:</td></tr>",
+					"header" => "<tr><th>Task name:</th></tr>",
 					"class_name" => "Task",
 					"method_name" => "render_row_simple",
 					"html" => "

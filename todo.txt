@@ -13,16 +13,18 @@
 [DONE] Move "Add a task" to My tasks
 [DONE] Change password page
 [DONE] Issue: Strange reply when a login attempt fails
+[DONE] Issue: Best solutions not ordered well
 
 --- High priority
 
 [DONE] Check if the problem statement can be parsed before saving
 [DONE] Display parsed problem statement sandbox
-[....] Implement permissions for all pages
+[D...] Implement permissions for all pages
 [DO..] Admin Panel
 [DONE] SQL/XML dump
 Action Logging
 Make those tables/paginators look better
+[DO..] Display additional columns names in problem statements, submissions, etc.
 
 --- Lower priority, must be done before release ---
 
@@ -46,6 +48,7 @@ Add *unsolved only* selector to browse-tasks
 --- Optional ---
 
 Improve compiler/interpreter performance
+Increase maximum time limit
 Add more data to sample-small.sql
 Sandbox
 

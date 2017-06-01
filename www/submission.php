@@ -161,8 +161,11 @@ class Submission {
 	function render_row_all($r) {
 		$pretty_status = Submission::status_to_str($this->status);
 		$user = User::construct_safe($this->user_id);
+		$task = Task::construct_safe($this->task_id);
 		$r->print("<tr><td>");
 		$user->render_link($r);
+		$r->print("</td><td>");
+		$task->render_link($r);
 		$r->print("</td>
 			<td><a href='show-submission.php?id=$this->id'>$this->created_on</a></td>");		
 		$r->print("<td>$pretty_status</td></tr>");

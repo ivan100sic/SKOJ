@@ -73,9 +73,9 @@ class TutorialSkojLangPage extends Page {
 			uppercase letters, parentheses - '(' and ')', hash - '#', etc. You can safely 'glue'
 			together variable names, integer literals and operators, as long as no ambiguity
 			occurs. The parser is greedy and it first attempts to parse the input sequence as a 
-			two-character operator. This means that, for example, 'x = &lt;&lt;= a b c' will
+			two-character operator. This means that, for example, 'x = &lt;&lt;= a b c;' will
 			result in a compilation error, as it will be interpreted as x = &lt;&lt; = a b c.
-			However, 'x = &lt; &lt;= a b c' is a valid assignment statement.
+			However, 'x = &lt; &lt;= a b c;' is a valid assignment statement.
 		</p>
 		");
 	}
