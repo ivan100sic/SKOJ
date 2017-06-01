@@ -18,18 +18,18 @@ class Tokenizer {
 		$k = 28;
 		
 		$tokens_raw = [
-			/* Operatori od dva znaka, daje im se visi prioritet */
+			/* Two-character operators, which are given higher priority */
 		
 			"==", "!=", ">=", "<=",
 			"&&", "||", "<<", ">>",
 			
-			/* Operatori od jednog znaka (svi ostali) */
+			/* One-character operators */
 			
 			"`", "!", "~",
 			"+", "-", "*", "/", "%",
 			">", "<", "&", "|",
 			
-			/* Ostali jezicki tokeni */
+			/* Other tokens */
 			
 			"@", "=", ";", ".",
 			"[", "]", "{", "}"

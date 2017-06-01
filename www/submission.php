@@ -6,6 +6,7 @@ require_once 'syntax-parse.php';
 require_once 'testcase.php';
 require_once 'grader.php';
 require_once 'test_run.php';
+require_once 'task.php';
 
 class Submission {
 
@@ -169,6 +170,11 @@ class Submission {
 
 	function render_detailed($r) {
 		$r->print("<div>");
+		$r->print("<p>Problem: ");
+		Task::construct_safe($this->task_id)->render_link($r);
+		$r->print("</p>User: ");
+		User::construct_safe($this->user_id)->render_link($r);
+		$r->print("</p>");
 		if ($this->get_status() == self::STATUS_NOT_GRADED) {
 			$r->print("<p>Status: Not graded</p>");
 		} else if ($this->get_status() == self::STATUS_CE) {

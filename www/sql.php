@@ -7,9 +7,16 @@ class SQL {
 	// Maintain a connection for the duration of page render
 	static private function conn() {
 		if (SQL::$conn_var === NULL) {
+			// For local testing/development
 			SQL::$conn_var = new mysqli('localhost', 'root', '', 'skoj');
 			if (SQL::$conn_var->connect_error) {
-				throw new Exception("SQL");
+				// For web hosting
+				SQL::$conn_var = new mysqli('localhost', 'ivansici_php',
+					'309ieu9srf0gjio230', 'ivansici_skoj');
+				if (SQL::$conn_var->connect_error) {
+					// Error
+					throw new Exception("SQL");
+				}
 			}
 		}
 		SQL::$conn_var->set_charset("utf8");

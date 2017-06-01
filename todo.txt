@@ -18,7 +18,7 @@
 
 [DONE] Check if the problem statement can be parsed before saving
 [DONE] Display parsed problem statement sandbox
-Implement permissions for all pages
+[....] Implement permissions for all pages
 [DO..] Admin Panel
 [DONE] SQL/XML dump
 Action Logging

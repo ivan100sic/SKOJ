@@ -50,7 +50,7 @@ class Sidebar {
 			<p><a href='browse-tasks.php'>Browse tasks</a></p>
 			<p><a href='hall-of-fame.php'>Hall of Fame</a></p>
 			<p><a href='recent-submissions.php'>Recent submissions</a></p>
-			<p><a href=''>Tutorials (TODO)</a></p>
+			<p><a href='tutorials.php'>Tutorials</a></p>
 		");
 
 		

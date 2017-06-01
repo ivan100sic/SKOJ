@@ -16,8 +16,8 @@ class TaskEditPrompt {
 
 	function render($r) {
 		if (Task::authorize_edit($this->task_id, $this->session_id)) {
-			$r->print("<a href='edit-task.php?task_id=$this->task_id'>
-				Edit this task</a>");
+			$r->print("<p><a href='edit-task.php?task_id=$this->task_id'>
+				Edit this task</a></p>");
 		}
 	}
 }
@@ -51,16 +51,29 @@ class SubmitBox {
 
 	function render($r) {
 		$id = $this->task_id;
-		$r->print(
-		"<div>
-			<p>Submit a solution:</p>
-			<form action='submit.php' method='POST' enctype='multipart/form-data'>
-				<input type='hidden' name='task_id' value='$id'/>
-				<input type='file' name='file'/>
-				<input type='submit' value='Submit solution'/>
-			</form>
-			<p>Maximum size: 16384 bytes</p>
-		</div>");
+		$user = User::construct_safe($this->session_id);
+		if ($user !== NULL && $user->has_permission("SUBMIT")) {
+			$r->print(
+			"<div>
+				<p>Submit a solution:</p>
+				<form action='submit.php' method='POST' enctype='multipart/form-data'>
+					<input type='hidden' name='task_id' value='$id'/>
+					<input type='file' name='file'/>
+					<input type='submit' value='Submit solution'/>
+				</form>
+				<p>Maximum size: 16384 bytes</p>
+			</div>");
+		} else if ($user === NULL) {
+			$r->print(
+			"<div>
+				<p><a href='index.php'>Log in</a> to submit!</p>
+			</div>");
+		} else {
+			$r->print(
+			"<div>
+				<p>You don't have permission to submit. Contact the administrator!</p>
+			</div>");
+		}
 	}
 }
 
