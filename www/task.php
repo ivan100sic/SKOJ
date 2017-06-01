@@ -80,7 +80,7 @@ class Task {
 	function render_row_detailed($r) {
 		$r->print("<tr><td>");
 		$this->render_link($r);
-		$r->print("</td><td>");
+		$r->print("</td><td class='centered'>");
 		$r->print("$this->solved_count/$this->att_sol_count");
 		$r->print("</td></tr>");
 	}
@@ -112,7 +112,7 @@ class Task {
 			", [$this->id]);
 
 		// var_dump($db);
-		$r->print("<div><p>Best solutions</p><table>");
+		$r->print("<div><h3>Best solutions</h3><table>");
 		foreach ($db as $row) {
 			$sid = $row['sid'];
 			$uid = $row['uid'];

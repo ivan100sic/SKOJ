@@ -34,6 +34,18 @@ div.skoj_content {
 	padding: 8px;
 }
 
+table {
+	width: 500px;
+}
+
+table.wide {
+	width: 800px;
+}
+
+td.centered {
+	text-align: center;
+}
+
 /* unvisited link */
 a:link {
 	color: red;

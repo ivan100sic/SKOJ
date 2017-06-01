@@ -31,6 +31,8 @@ class PaginateBackend {
 	protected $header;
 	// Query arguments, drawn from POST
 	protected $args;
+	// Additional options for the table
+	protected $table_options;
 
 	// Constructor. Can swallow anything for limit and offset.
 	function __construct($params) {
@@ -38,6 +40,7 @@ class PaginateBackend {
 		$this->class_name = $params['class_name'];
 		$this->method_name = $params['method_name'];
 		$this->header = $params['header'];
+		$this->table_options = $params['table_options'];
 
 		$limit_int = (int)__post__('limit');
 		if ($limit_int < 1) {
@@ -73,7 +76,7 @@ class PaginateBackend {
 			$objs[] = new $this->class_name($row);
 		}
 		// Render table and header
-		$r->print("<table>$this->header");
+		$r->print("<table $this->table_options>$this->header");
 		foreach ($objs as $obj) {
 			$obj->{$this->method_name}($r);
 		}
