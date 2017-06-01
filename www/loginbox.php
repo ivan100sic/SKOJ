@@ -20,14 +20,20 @@ class LoginBox {
 					}
 				});
 			}
+
+			function okd(e) {
+				if (e.keyCode == 13 || e.keyCode == 10) {
+					login();
+				}
+			}
 		</script>
 		<div>
 			<p>Login:</p>
 			<div>
 				<p>Username:</p>
-				<input type='text' id='username'/>
+				<input type='text' id='username' onkeydown='okd(event)'/>
 				<p>Password:</p>
-				<input type='password' id='password'/>
+				<input type='password' id='password' onkeydown='okd(event)'/>
 				<p><button onclick='login()'>Log in</button></p>
 				<p id='login_result_box'></p>
 			</div>

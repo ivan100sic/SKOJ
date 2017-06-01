@@ -23,17 +23,17 @@
 [DO..] Admin Panel
 [DONE] SQL/XML dump
 Action Logging
-Make those tables/paginators look better
+[DO..] Make those tables/paginators look better
 [DO..] Display additional columns names in problem statements, submissions, etc.
 
 --- Lower priority, must be done before release ---
 
-Issue: "Edit this task" link does not appear on its own line always
+[DONE] Issue: "Edit this task" link does not appear on its own line always
 [D...] Implement a visual theme
 Issue: Markup parser is too liberal right now
-Documentation for the programming language
+[DONE] Documentation for the programming language
 Documentation for the markup language used for displaying task statements
-Documentation for adding testcases
+[DO..] Documentation for adding testcases
 Documentation for the whole site (.pdf)
 
 --- Minor problems ---

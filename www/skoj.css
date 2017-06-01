@@ -53,3 +53,7 @@ a:hover {
 a:active {
 	color: purple;
 }
+
+td {
+	padding: 4px;
+}

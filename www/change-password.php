@@ -22,14 +22,20 @@ class ChangePasswordBox {
 					}
 				});
 			}
+
+			function okd(e) {
+				if (e.keyCode == 13 || e.keyCode == 10) {
+					change_password_submit();
+				}
+			}
 		</script>
 		<div>
 			<p>Confirm your old password:</p>
-			<input type='password' id='old_password'/>
+			<input type='password' id='old_password' onkeydown='okd(event)'/>
 			<p>Type your new password:</p>
-			<input type='password' id='password_1'/>
+			<input type='password' id='password_1' onkeydown='okd(event)'/>
 			<p>Confirm your new password:</p>
-			<input type='password' id='password_2'/> <br/>
+			<input type='password' id='password_2' onkeydown='okd(event)'/> <br/>
 			<button onclick='change_password_submit()'>Change password</button>
 			<p id='result_box'></p>
 		</div>");

@@ -33,22 +33,28 @@ class RegisterBox {
 				}, callback);
 
 				\$('#register_result_box').html('...');
-			}			
+			}
+
+			function okd(e) {
+				if (e.keyCode == 13 || e.keyCode == 10) {
+					register();
+				}
+			}
 		</script>
 		<div>
 			<p>Register:</p>
 			<div>
 				Username:<br/>
-				<input type='text' id='username'/><br/>
+				<input type='text' id='username' onkeydown='okd(event)'/><br/>
 
 				Email:<br/>
-				<input type='text' id='email'/><br/>
+				<input type='text' id='email' onkeydown='okd(event)'/><br/>
 
 				Password:<br/>
-				<input type='password' id='password1'/> <br/>
+				<input type='password' id='password1' onkeydown='okd(event)'/> <br/>
 
 				Retype password:<br/>
-				<input type='password' id='password2'/> <br/>
+				<input type='password' id='password2' onkeydown='okd(event)'/> <br/>
 
 				<button onclick='register()'>Register</button>
 			</div>
