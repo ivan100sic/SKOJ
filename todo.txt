@@ -38,8 +38,8 @@ Documentation for the whole site (.pdf)
 
 --- Minor problems ---
 
-Tabs in <textarea>
-Login/register forms, enter = submit
+[DO..] Tabs in <textarea>
+[DONE] Login/register forms, enter = submit
 
 --- Optional but cool ---
 

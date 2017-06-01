@@ -87,6 +87,7 @@ class Page {
 			"charset" => new Text("<meta charset='UTF-8'/>"),
 			"title" => new Text("<title>SKOJ</title>"),
 			"jquery" => new Text("<script src='$jquery_url'></script>"),
+			"common_js" => new Text("<script src='common.js'></script>"),
 			"css" => new Text("<link rel='stylesheet' type='text/css' href='skoj.css'/>")
 		];
 		$this->body_items = [];

@@ -43,7 +43,8 @@ class EditTaskForm {
 				<p>Problem title:</p>
 				<input type='text' id='task_name'/>
 				<p>Problem statement:</p>
-				<textarea id='task_statement' rows='15' cols='70'></textarea><br/>
+				<textarea id='task_statement' rows='15' cols='70'
+					onkeydown='tab_hook(event, this)'></textarea><br/>
 				<button onclick='task_parse()'>Check & Preview</button>
 				<div id='task_parse_result_box'></div>
 				<button onclick='task_save()'>Save changes</button>

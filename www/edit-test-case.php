@@ -19,9 +19,11 @@ class EditTestcaseBox {
 				<p>Name:</p>
 				<input type='text' id='testcase_name'/>
 				<p>Input source code:</p>
-				<textarea id='testcase_source_input' rows='20' cols='60'></textarea>
+				<textarea id='testcase_source_input' rows='20' cols='60'
+					onkeydown='tab_hook(event, this)'></textarea>
 				<p>Output source code:</p>
-				<textarea id='testcase_source_output' rows='20' cols='60'></textarea>
+				<textarea id='testcase_source_output' rows='20' cols='60'
+					onkeydown='tab_hook(event, this)'></textarea>
 				<p>Instruction limit (no more than 65536):</p>
 				<input type='text' id='testcase_instruction_limit'/>
 				<button onclick='testcase_save()'>Save</button>
