@@ -100,7 +100,7 @@ class Page {
 		}
 		$r->print("</head><body>");
 		// Header div
-		$r->print("<div class='skoj_header'>SKOJ</div>");
+		$r->print("<div class='skoj_header'>SKOJ Online Judge</div>");
 		(new Sidebar())->render($r);
 		$r->print("<div class='skoj_content'>");
 		foreach ($this->body_items as $key => $value) {

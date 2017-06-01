@@ -30,13 +30,14 @@ class ChangePasswordBox {
 			}
 		</script>
 		<div>
+			<h2>Change password</h2>
 			<p>Confirm your old password:</p>
 			<input type='password' id='old_password' onkeydown='okd(event)'/>
 			<p>Type your new password:</p>
 			<input type='password' id='password_1' onkeydown='okd(event)'/>
 			<p>Confirm your new password:</p>
-			<input type='password' id='password_2' onkeydown='okd(event)'/> <br/>
-			<button onclick='change_password_submit()'>Change password</button>
+			<input type='password' id='password_2' onkeydown='okd(event)'/>
+			<p><button onclick='change_password_submit()'>Change password</button></p>
 			<p id='result_box'></p>
 		</div>");
 	}

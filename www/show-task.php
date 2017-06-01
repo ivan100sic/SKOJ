@@ -109,7 +109,9 @@ class ShowTaskPage extends Page {
 		parent::__construct();
 		$task = Task::construct_safe($task_id);
 		$this->task_id = $task_id;
-		$this->body_items[] = new Text("Task added by: ");
+		$this->body_items[] = new Text("<h2>Task: ");
+		$this->body_items[] = new EscapedText($task->get_name());
+		$this->body_items[] = new Text("</h2>Task added by: ");
 		$this->body_items[] = new Adapter(
 			User::construct_safe($task->get_author()), "render_link");
 		$this->body_items[] = new TaskEditPrompt($task_id, $session_id);

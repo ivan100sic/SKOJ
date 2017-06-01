@@ -6,7 +6,7 @@ require_once 'dom.php';
 
 class HallOfFameBox {
 	function render($r) {
-		$r->print("<p>Hall of Fame:");
+		$r->print("<h2>Hall of Fame</h2>");
 		$r->print("<table>");
 		$db = SQL::get("select *, (
 				select count(*) from tasks t2

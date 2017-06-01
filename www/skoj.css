@@ -1,32 +1,35 @@
-body {
+body, textarea, input, button, select, option {
 	font-family: monospace;
+	background-color: #000000;
+	color: #00ff00;
 }
 
 div.skoj_header {
 	position: absolute;
-	left: 0px;
+	left: 25%;
 	top: 0px;
-	width: 100%;
-	height: 48px;
+	width: 75%;
+	height: 64px;
 	font-size: 40px;
 	margin: 0px;
-	padding: 0px;
-	text-align: center;
+	padding-top: 12px;
+	text-align: left;
 }
 
 div.skoj_sidebar {
 	position: absolute;
 	left: 0px;
-	top: 48px;
+	top: 64px;
 	width: 25%;
 	padding: 8px;
+	padding-left: 24px;
 	text-align: left;
 }
 
 div.skoj_content {
 	position: absolute;
 	left: 25%;
-	top: 48px;
+	top: 64px;
 	width: 50%;
 	padding: 8px;
 }

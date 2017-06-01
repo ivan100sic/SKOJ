@@ -8,6 +8,7 @@ class BrowseTasksPage extends Page {
 
 	function __construct() {
 		parent::__construct();
+		$this->body_items[] = new Text("<h2>Browse tasks</h2>");
 		$this->body_items[] = new PaginateFrontend(PaginateTypes::get('task_detailed'));
 	}
 }

@@ -29,7 +29,7 @@ Action Logging
 --- Lower priority, must be done before release ---
 
 [DONE] Issue: "Edit this task" link does not appear on its own line always
-[D...] Implement a visual theme
+[DO..] Implement a visual theme
 Issue: Markup parser is too liberal right now
 [DONE] Documentation for the programming language
 Documentation for the markup language used for displaying task statements
@@ -40,6 +40,7 @@ Documentation for the whole site (.pdf)
 
 [DO..] Tabs in <textarea>
 [DONE] Login/register forms, enter = submit
+Issue: Choose file button does not conform to the style
 
 --- Optional but cool ---
 

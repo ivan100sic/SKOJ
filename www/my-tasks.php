@@ -11,6 +11,7 @@ class MyTasksPage extends Page {
 		parent::__construct();
 		$user = User::construct_safe($user_id);
 		if ($user !== NULL && $user->has_permission("EDIT_OWN_TASKS")) {
+			$this->body_items[] = new Text("<h2>Your tasks</h2>");
 			$this->body_items[] = new Text(
 				"<p><a href='new-task.php'>Add a task</a></p>
 				<input type='hidden' id='user_tasks_author' value='$user_id'/>");

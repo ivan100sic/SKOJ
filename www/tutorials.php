@@ -9,8 +9,9 @@ class TutorialsPage extends Page {
 	function __construct() {
 		parent::__construct();
 		$this->body_items[] = new Text("
-			<p><a href='tutorial-skoj-lang.php'>About the SKOJ language</a></p>
-			<p><a href='tutorial-examples.php'>Examples</a></p>
+			<h2>Tutorials</h2>
+			<h3><a href='tutorial-skoj-lang.php'>About the SKOJ language</a></h3>
+			<h3><a href='tutorial-examples.php'>Examples</a></h3>
 		");
 	}
 }
