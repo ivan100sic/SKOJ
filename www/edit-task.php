@@ -43,7 +43,9 @@ class EditTaskForm {
 				<p>Problem title:</p>
 				<input type='text' id='task_name'/>
 				<p>Problem statement:</p>
-				<textarea id='task_statement' rows='30' cols='90'></textarea><br/>
+				<textarea id='task_statement' rows='15' cols='70'></textarea><br/>
+				<button onclick='task_parse()'>Check & Preview</button>
+				<div id='task_parse_result_box'></div>
 				<button onclick='task_save()'>Save changes</button>
 				<p id='task_result_box'></p>
 				<p>Test cases:</p>
@@ -84,6 +86,17 @@ class EditTaskForm {
 					}, function(data, status) {
 						if (status == 'success') {
 							\$('#task_result_box').html(data);
+						}
+					});
+				}
+
+				function task_parse() {
+					var statement = \$('#task_statement').val();
+					\$.post('parse-task.php', {
+						'statement': statement
+					}, function(data, status) {
+						if (status == 'success') {
+							\$('#task_parse_result_box').html(data);
 						}
 					});
 				}

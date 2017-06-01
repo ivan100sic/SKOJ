@@ -7,9 +7,9 @@
 [DONE] Rework login
 [DONE] Submissions link to submission page
 [DONE] Create task page (backend action at least)
-[DON.] Sidebar/navbar
-[DON.] Issue: Don't display pages inaccessible to guests
-[....] Issue: Don't display "Add a task" for users which can't do that
+[DONE] Sidebar/navbar
+[DONE] Issue: Don't display pages inaccessible to guests
+[DONE] Issue: Don't display "Add a task" for users which can't do that
 [DONE] Move "Add a task" to My tasks
 [DONE] Change password page
 [DONE] Issue: Strange reply when a login attempt fails
@@ -17,16 +17,18 @@
 --- High priority
 
 [DONE] Check if the problem statement can be parsed before saving
-Display parsed problem statement sandbox
+[DONE] Display parsed problem statement sandbox
 Implement permissions for all pages
 [DO..] Admin Panel
 [DONE] SQL/XML dump
 Action Logging
+Make those tables/paginators look better
 
 --- Lower priority, must be done before release ---
 
 Issue: "Edit this task" link does not appear on its own line always
 [D...] Implement a visual theme
+Issue: Markup parser is too liberal right now
 Documentation for the programming language
 Documentation for the markup language used for displaying task statements
 Documentation for adding testcases
