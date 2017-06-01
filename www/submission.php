@@ -167,7 +167,9 @@ class Submission {
 		$r->print("</td><td>");
 		$task->render_link($r);
 		$r->print("</td>
-			<td><a href='show-submission.php?id=$this->id'>$this->created_on</a></td>");		
+			<td class='centered'>
+				<a href='show-submission.php?id=$this->id'>$this->created_on</a>
+			</td>");		
 		$r->print("<td>$pretty_status</td></tr>");
 	}
 

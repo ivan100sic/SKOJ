@@ -18,7 +18,7 @@ class PaginateTypes {
 
 		// The same goes for the result box
 
-		$paginate_result_box = "<div id='${type}_result_box'></div>";
+		$paginate_result_box = "<div id='${type}_result_box' class='vspace'></div>";
 
 		// And previous/next controller
 
@@ -38,7 +38,7 @@ class PaginateTypes {
 					"class_name" => "User",
 					"method_name" => "render_row_simple",
 					"html" => "
-						<div>
+						<div class='vspace'>
 							$paginate_limit_controller
 							$paginate_bidi_controller
 							$paginate_result_box
@@ -69,7 +69,7 @@ order by t7.task_id",
 					"class_name" => "Task",
 					"method_name" => "render_row_detailed",
 					"html" => "
-						<div>
+						<div class='vspace'>
 							$paginate_limit_controller
 							$paginate_bidi_controller
 							$paginate_result_box
@@ -87,7 +87,7 @@ order by t7.task_id",
 					"class_name" => "Submission",
 					"method_name" => "render_row_simple",
 					"html" => "
-						<div>
+						<div class='vspace'>
 							$paginate_limit_controller
 							$paginate_bidi_controller
 							$paginate_result_box
@@ -105,7 +105,7 @@ order by t7.task_id",
 					"class_name" => "Submission",
 					"method_name" => "render_row_all",
 					"html" => "
-						<div>
+						<div class='vspace'>
 							$paginate_limit_controller
 							$paginate_bidi_controller
 							$paginate_result_box
@@ -118,11 +118,11 @@ order by t7.task_id",
 					"query" => "select * from tasks where author = ? order by id asc",
 					"args" => ["author", "limit", "offset"],
 					"table_options" => "",
-					"header" => "<tr><th>Task name:</th></tr>",
+					"header" => "<tr><th>Task name:</th><th>Created on:</th></tr>",
 					"class_name" => "Task",
 					"method_name" => "render_row_simple",
 					"html" => "
-						<div>
+						<div class='vspace'>
 							$paginate_limit_controller
 							$paginate_bidi_controller
 							$paginate_result_box

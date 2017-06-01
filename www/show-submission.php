@@ -8,6 +8,7 @@ class ShowSubmissionPage extends Page {
 
 	function __construct($submission) {
 		parent::__construct();
+		$this->body_items[] = new Text("<h2>Submission details</h2>");
 		$this->body_items[] = new Adapter($submission, "render_detailed");
 	}
 }

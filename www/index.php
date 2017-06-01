@@ -14,8 +14,9 @@ class IndexPage extends Page {
 		} else {
 			$user = User::construct_safe(get_session_id());
 			// Temporary welcome setup
-			$this->body_items[] = new Text("<p>Welcome, ");
+			$this->body_items[] = new Text("<h2>Welcome, ");
 			$this->body_items[] = new Adapter($user, "render_link");
+			$this->body_items[] = new Text("</h2>");
 		}
 	}
 }

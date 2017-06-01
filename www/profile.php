@@ -35,14 +35,17 @@ class ProfileBox {
 
 	function render($r) {
 		$user = User::construct_safe($this->id);
-		$r->print("<p>Solved tasks:</p><div>");
+		$r->print("<h2>User: ");
+		(new EscapedText($user->get_username()))->render($r);
+		$r->print("</h2>");
+		$r->print("<h3>Solved tasks:</h3><div>");
 		$comma = '';
 		foreach ($user->get_solved_tasks() as $task) {
 			$r->print($comma);
 			$comma = ", ";
 			(new UserNTask($user, $task))->render($r);
 		}
-		$r->print("</div><p>Attempted tasks:</p><div>");
+		$r->print("</div><h3>Attempted tasks:</h3><div>");
 		$comma = '';
 		foreach ($user->get_attempted_tasks() as $task) {
 			$r->print($comma);
@@ -50,7 +53,7 @@ class ProfileBox {
 			(new UserNTask($user, $task))->render($r);
 		}
 		$comma = '';
-		$r->print("</div><p>Authored tasks:</p><div>");
+		$r->print("</div><h3>Authored tasks:</h3><div>");
 		foreach ($user->get_authored_tasks() as $task) {
 			$r->print($comma);
 			$comma = ", ";

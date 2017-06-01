@@ -74,7 +74,9 @@ class Task {
 	function render_row_simple($r) {
 		$r->print("<tr><td>");
 		$this->render_link($r);
-		$r->print("</td><td>");
+		$r->print("</td><td class='centered'>");
+		$r->print($this->created_on);
+		$r->print("</td></tr>");
 	}
 
 	function render_row_detailed($r) {
@@ -107,7 +109,7 @@ class Task {
 				) t3 inner join submissions t4 on t3.i = t4.id
 			) t5
 			inner join users t6 on t5.user_id = t6.id
-			order by status asc
+			order by status asc, sid asc
 			limit 10
 			", [$this->id]);
 
