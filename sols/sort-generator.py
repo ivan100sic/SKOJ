@@ -13,5 +13,5 @@ print();
 a.sort();
 print('k = 1;');
 for i in range(n):
-	print('!= a.{} {} {} k = 1; {}'.format(i, a[i], '{', '}'));
+	print('!= a.{} {} {} k = 0; {}'.format(i, a[i], '{', '}'));
 print('k { @ }');

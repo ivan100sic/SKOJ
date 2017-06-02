@@ -14,6 +14,11 @@ class UserTaskSubmissionsPage extends Page {
 			<input type='hidden' id='user_task_subs_user_id' value='$user_id'/>
 			<input type='hidden' id='user_task_subs_task_id' value='$task_id'/>
 		");
+		$this->body_items[] = new Text("<h3>Task: ");
+		$this->body_items[] = new Adapter(Task::construct_safe($task_id), "render_link");
+		$this->body_items[] = new Text("</h3><h3>Submissions by: ");
+		$this->body_items[] = new Adapter(User::construct_safe($user_id), "render_link");
+		$this->body_items[] = new Text("</h3>");
 		$this->body_items[] = new PaginateFrontend(PaginateTypes::get('user_task_subs'));
 	}
 }

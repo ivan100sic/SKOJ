@@ -35,7 +35,9 @@ class TaskTextBox {
 		if ($task === NULL) {
 			throw new Exception("GET ERROR");
 		} else {
+			$r->print("<div class='vspace'>");
 			$task->render_statement($r);
+			$r->print("</div>");
 		}
 	}
 }
@@ -54,7 +56,7 @@ class SubmitBox {
 		$user = User::construct_safe($this->session_id);
 		if ($user !== NULL && $user->has_permission("SUBMIT")) {
 			$r->print(
-			"<div>
+			"<div class='vspace'>
 				<h3>Submit a solution:</h3>
 				<form action='submit.php' method='POST' enctype='multipart/form-data'>
 					<input type='hidden' name='task_id' value='$id'/>
@@ -95,7 +97,7 @@ class RecentSubmissionsBox {
 			order by id desc limit 10
 		", [$this->user_id, $this->task_id]);
 
-		$r->print("<div><h3>Your recent submissions:</h3><table>");
+		$r->print("<div class='vspace'><h3>Your recent submissions:</h3><table>");
 		foreach ($db as $row) {
 			(new Submission($row))->render_row_simple($r);
 		}
