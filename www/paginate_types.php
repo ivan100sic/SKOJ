@@ -49,8 +49,8 @@ class PaginateTypes {
 				return [
 					"name" => "task_detailed",
 					"query" => 
-"select id, name, statement, author, created_on, status,
- s, ac from tasks t9 inner join (
+"select id, name,
+ s, ac, tcc from tasks t9 inner join (
  select t3.task_id, s, ac from (
   select task_id, count(user_id) ac from (
    (select * from solved) union (select * from attempted)
@@ -62,10 +62,15 @@ class PaginateTypes {
  ) t4
  on t3.task_id = t4.task_id
 ) t7 on t9.id = t7.task_id
+ inner join (
+  select task_id, count(id) tcc from testcases
+  group by task_id
+ ) t10 on t10.task_id = t7.task_id
 order by t7.task_id",
 					"args" => ["limit", "offset"],
 					"table_options" => "",
-					"header" => "<tr><th>Task name</th><th>Success rate</th></tr>",
+					"header" => "<tr><th>Task name</th><th>Success rate</th>
+						<th># Test cases</th></tr>",
 					"class_name" => "Task",
 					"method_name" => "render_row_detailed",
 					"html" => "

@@ -192,8 +192,9 @@ class Submission {
 				$r->print("<p>Total running time: " . $this->get_status());
 			}
 			$r->print("<p>Details:</p>");
-			$r->print("<table>");
+			$r->print("<table class='narrower'><tr><th>#</th><th>Status</th></tr>");
 			$test_runs = TestRun::get_all_by_submission_id($this->get_id());
+			$r->temp['rsto'] = 0;
 			foreach ($test_runs as $run) {
 				$run->render_table_row($r);
 			}

@@ -23,13 +23,13 @@
 [DO..] Admin Panel
 [DONE] SQL/XML dump
 Action Logging
-[DO..] Make those tables/paginators look better
-[DO..] Display additional columns names in problem statements, submissions, etc.
+[DONE] Make those tables/paginators look better
+[DONE] Display additional columns names in problem statements, submissions, etc.
 
 --- Lower priority, must be done before release ---
 
 [DONE] Issue: "Edit this task" link does not appear on its own line always
-[DO..] Implement a visual theme
+[DON.] Implement a visual theme
 Issue: Markup parser is too liberal right now
 [DONE] Documentation for the programming language
 Documentation for the markup language used for displaying task statements

@@ -15,6 +15,7 @@ class Task {
 
 	private $solved_count;
 	private $att_sol_count;
+	private $testcase_count;
 	
 	function __construct($row) {
 		$this->id = $row["id"];
@@ -34,6 +35,12 @@ class Task {
 			$this->att_sol_count = (int)$row['ac'];
 		} else {
 			$this->att_sol_count = NULL;
+		}
+
+		if (isset($row['tcc'])) {
+			$this->testcase_count = (int)$row['tcc'];
+		} else {
+			$this->testcase_count = NULL;
 		}
 	}
 	
@@ -84,7 +91,8 @@ class Task {
 		$this->render_link($r);
 		$r->print("</td><td class='centered'>");
 		$r->print("$this->solved_count/$this->att_sol_count");
-		$r->print("</td></tr>");
+		$r->print("</td><td class='centered'>$this->testcase_count
+			</td></tr>");
 	}
 
 	function render_best_solutions($r) {
@@ -114,7 +122,9 @@ class Task {
 			", [$this->id]);
 
 		// var_dump($db);
-		$r->print("<div><h3>Best solutions</h3><table>");
+		$r->print("<div><h3>Best solutions</h3><table class='narrow'>
+			<tr><th>User</th><th>Total time</th>
+		");
 		foreach ($db as $row) {
 			$sid = $row['sid'];
 			$uid = $row['uid'];
@@ -122,7 +132,7 @@ class Task {
 
 			$r->print("<tr><td>");
 			User::construct_safe($uid)->render_link($r);
-			$r->print("</td><td><a href='show-submission.php?id=$sid'>
+			$r->print("</td><td class='centered'><a href='show-submission.php?id=$sid'>
 				$status</a></td></tr>");
 		}
 		$r->print("</table></div>");

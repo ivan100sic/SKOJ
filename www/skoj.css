@@ -47,8 +47,20 @@ table.wide {
 	width: 800px;
 }
 
+table.narrow {
+	width: 300px;
+}
+
+table.narrower {
+	width: 220px;
+}
+
 td.centered {
 	text-align: center;
+}
+
+td.right {
+	text-align: right;
 }
 
 /* unvisited link */

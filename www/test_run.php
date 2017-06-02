@@ -65,8 +65,6 @@ class TestRun {
 	}
 
 	function render_table_row($r) {
-		$r->temp['rsto'] = 0;
-
 		$r->temp['rsto'] += 1;
 		$a = $r->temp['rsto'];
 		switch ($this->status) {
@@ -77,10 +75,10 @@ class TestRun {
 			case self::STATUS_RTE:
 				$b = 'Runtime Error'; break;
 			default:
-				$b = 'OK; time = ' . $this->status; break;					
+				$b = "OK ($this->status)"; break;					
 		}
 
-		$r->print("<tr><td>" . $a . "</td><td>" . $b . "</td></tr>");
+		$r->print("<tr><td>$a</td><td>$b</td></tr>");
 	}
 }
 
