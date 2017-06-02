@@ -14,7 +14,7 @@ class Task {
 	private $status;
 
 	private $solved_count;
-	private $att_sol_count;
+	private $attepted_count;
 	private $testcase_count;
 	
 	function __construct($row) {
@@ -31,10 +31,10 @@ class Task {
 			$this->solved_count = NULL;
 		}
 
-		if (isset($row['ac'])) {
-			$this->att_sol_count = (int)$row['ac'];
+		if (isset($row['a'])) {
+			$this->attepted_count = (int)$row['a'];
 		} else {
-			$this->att_sol_count = NULL;
+			$this->attepted_count = NULL;
 		}
 
 		if (isset($row['tcc'])) {
@@ -90,7 +90,8 @@ class Task {
 		$r->print("<tr><td>");
 		$this->render_link($r);
 		$r->print("</td><td class='centered'>");
-		$r->print("$this->solved_count/$this->att_sol_count");
+		$sol_att_count = $this->solved_count + $this->attepted_count;
+		$r->print("$this->solved_count/$sol_att_count");
 		$r->print("</td><td class='centered'>$this->testcase_count
 			</td></tr>");
 	}

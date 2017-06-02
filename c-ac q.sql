@@ -36,3 +36,15 @@ select id, name,
   group by task_id
  ) t10 on t10.task_id = t7.task_id
 order by t7.task_id;
+
+-- Fix --
+
+select
+ id,
+ name, statement, author, created_on, status,
+ (select count(*) from solved where tasks.id = solved.task_id) s,
+ (select count(*) from attempted where tasks.id = attempted.task_id) a,
+ (select count(*) from testcases where tasks.id = testcases.task_id) tcc
+from
+ tasks
+order by tasks.id asc;
