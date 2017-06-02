@@ -44,6 +44,14 @@ class Submission {
 	function get_status() {
 		return $this->status;
 	}
+
+	function get_task_id() {
+		return $this->task_id;
+	}
+
+	function get_user_id() {
+		return $this->user_id;
+	}
 	
 	static function construct_safe($id) {
 		$db = SQL::get("select * from submissions where id = ?", [$id]);
@@ -174,7 +182,7 @@ class Submission {
 	}
 
 	function render_detailed($r) {
-		$r->print("<div>");
+		$r->print("<div class='vspace'>");
 		$r->print("<p>Problem: ");
 		Task::construct_safe($this->task_id)->render_link($r);
 		$r->print("</p>User: ");
@@ -201,6 +209,13 @@ class Submission {
 			$r->print("</table>");
 		}
 		$r->print("</div>");
+	}
+
+	function render_source($r) {
+		$r->print("<div class='vspace'><pre>");
+		$r->print("<h2>Source code</h2>");
+		(new EscapedText($this->source))->render($r);
+		$r->print("</pre></div>");
 	}
 }
 

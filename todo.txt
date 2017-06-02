@@ -35,6 +35,7 @@ Issue: Markup parser is too liberal right now
 Documentation for the markup language used for displaying task statements
 [DO..] Documentation for adding testcases
 Documentation for the whole site (.pdf)
+Warning when leaving edit-task or edit-test-case
 
 --- Minor problems ---
 
