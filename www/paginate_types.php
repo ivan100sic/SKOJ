@@ -126,6 +126,23 @@ order by tasks.id asc
 						</div>
 					"
 				];
+			case 'edit_perms':
+				return [
+					"name" => "edit_perms",
+					"query" => "select * from users",
+					"args" => ["limit", "offset"],
+					"table_options" => "",
+					"header" => "",
+					"class_name" => "User",
+					"method_name" => "render_row_edit_perms",
+					"html" => "
+						<div class='vspace'>
+							$paginate_limit_controller
+							$paginate_bidi_controller
+							$paginate_result_box
+						</div>
+					"
+				];
 			default:
 				return NULL;
 		}

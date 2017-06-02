@@ -2,6 +2,7 @@
 
 require_once 'sql.php';
 require_once 'hash.php';
+require_once 'permissions.php';
 
 class User {
 	
@@ -149,6 +150,21 @@ class User {
 		$r->print("</td>
 			<td>$sp problem$suffix solved</td>
 		</tr>");
+	}
+
+	function render_row_edit_perms($r) {
+		$r->print("<tr id='edit_perms_$this->id'><td>");
+		$this->render_link($r);
+		$r->print("</td>");
+		foreach (Permissions::get() as $perm_id => $perm_name) {
+			$has = $this->has_permission($perm_name) ? 'X' : '.';
+			$r->print("<td><a
+				href='javascript:toggle_perm(
+					$this->id, $perm_id
+				)'
+				id = 'edit_perms_link_".$this->id."_$perm_id'>$has</a></td>");
+		}
+		$r->print('</tr>');
 	}
 }
 

@@ -7,7 +7,10 @@ require_once 'user.php';
 
 class AdminPanel {
 	function render($r) {
-		$r->print("<h2><a target='_blank' href='sql-dump.php'>SQL Dump</a></h2>");
+		$r->print("<h2><a target='_blank' href='sql-dump.php'>
+			SQL Dump</a></h2>");
+		$r->print("<h2><a target='_blank' href='edit-permissions.php'>
+			Edit permissions</a></h2>");
 	}
 }
 
