@@ -64,6 +64,7 @@ if ($instruction_limit < 1) {
 }
 
 if ($instruction_limit > 65536) {
+	$instruction_limit = 65536;
 	echo "Instruction limit set to 65536. ";
 }
 

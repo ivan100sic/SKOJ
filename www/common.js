@@ -1,8 +1,8 @@
 function tab_hook(event, elem) {
 	// standing on the shoulders of elgholm from
 	// http://stackoverflow.com/questions/6637341/use-tab-to-indent-in-textarea
-	event.preventDefault();
 	if (event.keyCode === 9) {
+		event.preventDefault();
 		var v = elem.value;
 		var s = elem.selectionStart;
 		var e = elem.selectionEnd;
