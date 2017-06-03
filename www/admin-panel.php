@@ -14,6 +14,10 @@ class AdminPanel {
 			Edit permissions</a></h2>");
 		$r->print("<h2><a target='_blank' href='manage-ungraded.php'>
 			Manage ungraded submissions</a></h2>");
+		$r->print("<h2><a target='_blank' href='log-download.php'>
+			Download Log file</a></h2>");
+		$r->print("<h2><a href='log-reset.php'>
+			Reset Log file</a></h2>");
 	}
 }
 

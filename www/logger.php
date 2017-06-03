@@ -4,8 +4,12 @@ require_once 'global.php';
 
 class Logger {
 
+	static function location() {
+		return '../logs/default.txt';
+	}
+
 	static function log_raw($s) {
-		error_log($s, 3, '../logs/default.txt');
+		error_log($s, 3, Logger::location());
 	}
 
 	static function log($s, $level = 'Error') {

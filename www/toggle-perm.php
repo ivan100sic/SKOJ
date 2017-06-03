@@ -43,4 +43,5 @@ if (count($db) == 1) {
 }
 
 echo $x;
-Logger::notice("Flipped permission $permission_id of user $user_id, is now '$x'");
+$u = $user->get_id();
+Logger::notice("Flipped permission $perm_id of user $u, is now '$x'");
