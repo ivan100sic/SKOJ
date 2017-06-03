@@ -20,7 +20,7 @@
 [DONE] Check if the problem statement can be parsed before saving
 [DONE] Display parsed problem statement sandbox
 [D...] Implement permissions for all pages
-[DO..] Admin Panel
+[DON.] Admin Panel
 [DONE] SQL/XML dump
 Action Logging
 [DONE] Make those tables/paginators look better
@@ -53,6 +53,7 @@ Improve compiler/interpreter performance
 Increase maximum time limit
 Add more data to sample-small.sql
 Sandbox
+Add text box for submitting solutions
 
 --- Unescaped text issues ---
 

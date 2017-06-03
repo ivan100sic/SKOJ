@@ -11,6 +11,8 @@ class AdminPanel {
 			SQL Dump</a></h2>");
 		$r->print("<h2><a target='_blank' href='edit-permissions.php'>
 			Edit permissions</a></h2>");
+		$r->print("<h2><a target='_blank' href='manage-ungraded.php'>
+			Manage ungraded submissions</a></h2>");
 	}
 }
 

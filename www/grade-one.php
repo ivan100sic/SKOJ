@@ -8,6 +8,10 @@ $db = SQL::get("select * from submissions where status = -1 order by created_on 
 if (count($db) > 0) {
 	$submission = new Submission($db[0]);
 	$submission->grade();
+	$id = $submission->get_id();
+	echo "<p>Graded submission <a href='show-submission.php?id=$id'>$id</a></p>";
+} else {
+	echo "<p>No more submissions to grade!</p>";
 }
 	
 ?>
