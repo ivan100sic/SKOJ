@@ -20,7 +20,7 @@
 [DONE] Check if the problem statement can be parsed before saving
 [DONE] Display parsed problem statement sandbox
 [DONE] Implement permissions for all pages
-[DON.] Admin Panel
+[DONE] Admin Panel
 [DONE] SQL/XML dump
 [DONE] Action Logging
 [DONE] Make those tables/paginators look better
@@ -30,22 +30,22 @@
 
 [DONE] Issue: "Edit this task" link does not appear on its own line always
 [DON.] Implement a visual theme
-Issue: Markup parser is too liberal right now
+	Issue: Markup parser is too liberal right now
 [DONE] Documentation for the programming language
-Documentation for the markup language used for displaying task statements
+	Documentation for the markup language used for displaying task statements
 [DO..] Documentation for adding testcases
-Documentation for the whole site (.pdf)
-Warning when leaving edit-task or edit-test-case
+	Documentation for the whole site (.pdf)
+	Warning when leaving edit-task or edit-test-case
 
 --- Minor problems ---
 
 [DO..] Tabs in <textarea>
 [DONE] Login/register forms, enter = submit
-Issue: Choose file button does not conform to the style
+	Issue: Choose file button does not conform to the style
 
 --- Optional but cool ---
 
-Add *unsolved only* selector to browse-tasks
+	Add *unsolved only* selector to browse-tasks
 
 --- Optional ---
 

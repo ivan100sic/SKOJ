@@ -30,7 +30,7 @@ class AdminPanelPage extends Page {
 
 $user = User::construct_safe(get_session_id());
 if ($user === NULL || !$user->has_permission("ADMIN_PANEL")) {
-	Logger::notice('Attepted access to admin-panel.php');
+	Logger::notice('Attempted unauthorized access to admin-panel.php');
 	recover(0);
 }
 
