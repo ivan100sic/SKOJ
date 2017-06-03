@@ -15,6 +15,7 @@ class ManageUngradedPage extends Page {
 			<div class='vspace' id='regrade_replies'>
 			</div>
 			<script>
+				$.ajaxSetup({ cache: false });
 				function regrade_all() {
 					\$.get('grade-one.php', function (data, status) {
 						if (status == 'success') {

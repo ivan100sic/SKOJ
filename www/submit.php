@@ -34,8 +34,8 @@ if ($submission === NULL) {
 } else {
 	$submission->grade();
 	$id = $submission->get_id();
-	Logger::notice('Successful submission, id = $id');
-	header('Location: show-submission.php?id=$id');
+	Logger::notice("Successful submission, id = $id");
+	header("Location: show-submission.php?id=$id");
 }
 
 ?>

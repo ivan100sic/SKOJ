@@ -8,7 +8,9 @@ class SQL {
 	static private function conn() {
 		if (SQL::$conn_var === NULL) {
 			// For local testing/development
+			error_reporting(0);
 			SQL::$conn_var = new mysqli('localhost', 'root', '', 'skoj');
+			error_reporting(E_ALL & ~ E_NOTICE & ~ E_STRICT & ~ E_DEPRECATED);
 			if (SQL::$conn_var->connect_error) {
 				// For web hosting
 				SQL::$conn_var = new mysqli('localhost', 'ivansici_php',
