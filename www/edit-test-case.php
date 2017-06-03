@@ -109,11 +109,13 @@ class EditTestcasePage extends Page {
 $testcase_id = __get__('id');
 $testcase = Testcase::construct_safe($testcase_id);
 if ($testcase === NULL) {
+	Logger::notice('Missing or bad id in GET on page edit-test-case.php');
 	recover(0);
 }
 $task = $testcase->get_task_id();
 
 if (!Task::authorize_edit($task, get_session_id())) {
+	Logger::notice('User not authorized to edit task on edit-task.php');
 	recover(0);
 }
 
@@ -123,6 +125,7 @@ try {
 	$page->render($r);
 	$r->flush();
 } catch (Exception $e) {
+	Logger::error('Exception occurred on page edit-test-case.php');
 	recover(0);
 }
 

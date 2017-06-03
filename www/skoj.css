@@ -89,3 +89,7 @@ a:active {
 td {
 	padding: 4px;
 }
+
+span.error {
+	color: orange;
+}

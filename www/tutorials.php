@@ -2,8 +2,7 @@
 
 require_once 'global.php';
 require_once 'dom.php';
-require_once 'loginbox.php';
-require_once 'user.php';
+require_once 'logger.php';
 
 class TutorialsPage extends Page {
 	function __construct() {
@@ -22,5 +21,6 @@ try {
 	$page->render($r);
 	$r->flush();
 } catch (Exception $e) {
+	Logger::error("Exception occurred on page tutorials.php");
 	recover(0);
 }

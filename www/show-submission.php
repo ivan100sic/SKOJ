@@ -3,6 +3,7 @@
 require_once 'global.php';
 require_once 'submission.php';
 require_once 'dom.php';
+require_once 'logger.php';
 
 class ShowSubmissionPage extends Page {
 
@@ -30,6 +31,7 @@ $submission_id = __get__('id');
 $submission = Submission::construct_safe($submission_id);
 
 if ($submission === NULL) {
+	Logger::notice("Bad or missing id in POST on page show-submission.php");
 	recover(0);
 }
 
@@ -39,6 +41,7 @@ try {
 	$page->render($r);
 	$r->flush();
 } catch (Exception $e) {
+	Logger::error("Exception occurred on page show-submissions.php");
 	recover(0);
 }
 

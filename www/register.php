@@ -3,6 +3,7 @@
 require_once 'dom.php';
 require_once 'global.php';
 require_once 'user.php';
+require_once 'logger.php';
 
 class RegisterBox {
 
@@ -73,7 +74,10 @@ class RegisterPage extends Page {
 }
 
 $user = User::construct_safe(get_session_id());
-if ($user !== NULL) recover(0);
+if ($user !== NULL) {
+	Logger::notice("Attempted access to register.php by user already logged in");
+	recover(0);
+}
 
 $r = new Renderer(0);
 $page = new RegisterPage();
@@ -81,6 +85,7 @@ try {
 	$page->render($r);
 	$r->flush();
 } catch (Exception $e) {
+	Logger::error("Exception occurred on page register.php");
 	recover(0);
 }
 

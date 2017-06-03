@@ -3,6 +3,7 @@
 require_once 'dom.php';
 require_once 'global.php';
 require_once 'paginate.php';
+require_once 'logger.php';
 
 class BrowseTasksPage extends Page {
 
@@ -19,5 +20,6 @@ try {
 	$page->render($r);
 	$r->flush();
 } catch (Exception $e) {
+	Logger::error('Exception occurred on page browse-tasks.php');
 	recover(0);
 }

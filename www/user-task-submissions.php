@@ -5,6 +5,7 @@ require_once 'global.php';
 require_once 'paginate.php';
 require_once 'user.php';
 require_once 'task.php';
+require_once 'logger.php';
 
 class UserTaskSubmissionsPage extends Page {
 
@@ -27,10 +28,12 @@ $user_id = __get__('user_id');
 $task_id = __get__('task_id');
 
 if (User::construct_safe($user_id) === NULL) {
+	Logger::notice("Bad user_id in GET on page user-task-submissions.php");
 	recover(0);
 }
 
 if (Task::construct_safe($task_id) === NULL) {
+	Logger::notice("Bad task_id in GET on page user-task-submissions.php");
 	recover(0);
 }
 
@@ -40,6 +43,7 @@ try {
 	$page->render($r);
 	$r->flush();
 } catch (Exception $e) {
+	Logger::error("Exception occurred on page user-task-submissions.php");
 	recover(0);
 }
 

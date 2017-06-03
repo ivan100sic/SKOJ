@@ -1,0 +1,4 @@
+[Notice] [2017-06-03 17:07:20] [session: 0]: Failed login attempt on page login.php
+[Notice] [2017-06-03 17:07:20] [session: 0]: Failed login attempt on page login.php
+[Notice] [2017-06-03 17:07:21] [session: 0]: Failed login attempt on page login.php
+[Notice] [2017-06-03 17:07:36] [session: 0]: Bad or missing task_id in GET on page show-task.php

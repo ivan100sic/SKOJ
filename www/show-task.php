@@ -4,6 +4,7 @@ require_once 'dom.php';
 require_once 'global.php';
 require_once 'task.php';
 require_once 'submission.php';
+require_once 'logger.php';
 
 class TaskEditPrompt {
 	protected $task_id;
@@ -129,12 +130,18 @@ class ShowTaskPage extends Page {
 $session_id = get_session_id();
 $task_id = (int)__get__('task_id');
 
+if (Task::construct_safe($task_id) === NULL) {
+	Logger::notice("Bad or missing task_id in GET on page show-task.php");
+	recover(0);
+}
+
 try {
 	$r = new Renderer(0);
 	$page = new ShowTaskPage($task_id, $session_id);
 	$page->render($r);
 	$r->flush();
 } catch (Exception $e) {
+	Logger::error("Exception occurred on page show-task.php");
 	recover($e->getMessage());
 }
 

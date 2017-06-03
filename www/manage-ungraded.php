@@ -3,6 +3,7 @@
 require_once 'global.php';
 require_once 'dom.php';
 require_once 'sql.php';
+require_once 'logger.php';
 
 class ManageUngradedPage extends Page {
 	function __construct() {
@@ -32,6 +33,7 @@ class ManageUngradedPage extends Page {
 
 $user = User::construct_safe(get_session_id());
 if ($user === NULL || !$user->has_permission("ADMIN_PANEL")) {
+	Logger::notice("Unauthorized access attempt on page manage-ungraded.php");
 	recover(0);
 }
 
@@ -41,6 +43,7 @@ try {
 	$page->render($r);
 	$r->flush();
 } catch (Exception $e) {
+	Logger::error("Exception occurred on page manage-ungraded.php");
 	recover(0);
 }
 

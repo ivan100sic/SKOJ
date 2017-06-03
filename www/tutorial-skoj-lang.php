@@ -2,8 +2,7 @@
 
 require_once 'global.php';
 require_once 'dom.php';
-require_once 'loginbox.php';
-require_once 'user.php';
+require_once 'logger.php';
 
 class TutorialSkojLangPage extends Page {
 
@@ -87,6 +86,7 @@ try {
 	$page->render($r);
 	$r->flush();
 } catch (Exception $e) {
+	Logger::error("Exception occurred on page tutorial-skoj-lang.php");
 	recover(0);
 }
 

@@ -64,3 +64,5 @@ class PaginateFrontend {
 		$r->print($js);
 	}
 }
+
+?>

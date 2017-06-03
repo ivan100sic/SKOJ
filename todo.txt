@@ -19,10 +19,10 @@
 
 [DONE] Check if the problem statement can be parsed before saving
 [DONE] Display parsed problem statement sandbox
-[D...] Implement permissions for all pages
+[DONE] Implement permissions for all pages
 [DON.] Admin Panel
 [DONE] SQL/XML dump
-Action Logging
+[DONE] Action Logging
 [DONE] Make those tables/paginators look better
 [DONE] Display additional columns names in problem statements, submissions, etc.
 

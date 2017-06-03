@@ -4,23 +4,28 @@ require_once 'global.php';
 require_once 'sql.php';
 require_once 'hash.php';
 require_once 'user.php';
+require_once 'logger.php';
 
 $id = get_session_id();
 $user = User::construct_safe($id);
 
 if ($user == NULL) {
+	Logger::notice('Attempted access to change-password-backend.php, bad user id');
 	exit();
 }
 
 if (__post__("old_password") === NULL) {
+	Logger::notice('Attempted access to change-password-backend.php, bad old_password in POST');
 	exit(0);
 }
 
 if (__post__("password_1") === NULL) {
+	Logger::notice('Attempted access to change-password-backend.php, bad password_1 in POST');
 	exit(0);
 }
 
 if (__post__("password_2") === NULL) {
+	Logger::notice('Attempted access to change-password-backend.php, bad password_2 in POST');
 	exit(0);
 }
 
@@ -48,6 +53,12 @@ if ($password_1 != $password_2) {
 $db = SQL::run("update users set password = ? where id = ?",
 	[skoj_hash($user->get_username(), $password_1), $id]);
 
-if ($db) echo "Password changed!";
+Logger::notice("The user changed his/her password");
+
+if ($db) {
+	echo "Password changed!";
+} else {
+	Logger::critical("Database error on change-password-backend.php");
+}
 
 ?>

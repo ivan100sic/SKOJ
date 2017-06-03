@@ -13,6 +13,7 @@ require_once 'task.php';
 require_once 'submission.php';
 require_once 'test_run.php';
 require_once 'testcase.php';
+require_once 'logger.php';
 
 class PaginateBackend {
 
@@ -91,6 +92,8 @@ $pg = NULL;
 $pg_type_obj = PaginateTypes::get($type);
 if ($pg_type_obj !== NULL) {
 	$pg = new PaginateBackend($pg_type_obj);
+} else {
+	Logger::notice("Bad paginator type in POST on paginate_backend.php");
 }
 
 if ($pg !== NULL) {
@@ -98,7 +101,7 @@ if ($pg !== NULL) {
 		$pg->render($r);
 		$r->flush();
 	} catch (Exception $e) {
-		// This page shall echo an empty string if an exception happens
+		Logger::error("Exception occurred on paginate_backend.php");
 	}
 } else {
 	recover(0);

@@ -6,6 +6,7 @@ require_once 'task.php';
 require_once 'sql.php';
 require_once 'tokenizer.php';
 require_once 'syntax-parse.php';
+require_once 'logger.php';
 
 $id = __post__('id');
 $name = __post__('name');
@@ -14,6 +15,7 @@ $source_output = __post__('source_output');
 $instruction_limit = __post__('instruction_limit');
 
 function bad_post() {
+	Logger::notice("Bad POST on save-test-case.php");
 	echo 'Error: Bad POST request';
 	exit();
 }
@@ -25,7 +27,8 @@ if ($testcase === NULL) bad_post();
 $task = $testcase->get_task_id();
 
 if (!Task::authorize_edit($task, get_session_id())) {
-	bad_post();
+	Logger::notice("Unauthorized edit attempt on save-test-case.php");
+	exit();
 }
 
 // Verify integrity
@@ -81,8 +84,10 @@ $db = SQL::run("update testcases set
 $testcase->invalidate();
 
 if (!$db) {
+	Logger::critical("Database error on save-test-case.php");
 	echo "Database error!";
 } else {
+	Logger::notice("Saved changes to testcase $id");
 	echo "Changes saved!";
 }
 

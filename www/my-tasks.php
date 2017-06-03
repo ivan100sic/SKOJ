@@ -4,6 +4,7 @@ require_once 'global.php';
 require_once 'dom.php';
 require_once 'user.php';
 require_once 'paginate.php';
+require_once 'logger.php';
 
 class MyTasksPage extends Page {
 
@@ -26,11 +27,16 @@ class MyTasksPage extends Page {
 }
 
 $r = new Renderer(0);
+if (get_session_id() === 0) {
+	Logger::notice("Attempted access to page my-tasks.php");
+	recover(0);
+}
 $page = new MyTasksPage(get_session_id());
 try {
 	$page->render($r);
 	$r->flush();
 } catch (Exception $e) {
+	Logger::error("Exception occurred on page my-tasks.php");
 	recover(0);
 }
 

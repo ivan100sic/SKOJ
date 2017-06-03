@@ -5,6 +5,7 @@ require_once 'sql.php';
 require_once 'dom.php';
 require_once 'user.php';
 require_once 'paginate.php';
+require_once 'logger.php';
 
 class EditPermissionsPage extends Page {
 	function __construct() {
@@ -30,6 +31,7 @@ class EditPermissionsPage extends Page {
 
 $user = User::construct_safe(get_session_id());
 if ($user === NULL || !$user->has_permission("ADMIN_PANEL")) {
+	Logger::notice("Attempted access to edit-permissions.php");
 	recover(0);
 }
 
@@ -39,6 +41,7 @@ try {
 	$page->render($r);
 	$r->flush();
 } catch (Exception $e) {
+	Logger::error("Exception occurred on page edit-permissions.php");
 	recover(0);
 }
 

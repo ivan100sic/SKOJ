@@ -5,6 +5,7 @@ require_once 'dom.php';
 require_once 'user.php';
 require_once 'task.php';
 require_once 'testcase.php';
+require_once 'logger.php';
 
 class TestCaseEditor {
 	protected $task_id;
@@ -130,17 +131,26 @@ $session_id = get_session_id();
 $task = Task::construct_safe($task_id);
 $user = User::construct_safe($session_id);
 
-if ($task === NULL) recover(0);
-if ($user === NULL) recover(0);
+if ($task === NULL) {
+	Logger::notice('Missing task_id in GET on page edit-task.php');
+	recover(0);
+}
+
+if ($user === NULL) {
+	Logger::notice('Attempted access to page edit-task.php');
+	recover(0);
+}
 
 if ($task->get_author() == get_session_id()) {
 	if (!$user->has_permission("EDIT_OWN_TASKS")
 		&& !$user->has_permission("EDIT_ALL_TASKS"))
 	{
+		Logger::notice('User not authorized to edit task on edit-task.php');
 		recover(0);
 	}
 } else {
 	if (!$user->has_permission("EDIT_ALL_TASKS")) {
+		Logger::notice('User not authorized to edit task on edit-task.php');
 		recover(0);
 	}
 }
@@ -153,6 +163,7 @@ try {
 	$page->render($r);
 	$r->flush();
 } catch (Exception $e) {
+	Logger::error('Exception occurred on page edit-task.php');
 	recover(0);
 }
 

@@ -4,6 +4,7 @@ require_once 'user.php';
 require_once 'dom.php';
 require_once 'global.php';
 require_once 'task.php';
+require_once 'logger.php';
 
 class UserNTask {
 
@@ -78,5 +79,6 @@ try {
 	$page->render($r);
 	$r->flush();
 } catch (Exception $e) {
+	Logger::error("Exception occurred on page profile.php");
 	recover(0);
 }

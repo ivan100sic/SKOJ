@@ -3,6 +3,7 @@
 require_once 'user.php';
 require_once 'global.php';
 require_once 'dom.php';
+require_once 'logger.php';
 
 class HallOfFameBox {
 	function render($r) {
@@ -40,6 +41,7 @@ try {
 	$page->render($r);
 	$r->flush();
 } catch (Exception $e) {
+	Logger::error("Exception occurred on page hall-of-fame.php");
 	recover(0);
 }
 

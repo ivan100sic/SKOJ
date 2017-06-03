@@ -4,9 +4,11 @@ require_once 'global.php';
 require_once 'sql.php';
 require_once 'user.php';
 require_once 'dom.php';
+require_once 'logger.php';
 
 $user = User::construct_safe(get_session_id());
 if ($user === NULL || !$user->has_permission("ADMIN_PANEL")) {
+	Logger::notice("Unauthorized access to page sql-dump.php");
 	recover(0);
 }
 
@@ -15,6 +17,8 @@ $size = strlen($dump);
 
 // Credits:
 // https://stackoverflow.com/questions/8485886/force-file-download-with-php-using-header
+
+Logger::notice("Dumping SQL");
 
 // Removed some unneeded headers
 header('Content-Description: File Transfer');
