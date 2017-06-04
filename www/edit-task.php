@@ -42,13 +42,17 @@ class EditTaskForm {
 		$r->print("
 			<div>
 				<p>Problem title:</p>
-				<input type='text' id='task_name'/>
+				<input type='text' id='task_name' onkeydown='make_dirty()'/>
 				<p>Problem statement:</p>
 				<textarea id='task_statement' rows='15' cols='70'
-					onkeydown='tab_hook(event, this)'></textarea><br/>
-				<button onclick='task_parse()'>Check & Preview</button>
+					onkeydown='tab_hook(event, this)'></textarea>
+				<p>
+					<button onclick='task_parse()'>Check & Preview</button>
+				</p>
 				<div id='task_parse_result_box'></div>
-				<button onclick='task_save()'>Save changes</button>
+				<p>
+					<button onclick='task_save()'>Save changes</button>
+				</p>
 				<p id='task_result_box'></p>
 				<p>Test cases:</p>
 			");
@@ -81,6 +85,7 @@ class EditTaskForm {
 				function task_save() {
 					var name = \$('#task_name').val();
 					var statement = \$('#task_statement').val();
+					\$('#task_result_box').html('...');
 					\$.post('save-task.php', {
 						'id': $this->task_id,
 						'name' : name,
@@ -88,6 +93,9 @@ class EditTaskForm {
 					}, function(data, status) {
 						if (status == 'success') {
 							\$('#task_result_box').html(data);
+							if (data == 'Changes saved!') {
+								make_clean();
+							}
 						}
 					});
 				}

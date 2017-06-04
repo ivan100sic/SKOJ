@@ -51,6 +51,7 @@ class Sidebar {
 			<p><a href='hall-of-fame.php'>Hall of Fame</a></p>
 			<p><a href='recent-submissions.php'>Recent submissions</a></p>
 			<p><a href='tutorials.php'>Tutorials</a></p>
+			<p><a href='sandbox.php'>Sandbox</a></p>
 		");
 
 		

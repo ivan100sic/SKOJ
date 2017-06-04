@@ -45,19 +45,29 @@ class RegisterBox {
 		<div>
 			<p>Register:</p>
 			<div>
-				Username:<br/>
-				<input type='text' id='username' onkeydown='okd(event)'/><br/>
+				Username:
+				<p>
+					<input type='text' id='username' onkeydown='okd(event)'/>
+				</p>
 
-				Email:<br/>
-				<input type='text' id='email' onkeydown='okd(event)'/><br/>
+				Email:
+				<p>
+					<input type='text' id='email' onkeydown='okd(event)'/>
+				</p>
 
-				Password:<br/>
-				<input type='password' id='password1' onkeydown='okd(event)'/> <br/>
+				Password:
+				<p>
+					<input type='password' id='password1' onkeydown='okd(event)'/>
+				</p>
 
-				Retype password:<br/>
-				<input type='password' id='password2' onkeydown='okd(event)'/> <br/>
+				Retype password:
+				<p>
+					<input type='password' id='password2' onkeydown='okd(event)'/>
+				</p>
 
-				<button onclick='register()'>Register</button>
+				<p>
+					<button onclick='register()'>Register</button>
+				</p>
 			</div>
 			<p id='register_result_box'></p>
 		</div>

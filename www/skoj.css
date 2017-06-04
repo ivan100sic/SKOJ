@@ -87,6 +87,17 @@ table.narrower {
 	width: 220px;
 }
 
+table.bordered {
+	width: auto;
+	border-collapse: collapse;
+}
+
+table.bordered th, table.bordered td {
+	border: 1px solid #00ff00;
+	border-collapse: collapse;
+}
+
+
 td.centered {
 	text-align: center;
 }
@@ -119,7 +130,7 @@ a:active {
 	color: purple;
 }
 
-td {
+td, th {
 	padding: 4px;
 }
 

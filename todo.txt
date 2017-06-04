@@ -29,32 +29,30 @@
 --- Lower priority, must be done before release ---
 
 [DONE] Issue: "Edit this task" link does not appear on its own line always
-[DON.] Implement a visual theme
-[DON.] Issue: Markup parser is too liberal right now
+[DONE] Implement a visual theme
+[DONE] Issue: Markup parser is too liberal right now
 [DONE] Documentation for the programming language
 [DONE] Documentation for the markup language used for displaying task statements
 [DONE] Documentation for adding testcases
 	Documentation for the whole site (.pdf)
-	Warning when leaving edit-task or edit-test-case
+[DONE] Warning when leaving edit-task or edit-test-case
 
 --- Minor problems ---
 
-[DO..] Tabs in <textarea>
+[DONE] Tabs in <textarea>
 [DONE] Login/register forms, enter = submit
 	Issue: Choose file button does not conform to the style
 
 --- Optional but cool ---
 
 	Add *unsolved only* selector to browse-tasks
-	Sandbox
+[....] Sandbox
 	Add text box for submitting solutions
 
 --- Optional ---
 
 Improve compiler/interpreter performance
 Increase maximum time limit
-Add more data to sample-small.sql
-
 
 --- Unescaped text issues ---
 

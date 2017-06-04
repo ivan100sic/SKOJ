@@ -27,3 +27,5 @@ try {
 	Logger::error("Exception occurred on page tutorials.php");
 	recover(0);
 }
+
+?>

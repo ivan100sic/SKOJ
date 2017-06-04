@@ -6,11 +6,14 @@ class SKOJObject {
 	private $map;
 	
 	function __construct() {
-		$this->root = 0;
+		$this->root = NULL;
 		$this->map = array();
 	}
 	
 	function get_root() {
+		if ($this->root === NULL) {
+			$this->root = 0;
+		}
 		return $this->root;
 	}
 	
@@ -24,9 +27,17 @@ class SKOJObject {
 		}
 		return $this->map[$idx];
 	}
+
+	function is_dirty_root() {
+		return $this->root !== NULL;
+	}
 	
 	function set($idx, $val) {
 		$this->map[$idx] = $val;	
+	}
+
+	function get_raw() {
+		return $this->map;
 	}
 }
 
@@ -97,6 +108,35 @@ class Environment {
 	
 	function set_instruction_limit($val) {
 		$this->max_instr_count = $val;
+	}
+
+	function render($r) {
+		$r->print("<h3>Instruction count: $this->instr_count</h3>");
+		$succ = $this->success ? "Yes" : "No";
+		$r->print("<h3>Cookie statement executed: $succ</h3>");
+		$r->print("<h3>Values of variables</h3>");
+		for ($i = 1; $i <= 26; $i++) {
+			$x = chr($i + 96);
+			if ($this->map[$x]->is_dirty_root()) {
+				$v = $this->map[$x]->get_root();
+				$r->print("<p>$x = $v</p>");
+			}
+		}
+		$r->print("<h3>Values of arrays</h3>");
+		for ($i = 1; $i <= 26; $i++) {
+			$x = chr($i + 96);
+			$raw = $this->map[$x]->get_raw();
+			if (count($raw) > 0) {
+				ksort($raw);
+				$r->print("<h3>$x</h3></p><table class='bordered'>
+					<tr><th>Key</th><th>Value</th></tr>");
+				foreach ($raw as $key => $value) {
+					$r->print("<tr><td class='centered'>$key</td>
+						<td class='centered'>$value</td></tr>");
+				}
+				$r->print("</table>");
+			}
+		}
 	}
 }
 

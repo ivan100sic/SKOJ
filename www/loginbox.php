@@ -8,6 +8,7 @@ class LoginBox {
 		$r->print("
 		<script>
 			function login() {
+				\$('#login_result_box').html('...');
 				\$.post('login.php', {
 					'username': \$('#username').val(),
 					'password': \$('#password').val()

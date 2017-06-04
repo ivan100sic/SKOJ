@@ -17,7 +17,7 @@ class EditTestcaseBox {
 		$r->print("
 			<div>
 				<p>Name:</p>
-				<input type='text' id='testcase_name'/>
+				<input type='text' id='testcase_name' onkeydown='make_dirty()'/>
 				<p>Input source code:</p>
 				<textarea id='testcase_source_input' rows='20' cols='60'
 					onkeydown='tab_hook(event, this)'></textarea>
@@ -80,7 +80,7 @@ class EditTestcaseBox {
 					var source_input = \$('#testcase_source_input').val();
 					var source_output = \$('#testcase_source_output').val();
 					var instruction_limit = \$('#testcase_instruction_limit').val();
-
+					\$('#testcase_result_box').html('...');
 					\$.post('save-test-case.php', {
 						'id': $id,
 						'name': name,
@@ -90,6 +90,9 @@ class EditTestcaseBox {
 					}, function (data, status) {
 						if (status == 'success') {
 							\$('#testcase_result_box').html(data);
+							if (data.includes('Changes saved!')) {
+								make_clean();
+							}
 						}
 					});
 				}
