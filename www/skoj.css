@@ -39,6 +39,24 @@ div.vspace {
 	padding-bottom: 12px;
 }
 
+div.statement_input {
+	padding-top: 8px;
+	padding-bottom: 8px;
+	color: #ffa000;
+}
+
+div.statement_output {
+	padding-top: 8px;
+	padding-bottom: 8px;
+	color: #00a0ff;
+}
+
+div.statement_example {
+	padding-top: 8px;
+	padding-bottom: 8px;
+	color: #00a000;
+}
+
 table {
 	width: 500px;
 }
