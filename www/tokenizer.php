@@ -15,8 +15,6 @@ class Tokenizer {
 	
 	static function to_token_seq($s) {
 		
-		$k = 28;
-		
 		$tokens_raw = [
 			/* Two-character operators, which are given higher priority */
 		
@@ -47,6 +45,8 @@ class Tokenizer {
 			"cookie", "assignment", "semicolon", "dot",
 			"left_bracket", "right_bracket", "left_brace", "right_brace"
 		];
+
+		$k = count($tokens_raw);
 		
 		$n = strlen($s);
 		$s .= "#";

@@ -1,6 +1,7 @@
 <?php
 
 session_start();
+ini_set('xdebug.max_nesting_level', 65536);
 
 require_once 'user.php';
 

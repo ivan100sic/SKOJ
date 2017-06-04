@@ -11,3 +11,5 @@
 [Notice] [2017-06-04 15:44:53] [session: 1]: Saved changes to task 4
 [Notice] [2017-06-04 18:12:01] [session: 1]: Successful login attempt on page login.php
 [Notice] [2017-06-04 18:12:26] [session: 1]: Dumping SQL
+[Notice] [2017-06-05 00:21:02] [session: 1]: Successful submission, id = 42
+[Notice] [2017-06-05 00:21:07] [session: 1]: Successful submission, id = 43

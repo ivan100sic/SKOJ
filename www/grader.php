@@ -56,15 +56,6 @@ class Grader {
 			}
 		}
 	}
-	
-	static function sandbox($source) {
-		$source_tokens = Tokenizer::to_token_seq($source);
-		$source_tree = Program::compile($source_tokens);
-		if ($source_tree === NULL) {
-			return ["status" => "CE"];
-		}
-		return grade_one($source_tree, "", "", 64000);
-	}
 }
 
 ?>
