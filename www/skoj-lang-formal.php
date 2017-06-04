@@ -9,6 +9,8 @@ class SkojLangFormalPage extends Page {
 	function __construct() {
 		parent::__construct();
 		$this->body_items[] = new Text("
+			<h2><a href='tutorials.php'>Tutorials</a> :: Formal
+			description of the language</a></h2>
 <pre>
 skoj_program:
 	  statement_list

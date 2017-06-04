@@ -9,7 +9,8 @@ class TutorialSkojLangPage extends Page {
 	function __construct() {
 		parent::__construct();
 		$this->body_items[] = new Text("
-		<h2> Introduction </h2>
+		<h2><a href='tutorials.php'>Tutorials</a> :: About the SKOJ language</h2>
+		<h3>Introduction</h3>
 		<p>
 			SKOJ is a programming language designed to be easy to learn and
 			simple to compile. The language was created as part of the SKOJ system,
@@ -20,7 +21,7 @@ class TutorialSkojLangPage extends Page {
 			connection.
 		</p>
 
-		<h2>Formal description</h2>
+		<h3>Formal description</h3>
 
 		<p>
 			For those of you who love formal language theory,
@@ -29,7 +30,7 @@ class TutorialSkojLangPage extends Page {
 			syntax, which is easier to parse.
 		</p>
 
-		<h2>Type system and variables</h2>
+		<h3>Type system and variables</h3>
 
 		<p>
 			The only type in SKOJ is the 32-bit signed integer. Integer overflow gives undefined 
@@ -42,7 +43,7 @@ class TutorialSkojLangPage extends Page {
 			to directly copy the contents of one entire array into another.
 		</p>
 
-		<h2>Runtime</h2>
+		<h3>Runtime</h3>
 
 		<p>
 			Division by zero results in a runtime error. All variables are zero-initialized.
@@ -51,7 +52,7 @@ class TutorialSkojLangPage extends Page {
 			is monitored and reported to the user.
 		</p>
 
-		<h2>Input/output and testing</h2>
+		<h3>Input/output and testing</h3>
 
 		<p>
 			When you submit a solution to a problem, each time your solution is run on one of
@@ -65,7 +66,7 @@ class TutorialSkojLangPage extends Page {
 			than bumping the instruction count).
 		</p>
 
-		<h2>Comments and details about parsing</h2>
+		<h3>Comments and details about parsing</h3>
 
 		<p>
 			All characters not defined in the language are ignored. This includes: whitespace,

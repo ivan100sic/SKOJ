@@ -9,7 +9,8 @@ class TutorialExamplesPage extends Page {
 	function __construct() {
 		parent::__construct();
 		$this->body_items[] = new Text("
-		<h2> Example 1: Sort </h2>
+		<h2><a href='tutorials.php'>Tutorials</a> :: Examples</h2>
+		<h2>Example 1: Sorting</h2>
 		<h3> Input program 1: </h3>
 <pre>
 n = 3;

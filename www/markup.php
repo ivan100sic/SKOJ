@@ -15,6 +15,8 @@ class Markup {
 		
 		$markup_stack = [];
 		$ms_size = 0;
+
+		$markup_state = '';
 		
 		while ($i < $n) {
 			if ($raw[$i] == '\\') {
@@ -72,6 +74,10 @@ class Markup {
 						break;
 						
 					case "P":
+						if ($markup_state === 'p' || $markup_state === 'sp') {
+							return NULL;
+						}
+						$markup_state .= 'p';
 						$html .= "<p>";
 						$markup_stack[$ms_size++] = "P";
 						break;
@@ -80,10 +86,15 @@ class Markup {
 						if ($markup_stack[--$ms_size] !== 'P') {
 							return NULL;
 						}
+						$markup_state = substr($markup_state, 0, -1);
 						break;
 						
 					case "U":
-						$html .= "<div class='statement_input'>"; // or whatever we come up with
+						if ($markup_state !== '') {
+							return NULL;
+						}
+						$markup_state = 's';
+						$html .= "<div class='statement_input'>";
 						$markup_stack[$ms_size++] = "U";
 						break;
 					case "u":
@@ -91,10 +102,15 @@ class Markup {
 						if ($markup_stack[--$ms_size] !== 'U') {
 							return NULL;
 						}
+						$markup_state = '';
 						break;
 						
 					case "R":
-						$html .= "<div class='statement_output'>"; // or whatever we come up with
+						if ($markup_state !== '') {
+							return NULL;
+						}
+						$markup_state = 's';
+						$html .= "<div class='statement_output'>";
 						$markup_stack[$ms_size++] = "R";
 						break;
 					case "r":
@@ -102,10 +118,15 @@ class Markup {
 						if ($markup_stack[--$ms_size] !== 'R') {
 							return NULL;
 						}
+						$markup_state = '';
 						break;
 						
 					case "E":
-						$html .= "<div class='statement_example'>"; // or whatever we come up with
+						if ($markup_state !== '') {
+							return NULL;
+						}
+						$markup_state = 's';
+						$html .= "<div class='statement_example'>";
 						$markup_stack[$ms_size++] = "E";
 						break;
 					case "e":
@@ -113,17 +134,7 @@ class Markup {
 						if ($markup_stack[--$ms_size] !== 'E') {
 							return NULL;
 						}
-						break;
-						
-					case "M":
-						$html .= "<span class='monospace'>"; // or whatever we come up with
-						$markup_stack[$ms_size++] = "M";
-						break;
-					case "m":
-						$html .= "</span>";
-						if ($markup_stack[--$ms_size] !== 'M') {
-							return NULL;
-						}
+						$markup_state = '';
 						break;
 						
 					case 'N':

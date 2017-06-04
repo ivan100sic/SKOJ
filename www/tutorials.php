@@ -10,6 +10,9 @@ class TutorialsPage extends Page {
 		$this->body_items[] = new Text("
 			<h2>Tutorials</h2>
 			<h3><a href='tutorial-skoj-lang.php'>About the SKOJ language</a></h3>
+			<h3><a href='skoj-lang-formal.php'>Formal description of the language</a></h3>
+			<h3><a href='tutorial-task-guidelines.php'>Guidelines for problem setting</a></h3>
+			<h3><a href='tutorial-markup.php'>Markup language description</a></h3>
 			<h3><a href='tutorial-examples.php'>Examples</a></h3>
 		");
 	}
