@@ -27,7 +27,7 @@ class Tokenizer {
 			
 			"`", "!", "~",
 			"+", "-", "*", "/", "%",
-			">", "<", "&", "|",
+			">", "<", "&", "|", "^",
 			
 			/* Other tokens */
 			
@@ -42,7 +42,7 @@ class Tokenizer {
 			
 			"unary_minus", "not", "complement",
 			"plus", "minus", "times", "divide", "mod",
-			"greater", "less", "logical_and", "logical_or",
+			"greater", "less", "bitwise_and", "bitwise_or", "bitwise_xor",
 			
 			"cookie", "assignment", "semicolon", "dot",
 			"left_bracket", "right_bracket", "left_brace", "right_brace"

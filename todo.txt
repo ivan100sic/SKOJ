@@ -46,7 +46,7 @@
 --- Optional but cool ---
 
 	Add *unsolved only* selector to browse-tasks
-[....] Sandbox
+[DONE] Sandbox
 	Add text box for submitting solutions
 
 --- Optional ---
