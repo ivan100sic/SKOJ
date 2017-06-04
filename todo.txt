@@ -1,0 +1,64 @@
+--- Highest Priority ---
+
+[DONE] Modify tasks page
+[DONE] Logic for modifying test cases
+[DONE] Top users page
+[DONE] Profiles page
+[DONE] Rework login
+[DONE] Submissions link to submission page
+[DONE] Create task page (backend action at least)
+[DONE] Sidebar/navbar
+[DONE] Issue: Don't display pages inaccessible to guests
+[DONE] Issue: Don't display "Add a task" for users which can't do that
+[DONE] Move "Add a task" to My tasks
+[DONE] Change password page
+[DONE] Issue: Strange reply when a login attempt fails
+[DONE] Issue: Best solutions not ordered well
+
+--- High priority
+
+[DONE] Check if the problem statement can be parsed before saving
+[DONE] Display parsed problem statement sandbox
+[DONE] Implement permissions for all pages
+[DONE] Admin Panel
+[DONE] SQL/XML dump
+[DONE] Action Logging
+[DONE] Make those tables/paginators look better
+[DONE] Display additional columns names in problem statements, submissions, etc.
+
+--- Lower priority, must be done before release ---
+
+[DONE] Issue: "Edit this task" link does not appear on its own line always
+[DON.] Implement a visual theme
+[DON.] Issue: Markup parser is too liberal right now
+[DONE] Documentation for the programming language
+[DONE] Documentation for the markup language used for displaying task statements
+[DONE] Documentation for adding testcases
+	Documentation for the whole site (.pdf)
+	Warning when leaving edit-task or edit-test-case
+
+--- Minor problems ---
+
+[DO..] Tabs in <textarea>
+[DONE] Login/register forms, enter = submit
+	Issue: Choose file button does not conform to the style
+
+--- Optional but cool ---
+
+	Add *unsolved only* selector to browse-tasks
+	Sandbox
+	Add text box for submitting solutions
+
+--- Optional ---
+
+Improve compiler/interpreter performance
+Increase maximum time limit
+Add more data to sample-small.sql
+
+
+--- Unescaped text issues ---
+
+[DONE] hall-of-fame.php
+[DONE] index.php
+[DONE] edit-task.php testcase name, problem name
+[DONE] browse-tasks.php problem name

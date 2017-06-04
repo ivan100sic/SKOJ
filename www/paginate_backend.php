@@ -13,6 +13,7 @@ require_once 'task.php';
 require_once 'submission.php';
 require_once 'test_run.php';
 require_once 'testcase.php';
+require_once 'logger.php';
 
 class PaginateBackend {
 
@@ -31,6 +32,8 @@ class PaginateBackend {
 	protected $header;
 	// Query arguments, drawn from POST
 	protected $args;
+	// Additional options for the table
+	protected $table_options;
 
 	// Constructor. Can swallow anything for limit and offset.
 	function __construct($params) {
@@ -38,6 +41,7 @@ class PaginateBackend {
 		$this->class_name = $params['class_name'];
 		$this->method_name = $params['method_name'];
 		$this->header = $params['header'];
+		$this->table_options = $params['table_options'];
 
 		$limit_int = (int)__post__('limit');
 		if ($limit_int < 1) {
@@ -73,7 +77,7 @@ class PaginateBackend {
 			$objs[] = new $this->class_name($row);
 		}
 		// Render table and header
-		$r->print("<table>$this->header");
+		$r->print("<table $this->table_options>$this->header");
 		foreach ($objs as $obj) {
 			$obj->{$this->method_name}($r);
 		}
@@ -88,6 +92,8 @@ $pg = NULL;
 $pg_type_obj = PaginateTypes::get($type);
 if ($pg_type_obj !== NULL) {
 	$pg = new PaginateBackend($pg_type_obj);
+} else {
+	Logger::notice("Bad paginator type in POST on paginate_backend.php");
 }
 
 if ($pg !== NULL) {
@@ -95,7 +101,7 @@ if ($pg !== NULL) {
 		$pg->render($r);
 		$r->flush();
 	} catch (Exception $e) {
-		// This page shall echo an empty string if an exception happens
+		Logger::error("Exception occurred on paginate_backend.php");
 	}
 } else {
 	recover(0);

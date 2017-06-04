@@ -2,6 +2,7 @@
 
 require_once 'sql.php';
 require_once 'hash.php';
+require_once 'permissions.php';
 
 class User {
 	
@@ -18,9 +19,14 @@ class User {
 	// additional fields
 	private $solved_tasks;
 	private $attempted_tasks;
+	private $authored_tasks;
 
 	function get_id() {
 		return $this->id;
+	}
+
+	function get_username() {
+		return $this->username;
 	}
 	
 	function __construct($row) {
@@ -43,6 +49,7 @@ class User {
 		// Temporaries
 		$this->solved_tasks = NULL;
 		$this->attempted_tasks = NULL;
+		$this->authored_tasks = NULL;
 	}
 
 	function has_permission($perm) {
@@ -71,9 +78,9 @@ class User {
 	}
 	
 	function render_link($r) {
-		$user_id = $this->id;
-		$user_username = $this->username;
-		$r->print("<a href='profile.php?id=$user_id'>$user_username</a>");
+		$r->print("<a href='profile.php?id=$this->id'>");
+		(new EscapedText($this->username))->render($r);
+		$r->print("</a>");
 	}
 	
 	function get_solved_tasks() {
@@ -81,12 +88,8 @@ class User {
 			return $this->solved_tasks;
 		}
 		$a = [];
-		$db = SQL::get("select * from tasks t1 where
-			(select count(*) from submissions where
-				user_id = ? and
-				task_id = t1.id and
-				status >= 0
-			) > 0", [$this->id]);
+		$db = SQL::get("select * from solved inner join tasks
+			on task_id = tasks.id where user_id = ?", [$this->id]);
 			
 		foreach ($db as $row) {
 			$a[] = new Task($row);
@@ -100,21 +103,25 @@ class User {
 		}
 		$a = [];
 		/* Without successful submissions but with some attempts */
-		$db = SQL::get("select * from tasks t1 where
-			(select count(*) from submissions where
-				user_id = ? and
-				task_id = t1.id and
-				status >= 0
-			) = 0 and
-			(select count(*) from submissions where
-				user_id = ? and
-				task_id = t1.id
-			) > 0", [$this->id, $this->id]);
+		$db = SQL::get("select * from attempted inner join tasks
+			on task_id = tasks.id where user_id = ?", [$this->id]);
 			
 		foreach ($db as $row) {
 			$a[] = new Task($row);
 		}
 		return $this->attempted_tasks = $a;
+	}
+
+	function get_authored_tasks() {
+		if ($this->authored_tasks !== NULL) {
+			return $this->authored_tasks;
+		}
+		$a = [];
+		$db = SQL::get("select * from tasks where author = ?", [$this->id]);
+		foreach ($db as $row) {
+			$a[] = new Task($row);
+		}
+		return $this->authored_tasks = $a;
 	}
 
 	static function authenticate($username, $password) {
@@ -130,8 +137,36 @@ class User {
 	function render_row_simple($r) {
 		$r->print("<tr><td>$this->username</td></tr>");
 	}
+
+	function render_row_hall_of_fame($r) {
+		$sp = $r->temp['user_solved_problems'];
+		if ($sp == 1) {
+			$suffix = '';
+		} else {
+			$suffix = 's';
+		}
+		$r->print("<tr><td>");
+		$this->render_link($r);
+		$r->print("</td>
+			<td>$sp problem$suffix solved</td>
+		</tr>");
+	}
+
+	function render_row_edit_perms($r) {
+		$r->print("<tr id='edit_perms_$this->id'><td>");
+		$this->render_link($r);
+		$r->print("</td>");
+		foreach (Permissions::get() as $perm_id => $perm_name) {
+			$has = $this->has_permission($perm_name) ? 'X' : '.';
+			$r->print("<td><a
+				href='javascript:toggle_perm(
+					$this->id, $perm_id
+				)'
+				id = 'edit_perms_link_".$this->id."_$perm_id'>$has</a></td>");
+		}
+		$r->print('</tr>');
+	}
 }
 
 
 ?>
-	

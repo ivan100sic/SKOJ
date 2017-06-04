@@ -1,6 +1,8 @@
 <?php
 
+require_once 'global.php';
 require_once 'renderer.php';
+require_once 'user.php';
 
 class Text {
 	private $data;
@@ -35,16 +37,58 @@ class EscapedText {
 	/* Getters, setters... */
 }
 
+class Sidebar {
+	function render($r) {
+		$user = User::construct_safe(get_session_id());
+
+
+		$r->print("<div class='skoj_sidebar'>");
+		if ($user !== NULL) {
+			$r->print("<p><a href='index.php'>Home</a></p>");
+		}
+		$r->print("
+			<p><a href='browse-tasks.php'>Browse tasks</a></p>
+			<p><a href='hall-of-fame.php'>Hall of Fame</a></p>
+			<p><a href='recent-submissions.php'>Recent submissions</a></p>
+			<p><a href='tutorials.php'>Tutorials</a></p>
+		");
+
+		
+
+		if ($user !== NULL) {
+			$r->print("
+				<p><a href='my-tasks.php'>My tasks</a></p>			
+				<p><a href='change-password.php'>Change password</a></p>");
+		} else {
+			$r->print("<p><a href='index.php'>Login</a></p>");
+		}
+
+		if ($user !== NULL && $user->has_permission("ADMIN_PANEL")) {
+			$r->print("<p><a href='admin-panel.php'>Admin panel</a></p>");
+		}
+
+		if ($user !== NULL) {
+			$r->print("<p><a href='logout.php'>Log out</a></p>");
+		} else {
+			$r->print("<p><a href='register.php'>Register</a></p>");
+		}
+
+		$r->print("</div>");
+	}
+}
+
 class Page {
 	protected $head_items;
 	protected $body_items;
 	
 	function __construct() {
+		$jquery_url = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js";
 		$this->head_items = [
 			"charset" => new Text("<meta charset='UTF-8'/>"),
 			"title" => new Text("<title>SKOJ</title>"),
-			"jquery" => new Text("<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/
-				jquery.min.js'></script>")
+			"jquery" => new Text("<script src='$jquery_url'></script>"),
+			"common_js" => new Text("<script src='common.js'></script>"),
+			"css" => new Text("<link rel='stylesheet' type='text/css' href='skoj.css'/>")
 		];
 		$this->body_items = [];
 	}
@@ -55,10 +99,14 @@ class Page {
 			$value->render($r);
 		}
 		$r->print("</head><body>");
+		// Header div
+		$r->print("<div class='skoj_header'>SKOJ Online Judge</div>");
+		(new Sidebar())->render($r);
+		$r->print("<div class='skoj_content'>");
 		foreach ($this->body_items as $key => $value) {
 			$value->render($r);
 		}
-		$r->print("</body></html>");
+		$r->print("</div></body></html>");
 	}	
 }
 

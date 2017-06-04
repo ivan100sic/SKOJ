@@ -6,6 +6,7 @@ require_once 'syntax-parse.php';
 require_once 'testcase.php';
 require_once 'grader.php';
 require_once 'test_run.php';
+require_once 'task.php';
 
 class Submission {
 
@@ -43,6 +44,14 @@ class Submission {
 	function get_status() {
 		return $this->status;
 	}
+
+	function get_task_id() {
+		return $this->task_id;
+	}
+
+	function get_user_id() {
+		return $this->user_id;
+	}
 	
 	static function construct_safe($id) {
 		$db = SQL::get("select * from submissions where id = ?", [$id]);
@@ -56,17 +65,25 @@ class Submission {
 		if (!$db) {
 			return NULL;
 		}
-		$id = SQL::get('select last_insert_id() as id', []);
-		if (count($id) !== 1) return NULL;
-		return Submission::construct_safe($id[0]['id']);
+		$id = SQL::last_insert_id();
+		return Submission::construct_safe($id);
 	}
 	
 	private function grade_impl() {
-		$db = SQL::get("select * from testcases where task_id = ? order by id asc", [$this->task_id]);			
-		$obj = array();
+		/*
+			This is how you get only stale testcases
+			"select * from testcases where
+			task_id = ? and id not in (
+				select testcase_id id from test_runs where
+				submission_id = ?
+			) order by id asc"
+		*/
+		$db = SQL::get("select * from testcases where
+			task_id = ? order by id asc", [$this->task_id]);		
+		$testcases = array();
 		foreach ($db as $row) {
 			// safe
-			$obj[] = new Testcase($row);
+			$testcases[] = new Testcase($row);
 		}
 		
 		$source_tokens = Tokenizer::to_token_seq($this->source);
@@ -79,7 +96,7 @@ class Submission {
 		
 		$result = [];
 		
-		foreach ($obj as $testcase) {
+		foreach ($testcases as $testcase) {
 			$result[] = [
 				"id"  => $testcase->get_id(),
 				"run" => Grader::grade_one($source_tree, $testcase->get_source_input(),
@@ -132,8 +149,45 @@ class Submission {
 		$this->save_to_db();			
 	}
 
+	static function status_to_str($status) {
+		switch ($status) {
+			case self::STATUS_NOT_GRADED: return "Not graded";
+			case self::STATUS_CE: return "Compilation error";
+			case self::STATUS_REJECTED: return "Rejected";
+			default: return "Accepted ($status)";
+		}
+	}
+
+	function render_row_simple($r) {
+		$pretty_status = Submission::status_to_str($this->status);
+		$r->print("<tr>
+			<td><a href='show-submission.php?id=$this->id'>$this->created_on</a></td>
+			<td>$pretty_status</td>
+		</tr>");
+	}
+
+	function render_row_all($r) {
+		$pretty_status = Submission::status_to_str($this->status);
+		$user = User::construct_safe($this->user_id);
+		$task = Task::construct_safe($this->task_id);
+		$r->print("<tr><td>");
+		$user->render_link($r);
+		$r->print("</td><td>");
+		$task->render_link($r);
+		$r->print("</td>
+			<td class='centered'>
+				<a href='show-submission.php?id=$this->id'>$this->created_on</a>
+			</td>");		
+		$r->print("<td>$pretty_status</td></tr>");
+	}
+
 	function render_detailed($r) {
-		$r->print("<div>");
+		$r->print("<div class='vspace'>");
+		$r->print("<p>Problem: ");
+		Task::construct_safe($this->task_id)->render_link($r);
+		$r->print("</p>User: ");
+		User::construct_safe($this->user_id)->render_link($r);
+		$r->print("</p>");
 		if ($this->get_status() == self::STATUS_NOT_GRADED) {
 			$r->print("<p>Status: Not graded</p>");
 		} else if ($this->get_status() == self::STATUS_CE) {
@@ -146,14 +200,22 @@ class Submission {
 				$r->print("<p>Total running time: " . $this->get_status());
 			}
 			$r->print("<p>Details:</p>");
-			$r->print("<table>");
+			$r->print("<table class='narrower'><tr><th>#</th><th>Status</th></tr>");
 			$test_runs = TestRun::get_all_by_submission_id($this->get_id());
+			$r->temp['rsto'] = 0;
 			foreach ($test_runs as $run) {
 				$run->render_table_row($r);
 			}
 			$r->print("</table>");
 		}
 		$r->print("</div>");
+	}
+
+	function render_source($r) {
+		$r->print("<div class='vspace'><pre>");
+		$r->print("<h2>Source code</h2>");
+		(new EscapedText($this->source))->render($r);
+		$r->print("</pre></div>");
 	}
 }
 

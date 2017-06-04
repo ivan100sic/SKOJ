@@ -1,5 +1,5 @@
 drop database skoj;
-create database skoj default character set utf8;
+create database skoj default character set utf8 collate utf8_general_ci;
 use skoj;
 
 create table users (
@@ -129,6 +129,31 @@ create table users_permissions (
 		on delete cascade
 		on update cascade
 ) engine = InnoDB;
+
+-- Very useful views
+
+create view solved as
+	select users.id user_id, tasks.id task_id from users, tasks
+	where
+		(select count(*) from submissions where
+			user_id = users.id and
+			task_id = tasks.id and
+			status >= 0
+		) > 0;
+
+create view attempted as
+	select users.id user_id, tasks.id task_id from users, tasks
+	where
+		(select count(*) from submissions where
+				user_id = users.id and
+				task_id = tasks.id and
+				status >= 0
+		) = 0
+		and
+		(select count(*) from submissions where
+			user_id = users.id and
+			task_id = tasks.id
+		) > 0;
 
 -- The predefined set of permissions and properties
 
