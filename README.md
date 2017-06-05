@@ -19,8 +19,8 @@ SKOJ is a joint effort by me and Aleksandar Jovanović, my faculty colleague.
 
 SKOJ is written in *PHP 7.0*  and uses *MySQL 5.7* as its database engine. It also uses
 some *JQuery*. I've tried to make it *HTML5* and *CSS3* compliant but I'm not sure if did
-it. It works in Chrome. Good enough. Passwords are salted with a random strings and
-with the username and hash using SHA-1.
+it. It works in Chrome. Good enough. Passwords are salted with random strings and
+the username and are then hashed using SHA-1.
 
 The site currently requires an email to register, but it will not send any e-mails.
 **This may change in the future.** If you want your password reset, contact the administrator (me).
@@ -63,7 +63,7 @@ open the site in your browser. Register on the site, and after you've done it,
 give yourself the ADMIN_PANEL permission, by inserting ([your user id], 6) into
 the table user_permissions. Now you should be able to access the admin panel.
 
-If you're lazy or you just want to try the site, it is currently hosted on 
+If you're lazy or you just want to try out the site, it is currently hosted on 
 [skoj.ivan100sic.in.rs](http://skoj.ivan100sic.in.rs).
 
 ## Authors and contributors
