@@ -162,7 +162,7 @@ class User {
 		$r->print("</td><td><a href='edit-user?user_id=$this->id'>Edit</a></td>");
 		foreach (Permissions::get() as $perm_id => $perm_name) {
 			$has = $this->has_permission($perm_name) ? 'X' : '.';
-			$r->print("<td><a
+			$r->print("<td class='centered'><a
 				href='javascript:toggle_perm(
 					$this->id, $perm_id
 				)'
