@@ -200,7 +200,7 @@ textarea:focus {
 	border-color: #00ff00;
 }
 
-button {
+button, input[type=submit] {
 	border-radius: 3px;
 	border-style: double;
 	border-width: 3px;
@@ -210,13 +210,13 @@ button {
 	padding: 2px;
 }
 
-button:hover {
+button:hover, input[type=submit]:hover {
 	border-color: #00ff00;
 	border-style: solid;
 	border-radius: 3px;
 }
 
-button:active {
+button:active, input[type=submit]:active {
 	background-color: green;
 }
 

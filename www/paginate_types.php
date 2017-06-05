@@ -143,6 +143,25 @@ order by tasks.id asc
 						</div>
 					"
 				];
+			case 'user_subs':
+				return [
+					"name" => "user_subs",
+					"query" => "select * from submissions where
+						user_id = ? order by id desc",
+					"args" => ["user_id", "limit", "offset"],
+					"table_options" => "",
+					"header" => "<tr><th>Task</th><th>Submission time</th>
+						<th>Status</th></tr>",
+					"class_name" => "Submission",
+					"method_name" => "render_row_user_subs",
+					"html" => "
+						<div class='vspace'>
+							$paginate_limit_controller
+							$paginate_bidi_controller
+							$paginate_result_box
+						</div>
+					"
+				];
 			default:
 				return NULL;
 		}

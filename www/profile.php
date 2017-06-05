@@ -5,6 +5,7 @@ require_once 'dom.php';
 require_once 'global.php';
 require_once 'task.php';
 require_once 'logger.php';
+require_once 'paginate.php';
 
 class UserNTask {
 
@@ -39,14 +40,14 @@ class ProfileBox {
 		$r->print("<h2>User: ");
 		(new EscapedText($user->get_username()))->render($r);
 		$r->print("</h2>");
-		$r->print("<h3>Solved tasks:</h3><div>");
+		$r->print("<h3>Solved tasks:</h3><div class='vspace'>");
 		$comma = '';
 		foreach ($user->get_solved_tasks() as $task) {
 			$r->print($comma);
 			$comma = ", ";
 			(new UserNTask($user, $task))->render($r);
 		}
-		$r->print("</div><h3>Attempted tasks:</h3><div>");
+		$r->print("</div><h3>Attempted tasks:</h3><div class='vspace'>");
 		$comma = '';
 		foreach ($user->get_attempted_tasks() as $task) {
 			$r->print($comma);
@@ -54,12 +55,15 @@ class ProfileBox {
 			(new UserNTask($user, $task))->render($r);
 		}
 		$comma = '';
-		$r->print("</div><h3>Authored tasks:</h3><div>");
+		$r->print("</div><h3>Authored tasks:</h3><div class='vspace'>");
 		foreach ($user->get_authored_tasks() as $task) {
 			$r->print($comma);
 			$comma = ", ";
 			$task->render_link($r);
 		}
+		$r->print("</div><h3>Recent submissions:</h3><div>");
+		(new PaginateFrontend(PaginateTypes::get('user_subs')))->render($r);
+		$r->print("</div>");
 	}
 }
 
@@ -67,6 +71,8 @@ class ProfilePage extends Page {
 
 	function __construct($id) {
 		parent::__construct();
+		$this->body_items[] = new Text("
+			<input type='hidden' id='user_subs_user_id' value='$id'/>");
 		$this->body_items[] = new ProfileBox($id);
 	}
 }

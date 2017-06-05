@@ -217,6 +217,18 @@ class Submission {
 		(new EscapedText($this->source))->render($r);
 		$r->print("</pre></div>");
 	}
+
+	function render_row_user_subs($r) {
+		$pretty_status = Submission::status_to_str($this->status);
+		$task = Task::construct_safe($this->task_id);
+		$r->print("<tr><td>");
+		$task->render_link($r);
+		$r->print("</td>
+			<td class='centered'>
+				<a href='show-submission.php?id=$this->id'>$this->created_on</a>
+			</td>");		
+		$r->print("<td>$pretty_status</td></tr>");
+	}
 }
 
 ?>
