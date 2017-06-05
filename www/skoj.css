@@ -141,34 +141,41 @@ span.error {
   background: green;
 }
 input[type=text] {
-    border: 3px double #ffa000;
+    border: 3px double #cc8100;
     border-radius: 4px;
-	transition-duration: 0.2s;
+	transition-duration: 0.3s;
 	background-color: #000000;
 }
 input[type=text]:hover{
 	border-style: solid;
+	border-color: #ffa000;
 }
-input[type=text]:active{
-	background-color: #cc8100;
+input[type=text]:focus{
+	border: 3px double #ffa000;
+	border-radius: 2px;
 }
 input[type=password]{
-	border:3px double #00a0ff;
+	border:3px double #0081cc;
 	border-radius: 4px;
-	transition-duration: 0.2s;
+	transition-duration: 0.3s;
 	background-color: #000000;
 }
 input[type=password]:hover{
 	border-style: solid;
+	border-color: #00a0ff;
 }
-input[type=password]:active{
-	background-color: #0081cc;
+input[type=password]:focus{
+	border: 3px double #00a0ff;
+	border-radius: 2px;
 }
 textarea {
     border: 3px double green;
     border-radius: 4px;
 }
 textarea:hover{
+	border-style: solid;
+}
+textarea:focus{
 	border-color: #00ff00;
 }
 button {
