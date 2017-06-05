@@ -4,6 +4,10 @@ body, textarea, input, button, select, option {
 	color: #00ff00;
 }
 
+* {
+	outline-style: none;
+}
+
 div.skoj_header {
 	position: absolute;
 	left: 100px;
@@ -137,64 +141,88 @@ td, th {
 span.error {
 	color: orange;
 }
+
 ::selection {
   background: green;
 }
+
 input[type=text] {
     border: 3px double #cc8100;
     border-radius: 4px;
 	transition-duration: 0.3s;
 	background-color: #000000;
+	padding: 2px;
 }
-input[type=text]:hover{
+
+input[type=text]:hover {
 	border-style: solid;
 	border-color: #ffa000;
 }
-input[type=text]:focus{
+
+input[type=text]:focus {
 	border: 3px double #ffa000;
 	border-radius: 2px;
 }
-input[type=password]{
+
+input[type=text]:active {
+	border: 3px double #ffa000;
+	border-radius: 2px;
+}
+
+input[type=password] {
 	border:3px double #0081cc;
 	border-radius: 4px;
 	transition-duration: 0.3s;
 	background-color: #000000;
+	padding: 2px;
 }
-input[type=password]:hover{
+
+input[type=password]:hover {
 	border-style: solid;
 	border-color: #00a0ff;
 }
-input[type=password]:focus{
+
+input[type=password]:focus {
 	border: 3px double #00a0ff;
 	border-radius: 2px;
 }
+
 textarea {
     border: 3px double green;
     border-radius: 4px;
 }
-textarea:hover{
+
+textarea:hover {
 	border-style: solid;
 }
-textarea:focus{
+
+textarea:focus {
 	border-color: #00ff00;
 }
+
 button {
 	border-radius: 3px;
 	border-style: double;
 	border-width: 3px;
 	border-color: green;
 	transition-duration: 0.2s;
-	width: 130px;
+	width: 160px;
+	padding: 2px;
 }
-button:hover{
+
+button:hover {
 	border-color: #00ff00;
 	border-style: solid;
 	border-radius: 3px;
 }
-button:active{
+
+button:active {
 	background-color: green;
 }
 
-
-
-
+select, option {
+	border-color: #00ff00;
+	border-style: solid;
+	border-radius: 3px;
+	padding: 2px;
+}
