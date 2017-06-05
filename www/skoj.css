@@ -140,3 +140,54 @@ span.error {
 ::selection {
   background: green;
 }
+input[type=text] {
+    border: 3px double #ffa000;
+    border-radius: 4px;
+	transition-duration: 0.2s;
+	background-color: #000000;
+}
+input[type=text]:hover{
+	border-style: solid;
+}
+input[type=text]:active{
+	background-color: #cc8100;
+}
+input[type=password]{
+	border:3px double #00a0ff;
+	border-radius: 4px;
+	transition-duration: 0.2s;
+	background-color: #000000;
+}
+input[type=password]:hover{
+	border-style: solid;
+}
+input[type=password]:active{
+	background-color: #0081cc;
+}
+textarea {
+    border: 3px double green;
+    border-radius: 4px;
+}
+textarea:hover{
+	border-color: #00ff00;
+}
+button {
+	border-radius: 3px;
+	border-style: double;
+	border-width: 3px;
+	border-color: green;
+	transition-duration: 0.2s;
+	width: 130px;
+}
+button:hover{
+	border-color: #00ff00;
+	border-style: solid;
+	border-radius: 3px;
+}
+button:active{
+	background-color: green;
+}
+
+
+
+
