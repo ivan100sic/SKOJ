@@ -200,7 +200,7 @@ textarea:focus {
 	border-color: #00ff00;
 }
 
-button, input[type=submit] {
+button, input[type=submit], select {
 	border-radius: 3px;
 	border-style: double;
 	border-width: 3px;
@@ -210,19 +210,17 @@ button, input[type=submit] {
 	padding: 2px;
 }
 
-button:hover, input[type=submit]:hover {
+select {
+	width: 60px;
+	padding: 1px;
+}
+
+button:hover, input[type=submit]:hover, select:active {
 	border-color: #00ff00;
 	border-style: solid;
 	border-radius: 3px;
 }
 
-button:active, input[type=submit]:active {
+button:active, input[type=submit]:active, select:active {
 	background-color: green;
-}
-
-select, option {
-	border-color: #00ff00;
-	border-style: solid;
-	border-radius: 3px;
-	padding: 2px;
 }
