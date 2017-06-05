@@ -24,7 +24,7 @@ switch ($type) {
 	case 'statement':
 		echo $task->get_statement();
 		exit();
-	case 'default':
+	default:
 		Logger::notice("Bad or missing type in POST on get_task_attrs.php");
 		exit();
 }

@@ -132,7 +132,16 @@ order by tasks.id asc
 					"query" => "select * from users",
 					"args" => ["limit", "offset"],
 					"table_options" => "",
-					"header" => "",
+					"header" => "<tr>
+						<th>Username</th>
+						<th>Edit user</th>
+						<th>LG</th>
+						<th>SB</th>
+						<th>EOT</th>
+						<th>PT</th>
+						<th>EAT</th>
+						<th>AP</th>
+					</tr>",						
 					"class_name" => "User",
 					"method_name" => "render_row_edit_perms",
 					"html" => "

@@ -29,6 +29,10 @@ class User {
 		return $this->username;
 	}
 	
+	function get_email() {
+		return $this->email;
+	}
+	
 	function __construct($row) {
 		$this->id = $row["id"];
 		$this->username = $row["username"];
@@ -155,7 +159,7 @@ class User {
 	function render_row_edit_perms($r) {
 		$r->print("<tr id='edit_perms_$this->id'><td>");
 		$this->render_link($r);
-		$r->print("</td>");
+		$r->print("</td><td><a href='edit-user?user_id=$this->id'>Edit</a></td>");
 		foreach (Permissions::get() as $perm_id => $perm_name) {
 			$has = $this->has_permission($perm_name) ? 'X' : '.';
 			$r->print("<td><a

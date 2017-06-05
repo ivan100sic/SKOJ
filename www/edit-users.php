@@ -7,10 +7,10 @@ require_once 'user.php';
 require_once 'paginate.php';
 require_once 'logger.php';
 
-class EditPermissionsPage extends Page {
+class EditUsersPage extends Page {
 	function __construct() {
 		parent::__construct();
-		$this->body_items[] = new Text("<h2>Edit permissions</h2>");
+		$this->body_items[] = new Text("<h2>Edit users</h2>");
 		$this->body_items[] = new Text("
 		<script>
 			function toggle_perm(user_id, perm_id) {
@@ -36,12 +36,12 @@ if ($user === NULL || !$user->has_permission("ADMIN_PANEL")) {
 }
 
 $r = new Renderer(0);
-$page = new EditPermissionsPage();
+$page = new EditUsersPage();
 try {
 	$page->render($r);
 	$r->flush();
 } catch (Exception $e) {
-	Logger::error("Exception occurred on page edit-permissions.php");
+	Logger::error("Exception occurred on page edit-users.php");
 	recover(0);
 }
 
