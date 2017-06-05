@@ -135,12 +135,12 @@ order by tasks.id asc
 					"header" => "<tr>
 						<th>Username</th>
 						<th>Edit user</th>
-						<th>LG</th>
-						<th>SB</th>
+						<th>LGN</th>
+						<th>SBT</th>
 						<th>EOT</th>
-						<th>PT</th>
+						<th>PTS</th>
 						<th>EAT</th>
-						<th>AP</th>
+						<th>APN</th>
 					</tr>",						
 					"class_name" => "User",
 					"method_name" => "render_row_edit_perms",

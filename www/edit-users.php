@@ -12,6 +12,16 @@ class EditUsersPage extends Page {
 		parent::__construct();
 		$this->body_items[] = new Text("<h2>Edit users</h2>");
 		$this->body_items[] = new Text("
+			<p>
+			LGN - The user can log in. <br>
+			SBT - The user can submit to tasks. <br>
+			EOT - The user can edit own tasks. <br>
+			PTS - The user can publish new tasks. <br>
+			EAT - The user is allowed to edit all tasks. <br>
+			APN - The user can access the Admin Panel.
+			</p>
+");
+		$this->body_items[] = new Text("
 		<script>
 			function toggle_perm(user_id, perm_id) {
 				\$.post('toggle-perm.php', {
