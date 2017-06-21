@@ -22,7 +22,7 @@ class TutorialTaskGuidelinesPage extends Page {
 			<p>
 				You can use the SKOJ markup language to write your task's statement.
 				Tags in this language have the following form: \\X for opening tags,
-				\\x for closing tags. For more details, check out <a href=''>this</a> guide.
+				\\x for closing tags. For more details, check out <a href='tutorial-markup.php'>this</a> guide.
 			</p>
 			<h3>Test cases</h3>
 			<p>
