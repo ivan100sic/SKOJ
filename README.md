@@ -2,7 +2,8 @@
 
 SKOJ is an online judge featuring a new programming language based on prefix syntax.
 
-Currently hosted on [skoj.ivan100sic.in.rs](http://skoj.ivan100sic.in.rs).
+~~Currently hosted on [skoj.ivan100sic.in.rs](http://skoj.ivan100sic.in.rs).~~
+Offline due to a DDoS attack on my page.
 
 ## Origin
 
@@ -63,8 +64,8 @@ open the site in your browser. Register on the site, and after you've done it,
 give yourself the ADMIN_PANEL permission, by inserting ([your user id], 6) into
 the table user_permissions. Now you should be able to access the admin panel.
 
-If you're lazy or you just want to try out the site, it is currently hosted on 
-[skoj.ivan100sic.in.rs](http://skoj.ivan100sic.in.rs).
+If you're lazy or you just want to try out the site, ~~it is currently hosted on 
+[skoj.ivan100sic.in.rs](http://skoj.ivan100sic.in.rs).~~ See above
 
 ## Authors and contributors
 
