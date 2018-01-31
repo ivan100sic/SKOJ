@@ -2,8 +2,7 @@
 
 SKOJ is an online judge featuring a new programming language based on prefix syntax.
 
-~~Currently hosted on [skoj.ivan100sic.in.rs](http://skoj.ivan100sic.in.rs).~~
-Offline due to a DDoS attack on my page.
+Currently hosted on [skoj.ivan100sic.in.rs](http://skoj.ivan100sic.in.rs).
 
 ## Origin
 
